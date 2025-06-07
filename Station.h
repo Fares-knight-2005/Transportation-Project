@@ -8,6 +8,9 @@ class ParkingQueue
 {
     public:
 
+    bool operator==(ParkingQueue &other){
+        return id==other.id;
+    }
     private:
         Queue<Bus> buses;
         Queue<Passenger> passengers;
@@ -22,7 +25,9 @@ class Station{
 
     public:
 
-
+    bool operator==(Station &other){
+        return id==other.id;
+    }
     private:
         ParkingQueue  departure;
         ParkingQueue  coming;
