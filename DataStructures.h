@@ -52,6 +52,32 @@ public:
     return removeItem;
     }
 
+    void print(){
+    Node<Item> *curr=head;
+
+    while(curr!=nullptr)
+    {
+    cout<<curr->item<<endl;
+    cout<<"--------------------\n";
+    curr=curr->next;
+    }
+
+    }
+
+    Item* find(Item item){
+    if(isEmpty())
+        return nullptr;
+    Node<Item> *curr=head;
+
+    while(curr!=nullptr)
+    {
+        if(curr->item==item)
+            return &curr->item;
+        curr=curr->next;
+    }
+    return nullptr;
+    }
+
     int size(){
     return length;
     }
@@ -210,6 +236,48 @@ public:
         }
     return nullptr;
     }
+};
+
+template<class Key,class Item>
+class OpenHash{
+
+int size,capacity;
+SingleLinkedList<Item> *array;
+
+   int hashCode(int key){
+       return key%capacity;
+   }
+
+   int hashCode(string key){
+       int count=0;
+
+       for (char c : key)
+           count+=c;
+
+       return count%capacity;
+    }
+
+
+public:
+    OpenHash(int capacity=20):capacity(capacity),size(0) {array=new SingleLinkedList<Item>[capacity]; }
+
+    void insert(Key key,Item item){
+       int index=hashCode(key);
+       array[index].addLast(item);
+       size++;
+    }
+
+    void print(){
+    for(int i=0;i<capacity;i++)
+        if(!array[i].isEmpty())
+            array[i].print();
+    }
+
+    Item* find(Key key,Item item){
+    int index=hashCode(key);
+    return array[index].find(item);
+    }
+
 };
 
 
