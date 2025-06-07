@@ -47,9 +47,42 @@ public:
         return nullptr;
 
     Item *removeItem=&head->item;
+    Node<Item> *temp=head;
     head=head->next;
+    delete temp;
     --length;
     return removeItem;
+    }
+       
+   Item* remove(Item item) {
+    if (isEmpty()) {
+        return nullptr;
+    }
+
+    if (head->item == item) 
+        return removeFirst();
+
+    Node<Item>* prev = head;
+    Node<Item>* curr = head->next;
+
+    while (curr != nullptr) {
+        if (curr->item==item){
+            prev->next=curr->next;
+
+            if (curr==tail)
+                tail=prev;
+
+            Item* removedItem=&curr->item;
+            delete curr;
+            length--;
+            return removedItem;
+        }
+
+        prev = curr;
+        curr = curr->next;
+    }
+
+    return nullptr;
     }
 
     void print(){
@@ -58,7 +91,7 @@ public:
     while(curr!=nullptr)
     {
     cout<<curr->item<<endl;
-    cout<<"--------------------\n";
+    cout <<"---------------------\n";
     curr=curr->next;
     }
 
@@ -276,6 +309,13 @@ public:
     Item* find(Key key,Item item){
     int index=hashCode(key);
     return array[index].find(item);
+    }
+
+    Item* remove(Key key,Item item){
+    int index=hashCode(key);
+    Item *toDelete=array[index].remove(item);
+    if(toDelete!=nullptr)   size--;
+    return toDelete;
     }
 
 };
