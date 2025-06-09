@@ -17,11 +17,10 @@ protected:
 	string LastName;
 	string PhoneNumber;
 	string Email;
-	
 
 public:
 
-	clsPerson(short Age, string FirstName, string LastName, string PhoneNumber , string Email)
+	clsPerson(short Age, string FirstName, string LastName, string PhoneNumber , string Eamil)
 	{
 		this->Age = Age;
 		this->FirstName = FirstName;
@@ -30,6 +29,55 @@ public:
 		this->Email = Email;
 	}
 
+	string GetFirstName()
+	{
+		return FirstName;
+	}
+
+	void SetFirstName(string FirstName)
+	{
+		this->FirstName = FirstName;
+	}
+
+	string GetLastName()
+	{
+		return this->LastName;
+	}
+
+	void SetLastName(string LastName)
+	{
+		this->LastName = LastName;
+	}
+
+	short GetAge()
+	{
+		return this->Age;
+	}
+
+	void SetAge(short Age)
+	{
+		this->Age = Age;
+	}
+
+	string GetPhoneNumber()
+	{
+		return this->PhoneNumber;
+	}
+
+	void SetPhoneNumber(string PhoneNumber)
+	{
+		this->PhoneNumber = PhoneNumber;
+	}
+
+	string GetEmail()
+	{
+		return this->Email;
+	}
+
+	void SetEmail(string Eamil)
+	{
+		this->Email = Email;
+	}
 
 };
 
