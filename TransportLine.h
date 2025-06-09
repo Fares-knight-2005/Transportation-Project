@@ -7,8 +7,8 @@ class TransportLine
 {
     public:
 
-    bool operator==(TransportLine &other){
-        return id==other.id;
+    bool operator==(int id){
+        return this->id==id;
     }
     private:
         DoubleLinkedList<Parking> parkings;
