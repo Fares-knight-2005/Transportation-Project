@@ -37,52 +37,21 @@ public:
     if(isEmpty())
         tail=head=new Node<Item>(item,nullptr);
     else
-        tail=tail->next=new Node<Item>(item,tail);
+        tail=tail->next=new Node<Item>(item,nullptr);
+
     ++length;
     }
 
-    Item *removeFirst(){
+    bool removeFirst(){
 
     if(isEmpty())
-        return nullptr;
+        return false;
 
-    Item *removeItem=&head->item;
     Node<Item> *temp=head;
     head=head->next;
     delete temp;
     --length;
-    return removeItem;
-    }
-       
-   Item* remove(Item item) {
-    if (isEmpty()) {
-        return nullptr;
-    }
-
-    if (head->item == item) 
-        return removeFirst();
-
-    Node<Item>* prev = head;
-    Node<Item>* curr = head->next;
-
-    while (curr != nullptr) {
-        if (curr->item==item){
-            prev->next=curr->next;
-
-            if (curr==tail)
-                tail=prev;
-
-            Item* removedItem=&curr->item;
-            delete curr;
-            length--;
-            return removedItem;
-        }
-
-        prev = curr;
-        curr = curr->next;
-    }
-
-    return nullptr;
+    return true;
     }
 
     void print(){
@@ -91,24 +60,55 @@ public:
     while(curr!=nullptr)
     {
     cout<<curr->item<<endl;
-    cout <<"---------------------\n";
+    cout<<"--------------------\n";
     curr=curr->next;
     }
 
     }
 
-    Item* find(Item item){
+    template<class Value>
+    Item* find(Value value){
     if(isEmpty())
         return nullptr;
     Node<Item> *curr=head;
 
     while(curr!=nullptr)
     {
-        if(curr->item==item)
+        if(curr->item==value)
             return &curr->item;
         curr=curr->next;
     }
     return nullptr;
+    }
+
+    template<class Value>
+    bool remove(Value value) {
+    if (isEmpty()) {
+        return false;
+    }
+
+    if (head->item==value)
+        return removeFirst();
+
+    Node<Item>* prev = head;
+    Node<Item>* curr = head->next;
+
+    while (curr != nullptr) {
+        if (curr->item==value){
+            prev->next=curr->next;
+
+            if (curr==tail)
+                tail=prev;
+            delete curr;
+            length--;
+            return true;
+        }
+
+        prev = curr;
+        curr = curr->next;
+    }
+
+    return false;
     }
 
     int size(){
@@ -127,8 +127,12 @@ public:
     singleLinkedList.addLast(item);
     }
 
-    Item *dequeue(){
+    bool dequeue(){
     return singleLinkedList.removeFirst();
+    }
+
+    bool isEmpty(){
+    return singleLinkedList.isEmpty();
     }
 
     int size(){
@@ -176,9 +180,9 @@ public:
 
     void addFirst(Item item) {
         if (isEmpty())
-            head = tail = new DoubleNode<Item>(item, nullptr, nullptr);
+            head=tail=new DoubleNode<Item>(item, nullptr, nullptr);
         else
-            head=head->previous= new DoubleNode<Item>(item, head, nullptr);
+            head=head->previous=new DoubleNode<Item>(item, head, nullptr);
 
         length++;
     }
@@ -212,40 +216,52 @@ public:
             curr = curr->next;
         }
 
-        DoubleNode<Item>* newNode = new Node<Item>(item, curr->next, curr);
+        DoubleNode<Item>* newNode =new DoubleNode<Item>(item, curr->next, curr);
         curr->next->previous = newNode;
         curr->next = newNode;
         length++;
     }
 
-    void remove(int index) {
-
-        DoubleNode<Item>* toDelete;
-        if (index == 0) {
-            toDelete = head;
-            head = head->next;
-            head->previous = nullptr;
-            if(size()==1)
-                tail=nullptr;
-        } else if (index == length - 1) {
-            toDelete = tail;
-            tail = tail->previous;
-            tail->next = nullptr;
-            if(size()==1)
-                head=nullptr;
-        } else {
-            DoubleNode<Item>* curr = head;
-            for (int i = 0; i < index; i++) {
-                curr = curr->next;
-            }
-            toDelete = curr;
-            curr->previous->next = curr->next;
-            curr->next->previous = curr->previous;
-        }
-
-        delete toDelete;
-        length--;
+    template<class Value>
+    bool remove(Value value) {
+    if (isEmpty()) {
+        return false;
     }
+
+    if (head->item==value) {
+        DoubleNode<Item>* temp=head;
+        head=head->next;
+
+        if (head!=nullptr)
+            head->previous=nullptr;
+        else
+            tail=nullptr;
+
+        delete temp;
+        length--;
+        return true;
+    }
+
+    DoubleNode<Item>* curr=head;
+
+    while (curr!=nullptr) {
+        if (curr->item==value) {
+            curr->previous->next=curr->next;
+
+            if (curr->next!=nullptr)
+                curr->next->previous=curr->previous;
+            else
+                tail=curr->previous;
+
+            delete curr;
+            length--;
+            return true;
+        }
+        curr=curr->next;
+    }
+
+    return false;
+   }
 
     void print(){
         DoubleNode<Item>* curr = head;
@@ -257,13 +273,14 @@ public:
         cout<<endl;
     }
 
-    Item* find(Item item){
+    template<class Value>
+    Item* find(Value value){
     if(isEmpty())
         return nullptr;
     DoubleNode<Item>* curr=head;
     while(curr!=nullptr)
         {
-        if(curr->item==item)
+        if(curr->item==value)
             return &curr->item;
         curr=curr->next;
         }
@@ -274,11 +291,11 @@ public:
 template<class Key,class Item>
 class OpenHash{
 
-int size,capacity;
+int size;
 SingleLinkedList<Item> *array;
 
    int hashCode(int key){
-       return key%capacity;
+       return key%size;
    }
 
    int hashCode(string key){
@@ -287,38 +304,39 @@ SingleLinkedList<Item> *array;
        for (char c : key)
            count+=c;
 
-       return count%capacity;
+       return count%size;
     }
 
 
 public:
-    OpenHash(int capacity=20):capacity(capacity),size(0) {array=new SingleLinkedList<Item>[capacity]; }
+    OpenHash(int size=20):size(size) {array=new SingleLinkedList<Item>[size]; }
 
     void insert(Key key,Item item){
        int index=hashCode(key);
        array[index].addLast(item);
-       size++;
     }
 
     void print(){
-    for(int i=0;i<capacity;i++)
+    for(int i=0;i<size;i++)
         if(!array[i].isEmpty())
             array[i].print();
     }
 
-    Item* find(Key key,Item item){
+    template<class Value>
+    Item* find(Key key,Value value){
     int index=hashCode(key);
-    return array[index].find(item);
+    return array[index].find(value);
     }
 
-    Item* remove(Key key,Item item){
+    template<class Value>
+    bool remove(Key key,Value value){
     int index=hashCode(key);
-    Item *toDelete=array[index].remove(item);
-    if(toDelete!=nullptr)   size--;
-    return toDelete;
+    bool result=array[index].remove(value);
+    if(result)
+        size--;
+    return result;
     }
 
 };
-
 
 #endif // DATASTRUCTURES_H
