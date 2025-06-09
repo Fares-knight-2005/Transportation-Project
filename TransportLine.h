@@ -11,9 +11,8 @@ class TransportLine
         return this->id==id;
     }
     private:
-        DoubleLinkedList<Parking> parkings;
+        DoubleLinkedList<Station> stations;
         int id,numberOfVehicles;
-        double totalLength;
         static int numberOfAllTransportLine;
 
 };
