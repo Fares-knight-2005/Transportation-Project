@@ -4,22 +4,11 @@
 #include "Bus.h"
 #include "Passenger.h"
 
-class ParkingQueue
+struct ParkingQueue
 {
-    public:
-
-    bool operator==(int id){
-        return this->id==id;
-    }
-    private:
-        Queue<Bus> buses;
-        Queue<Passenger> passengers;
-        int totalOfVehicles;
-        int totalOfPassengers;
-        int id;
-        static int numberOfAllParkingQueue;
+Queue<Bus> buses; // الطابور المخصص بالباصات (مصف)
+Queue<Passenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
 };
-int ParkingQueue::numberOfAllParkingQueue=0;
 
 class Station{
 
@@ -29,10 +18,10 @@ class Station{
         return this->id==id;
     }
     private:
-        ParkingQueue  departure;
-        ParkingQueue  coming;
-        int id;
-        static int numberOfAllStation;
+        ParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
+        ParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
+        int id;// معرف الموقف
+        static int numberOfAllStation;//عدد الكلي للمواقف
 };
 int Station::numberOfAllStation=0;
 
