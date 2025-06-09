@@ -310,6 +310,7 @@ SingleLinkedList<Item> *array;
 
 public:
     OpenHash(int size=20):size(size) {array=new SingleLinkedList<Item>[size]; }
+     ~OpenHash()     {delete[] array;}
 
     void insert(Key key,Item item){
        int index=hashCode(key);
@@ -322,16 +323,15 @@ public:
             array[i].print();
     }
 
-    template<class Value>
-    Item* find(Key key,Value value){
+    
+    Item* find(Key key){
     int index=hashCode(key);
-    return array[index].find(value);
+    return array[index].find(key);
     }
 
-    template<class Value>
-    bool remove(Key key,Value value){
+    bool remove(Key key){
     int index=hashCode(key);
-    bool result=array[index].remove(value);
+    bool result=array[index].remove(key);
     if(result)
         size--;
     return result;
