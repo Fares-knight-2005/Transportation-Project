@@ -1,5 +1,5 @@
-#ifndef STATION_H
-#define STATION_H
+#ifndef PARKING_H
+#define PARKING_H
 #include "DataStructures.h"
 #include "Bus.h"
 #include "Passenger.h"
@@ -10,7 +10,7 @@ Queue<Bus> buses; // الطابور المخصص بالباصات (مصف)
 Queue<Passenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
 };
 
-class Station{
+class Parking{
 
     public:
 
@@ -21,8 +21,8 @@ class Station{
         ParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
         ParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
         int id;// معرف الموقف
-        static int numberOfAllStation;//عدد الكلي للمواقف
+        static int numberOfAllParking;//عدد الكلي للمواقف
 };
-int Station::numberOfAllStation=0;
+int Parking::numberOfAllParking=0;
 
-#endif // STATION_H
+#endif // PARKING_H
