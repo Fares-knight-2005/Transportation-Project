@@ -20,4 +20,8 @@ public:
        bool operator==(int id){
         return this->id==id;
       }
+
+      bool operator==(string name){
+        return this->name==name;
+      }
 };
