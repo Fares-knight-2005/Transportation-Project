@@ -1,9 +1,9 @@
 #ifndef TRANSPORTLINE_H
 #define TRANSPORTLINE_H
 #include "DataStructures.h"
-#include "Parking.h"
+#include "clsParking.h"
 
-class TransportLine
+class clsTransportLine
 {
     public:
 
@@ -11,11 +11,11 @@ class TransportLine
         return this->id==id;
     }
     private:
-        DoubleLinkedList<Station> stations;
+        DoubleLinkedList<clsStation> stations;
         int id,numberOfVehicles;
         static int numberOfAllTransportLine;
 
 };
-int TransportLine::numberOfAllTransportLine=0;
+int clsTransportLine::numberOfAllTransportLine=0;
 
 #endif // TRANSPORTLINE_H
