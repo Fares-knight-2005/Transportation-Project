@@ -1,5 +1,4 @@
-#ifndef DATASTRUCTURES_H
-#define DATASTRUCTURES_H
+
 #include <iostream>
 
 using namespace std;
@@ -14,7 +13,7 @@ struct Node{
 template<class Item>
 class SingleLinkedList{
 
-Node<Item> *head,*tail;
+Node <Item> *head,*tail;
 int length;
 
 public:
@@ -338,5 +337,3 @@ public:
     }
 
 };
-
-#endif // DATASTRUCTURES_H

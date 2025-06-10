@@ -1,5 +1,4 @@
-#ifndef INPUT_H
-#define INPUT_H
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -135,5 +134,3 @@ public:
     }
 
 };
-
-#endif // INPUT_H

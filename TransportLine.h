@@ -1,5 +1,4 @@
-#ifndef TRANSPORTLINE_H
-#define TRANSPORTLINE_H
+
 #include "DataStructures.h"
 #include "Parking.h"
 
@@ -19,4 +18,4 @@ class TransportLine
 };
 int TransportLine::numberOfAllTransportLine=0;
 
-#endif // TRANSPORTLINE_H
+
