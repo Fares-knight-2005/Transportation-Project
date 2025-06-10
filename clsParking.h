@@ -4,13 +4,13 @@
 #include "Bus.h"
 #include "Passenger.h"
 
-struct ParkingQueue
+struct strParkingQueue
 {
 Queue<Bus> buses; // الطابور المخصص بالباصات (مصف)
 Queue<Passenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
 };
 
-class Parking{
+class clsParking{
 
     public:
 
@@ -18,8 +18,8 @@ class Parking{
         return this->id==id;
     }
     private:
-        ParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
-        ParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
+        strParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
+        strParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
         int id;// معرف الموقف
         static int numberOfAllParking;//عدد الكلي للمواقف
 };
