@@ -17,5 +17,7 @@ public:
 	Passenger(string name, int id, Card* card)
 		: name(name), id(id), card(card) {}
 
-
+       bool operator==(int id){
+        return this->id==id;
+      }
 };
