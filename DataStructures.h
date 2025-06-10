@@ -66,35 +66,35 @@ public:
 
     }
 
-    template<class Value>
-    Item* find(Value value){
+    template<class Variable>
+    Item* find(Variable variable){
     if(isEmpty())
         return nullptr;
     Node<Item> *curr=head;
 
     while(curr!=nullptr)
     {
-        if(curr->item==value)
+        if(curr->item==variable)
             return &curr->item;
         curr=curr->next;
     }
     return nullptr;
     }
 
-    template<class Value>
-    bool remove(Value value) {
+    template<class Variable>
+    bool remove(Variable variable) {
     if (isEmpty()) {
         return false;
     }
 
-    if (head->item==value)
+    if (head->item==variable)
         return removeFirst();
 
     Node<Item>* prev = head;
     Node<Item>* curr = head->next;
 
     while (curr != nullptr) {
-        if (curr->item==value){
+        if (curr->item==variable){
             prev->next=curr->next;
 
             if (curr==tail)
@@ -222,13 +222,13 @@ public:
         length++;
     }
 
-    template<class Value>
-    bool remove(Value value) {
+    template<class Variable>
+    bool remove(Variable variable) {
     if (isEmpty()) {
         return false;
     }
 
-    if (head->item==value) {
+    if (head->item==variable) {
         DoubleNode<Item>* temp=head;
         head=head->next;
 
@@ -245,7 +245,7 @@ public:
     DoubleNode<Item>* curr=head;
 
     while (curr!=nullptr) {
-        if (curr->item==value) {
+        if (curr->item==variable) {
             curr->previous->next=curr->next;
 
             if (curr->next!=nullptr)
@@ -273,14 +273,14 @@ public:
         cout<<endl;
     }
 
-    template<class Value>
-    Item* find(Value value){
+    template<class Variable>
+    Item* find(Variable variable){
     if(isEmpty())
         return nullptr;
     DoubleNode<Item>* curr=head;
     while(curr!=nullptr)
         {
-        if(curr->item==value)
+        if(curr->item==variable)
             return &curr->item;
         curr=curr->next;
         }
