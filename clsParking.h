@@ -23,6 +23,6 @@ class clsParking{
         int id;// معرف الموقف
         static int numberOfAllParking;//عدد الكلي للمواقف
 };
-int Parking::numberOfAllParking=0;
+int clsParking::numberOfAllParking=0;
 
 #endif // PARKING_H
