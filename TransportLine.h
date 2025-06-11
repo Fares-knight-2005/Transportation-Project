@@ -12,7 +12,6 @@ class TransportLine
     private:
         DoubleLinkedList<Parking> parkings;
         int id,numberOfVehicles;
-        double totalLength;
         static int numberOfAllTransportLine;
 
 };
