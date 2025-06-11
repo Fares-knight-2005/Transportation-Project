@@ -302,10 +302,23 @@ public:
 };
 
 template<class Key,class Item>
+struct HashNode{
+Key key;
+Item item;
+
+HashNode(Key key,Item item):key(key),item(item) {}
+
+bool operator==(Key key){
+return this->key==key;
+}
+
+};
+
+template<class Key,class Item>
 class OpenHash{
 
-int size;
-SingleLinkedList<Item> *array;
+int capacity,length;
+SingleLinkedList<HashNode<Key,Item>> *array;
 
    int hashCode(int key){
        return key%size;
@@ -322,12 +335,13 @@ SingleLinkedList<Item> *array;
 
 
 public:
-    OpenHash(int size=20):size(size) {array=new SingleLinkedList<Item>[size]; }
+    OpenHash(int capacity=20):capacity(capacity),length(0) {array=new SingleLinkedList<HashNode<Key,Item>>[capacity]; }
      ~OpenHash()     {delete[] array;}
 
     void insert(Key key,Item item){
        int index=hashCode(key);
-       array[index].addLast(item);
+       array[index].addLast(HashNode<Key,Item>(key,item));
+       length++;
     }
 
     void print(){
@@ -336,18 +350,27 @@ public:
             array[i].print();
     }
 
-    
+
     Item* find(Key key){
     int index=hashCode(key);
-    return array[index].find(key);
+    return &array[index].find(key)->item;
     }
+
 
     bool remove(Key key){
     int index=hashCode(key);
     bool result=array[index].remove(key);
     if(result)
-        size--;
+        length--;
     return result;
+    }
+
+    int size(){
+    return length;     
+    }
+
+    bool isEmpty(){
+    return length==0;
     }
 
 };
