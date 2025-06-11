@@ -337,3 +337,116 @@ public:
     }
 
 };
+
+
+
+
+
+
+//Making Tree DataStructure 
+
+template <typename T> class TreeNode
+{
+public:
+
+    T* Data;
+    TreeNode <T>* FChild;
+    TreeNode <T>* Sibling;
+
+
+    TreeNode(T Data, TreeNode <T>* FChild, TreeNode <T>* Sibling)
+    {
+        this->Data = Data;
+        this->FChild = FChild;
+        this->Sibling = Sibling;
+    }
+
+    TreeNode()
+    {
+        this->Data = nullptr;
+        this->FChild = nullptr;
+        this->Sibling = nullptr;
+
+    }
+
+};
+
+template <typename T> class Tree
+{
+public:
+
+    TreeNode <T>* Root;
+
+
+    Tree(TreeNode <T>* Root)
+    {
+        this->Root = Root;
+    }
+
+    Tree()
+    {
+        this->Root = nullptr;
+    }
+
+    void AddToParent(TreeNode <T>* Parent, T Value)
+    {
+        if (Parent == nullptr)
+            return;
+
+        TreeNode <T>* NewNode = new TreeNode<T>();
+
+        if (Parent->FChild == nullptr)
+        {
+            Parent->FChild = NewNode;
+            NewNode->Data = Value;
+            return;
+        }
+
+        TreeNode <T>* Temp = Parent.FChild;
+
+        while (Temp->Sibling != nullptr)
+        {
+            Temp = Temp->Sibling;
+        }
+
+        Temp->Sibling = NewNode;
+        NewNode->Data = Value;
+
+    }
+
+    TreeNode Search(TreeNode <T>* Parent, T Value)
+    {
+        if (Parent == nullptr)
+            return nullptr;
+
+        if (Parent->Data == Value)
+        {
+            return Parent;
+        }
+
+        TreeNode <T>* ChildResult = Search(Parent->FChild, Value);
+
+        if (ChildResult != nullptr)
+            return ChildResult;
+
+        return Search(Parent->Sibling, Value);
+
+    }
+
+
+    TreeNode Print(TreeNode <T>* Parent)
+    {
+        if (Parent == nullptr)
+            return nullptr;
+
+        TreeNode <T>* ChildResult = Print(Parent->FChild, Value);
+
+        if (ChildResult != nullptr)
+            return ChildResult;
+
+        return Search(Parent->Sibling, Value);
+
+    }
+
+};
+ 
