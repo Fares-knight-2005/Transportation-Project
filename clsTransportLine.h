@@ -1,7 +1,7 @@
 #ifndef TRANSPORTLINE_H
 #define TRANSPORTLINE_H
 #include "DataStructures.h"
-#include "clsParking.h"
+#include "clsStation.h"
 
 class clsTransportLine
 {
