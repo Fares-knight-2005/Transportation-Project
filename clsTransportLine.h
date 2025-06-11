@@ -12,8 +12,18 @@ class clsTransportLine
 
     clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0) {}
 
+    double getDistance(int startId, int endId){
+    if(startId>=endId)
+        return 0;
+    double distance=0;
+    for(int i=startId;i>endId;i++)
+        //distance+=البعد عن الموقف التالي
+        
+    return distance;
+    }
+
     double calculateFare(int startId, int endId,bool cardType){
-      //  int distance= getDistance(startId,endId);
+        double distance= getDistance(startId,endId);
         double price=distance*pricePerKilometer;
         if(cardType)
              return price*0.8;
@@ -21,14 +31,14 @@ class clsTransportLine
     }
 
     void addStation(clsStation station,int stationNumber){
-    stations.add(stationNumber-1,station);   
+        stations.add(stationNumber-1,station);   
     }
 
     void removeStation(int stationId){
-    if(stations.remove(stationId))
-        cout<<"The deletion process was completed successfully.\n";
-    else
-        cout<<"The station ID number you entered is not available.\n";
+       if(stations.remove(stationId))
+           cout<<"The deletion process was completed successfully.\n";
+       else
+           cout<<"The station ID number you entered is not available.\n";
     }
 
     bool operator==(int id){
