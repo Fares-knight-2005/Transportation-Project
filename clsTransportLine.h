@@ -13,17 +13,31 @@ class clsTransportLine
     clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0) {}
 
     double calculateFare(int startId, int endId,bool cardType){
-        retrurn 0.0;
+      //  int distance= getDistance(startId,endId);
+        double price=distance*pricePerKilometer;
+        if(cardType)
+             return price*0.8;
+        retrurn price;
     }
 
-    
+    void addStation(clsStation station,int stationNumber){
+    stations.add(stationNumber-1,station);   
+    }
+
+    void removeStation(int stationId){
+    if(stations.remove(stationId))
+        cout<<"The deletion process was completed successfully.\n";
+    else
+        cout<<"The station ID number you entered is not available.\n";
+    }
+
     bool operator==(int id){
         return this->id==id;
     }
 
     private:
         DoubleLinkedList<clsStation> stations;
-        int id,numberOfVehicles;
+        int id,numberOfVehicles,pricePerKilometer;
         static int numberOfAllTransportLine;
 
 };
