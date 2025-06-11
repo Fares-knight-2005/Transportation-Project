@@ -13,7 +13,8 @@ Queue<clsPassenger> passengers; // الطابور المخصص بالركاب (�
 class clsParking{
 
     public:
-    clsParking():departure(nullptr),coming(nullptr),id(0) {}
+    clsParking():id(0),distanceToNext(0.0) {}
+    clsParking(int id,double distanceToNext):id(id),distanceToNext(distanceToNext);
 
     double getDistanceToNext(){
     return distanceToNext;
@@ -22,6 +23,7 @@ class clsParking{
     bool operator==(int id){
         return this->id==id;
     }
+
     private:
         strParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
         strParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
