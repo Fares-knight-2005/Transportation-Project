@@ -321,7 +321,7 @@ int capacity,length;
 SingleLinkedList<HashNode<Key,Item>> *array;
 
    int hashCode(int key){
-       return key%size;
+       return key%capacity;
    }
 
    int hashCode(string key){
@@ -330,7 +330,7 @@ SingleLinkedList<HashNode<Key,Item>> *array;
        for (char c : key)
            count+=c;
 
-       return count%size;
+       return count%capacity;
     }
 
 
