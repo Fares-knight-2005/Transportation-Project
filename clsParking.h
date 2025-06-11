@@ -14,7 +14,11 @@ class clsParking{
 
     public:
     clsParking():departure(nullptr),coming(nullptr),id(0) {}
-    
+
+    double getDistanceToNext(){
+    return distanceToNext;
+    }
+
     bool operator==(int id){
         return this->id==id;
     }
@@ -22,6 +26,7 @@ class clsParking{
         strParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
         strParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
         int id;// معرف الموقف
+        double distanceToNext;//البعد عن الموقف التالي
         static int numberOfAllParking;//عدد الكلي للمواقف
 };
 int clsParking::numberOfAllParking=0;
