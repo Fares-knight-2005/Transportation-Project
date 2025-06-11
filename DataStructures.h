@@ -42,6 +42,15 @@ public:
     ++length;
     }
 
+    void addFirst(Item item){
+     if(isEmpty())
+        tail=head=new Node<Item>(item,nullptr);
+    else
+        head=new Node<Item>(item,head);
+
+    ++length;
+    }
+
     bool removeFirst(){
 
     if(isEmpty())
@@ -129,6 +138,10 @@ public:
 
     bool dequeue(){
     return singleLinkedList.removeFirst();
+    }
+
+    void push(Item item){
+    singleLinkedList.addFirst(item);
     }
 
     bool isEmpty(){
