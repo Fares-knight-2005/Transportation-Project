@@ -6,11 +6,11 @@
 class clsTransportLine
 {
     public:
-    clsTransportLine(int numberOfVehicles,DoubleLinkedList<clsStation> stations):
-    stations(stations),id(++numberOfAllTransportLine),
+    clsTransportLine(int numberOfVehicles,double pricePerKilometer,DoubleLinkedList<clsStation> stations):
+    stations(stations),pricePerKilometer(pricePerKilometer),id(++numberOfAllTransportLine),
     numberOfVehicles(numberOfVehicles)  {}
 
-    clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0) {}
+    clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0),pricePerKilometer(0) {}
 
     double getDistance(int startId, int endId){
     if(startId>=endId)
