@@ -13,7 +13,8 @@ Queue<clsPassenger> passengers; // الطابور المخصص بالركاب (�
 class clsParking{
 
     public:
-
+    clsParking():departure(nullptr),coming(nullptr),id(0) {}
+    
     bool operator==(int id){
         return this->id==id;
     }
