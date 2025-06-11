@@ -12,7 +12,7 @@ class clsTransportLine
 
     clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0),pricePerKilometer(0) {}
 
-    double getDistance(int startId, int endId){
+    static double getDistance(int startId, int endId){
     if(startId>=endId)
         return 0;
     double distance=0;
@@ -22,7 +22,7 @@ class clsTransportLine
     return distance;
     }
 
-    double calculateFare(int startId, int endId,bool cardType){
+    static double calculateFare(int startId, int endId,bool cardType){
         double distance= getDistance(startId,endId);
         double price=distance*pricePerKilometer;
         if(cardType)
