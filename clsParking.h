@@ -1,13 +1,13 @@
 #ifndef PARKING_H
 #define PARKING_H
 #include "DataStructures.h"
-#include "Bus.h"
-#include "Passenger.h"
+#include "clsVehicle.h"
+#include "clsPassenger.h"
 
 struct strParkingQueue
 {
-Queue<Bus> buses; // الطابور المخصص بالباصات (مصف)
-Queue<Passenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
+Queue<clsVehicle> vehicle; // الطابور المخصص بالباصات (مصف)
+Queue<clsPassenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
 };
 
 class clsParking{
