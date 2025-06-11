@@ -6,10 +6,21 @@
 class clsTransportLine
 {
     public:
+    clsTransportLine(int numberOfVehicles,DoubleLinkedList<clsStation> stations):
+    stations(stations),id(++numberOfAllTransportLine),
+    numberOfVehicles(numberOfVehicles)  {}
 
+    clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0) {}
+
+    double calculateFare(int startId, int endId,bool cardType){
+        retrurn 0.0;
+    }
+
+    
     bool operator==(int id){
         return this->id==id;
     }
+
     private:
         DoubleLinkedList<clsStation> stations;
         int id,numberOfVehicles;
