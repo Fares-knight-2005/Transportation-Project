@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "clsPerson.h"
-#include "clsBusDriver.h"
+#include "clsVehicleDriver.h"
 using namespace std;
 
 int main()
