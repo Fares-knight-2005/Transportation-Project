@@ -351,7 +351,7 @@ public:
     }
 
 
-    Item* find(Key key){
+    Item* operator[](Key key){
     int index=hashCode(key);
     return &array[index].find(key)->item;
     }
