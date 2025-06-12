@@ -2,6 +2,7 @@
 #define TRANSPORTLINE_H
 #include "DataStructures.h"
 #include "clsStation.h"
+#include "clsVehicle.h"
 
 class clsTransportLine
 {
