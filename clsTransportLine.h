@@ -6,8 +6,8 @@
 class clsTransportLine
 {
     public:
-    clsTransportLine(int numberOfVehicles,double pricePerKilometer,DoubleLinkedList<clsStation> stations):
-    stations(stations),pricePerKilometer(pricePerKilometer),id(++numberOfAllTransportLine),
+    clsTransportLine(int numberOfVehicles,double pricePerKilometer,enVehicleType vehiclesType,DoubleLinkedList<clsStation> stations):
+    stations(stations),pricePerKilometer(pricePerKilometer),id(++numberOfAllTransportLine),vehiclesType(vehiclesType),
     numberOfVehicles(numberOfVehicles)  {}
 
     clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0),pricePerKilometer(0) {}
@@ -48,6 +48,7 @@ class clsTransportLine
     private:
         DoubleLinkedList<clsStation> stations;
         int id,numberOfVehicles,pricePerKilometer;
+        enVehicleType vehiclesType;
         static int numberOfAllTransportLine;
 
 };
