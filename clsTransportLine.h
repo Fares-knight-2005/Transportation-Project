@@ -11,7 +11,7 @@ class clsTransportLine
     stations(stations),pricePerKilometer(pricePerKilometer),id(++numberOfAllTransportLine),vehiclesType(vehiclesType),
     numberOfVehicles(numberOfVehicles)  {}
 
-    clsTransportLine():stations(nullptr),id(0),numberOfVehicles(0),pricePerKilometer(0) {}
+    clsTransportLine():id(0),numberOfVehicles(0),pricePerKilometer(0) {}
 /*
     double getDistance(int startId, int endId){
     if(startId>=endId)
