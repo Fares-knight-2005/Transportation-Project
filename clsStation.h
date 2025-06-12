@@ -13,7 +13,7 @@ class clsStation
 	int station_id;
 	string stationName;
 	ClosedHash <int, clsParking> parkings;
-	string city
+	string city;
 	string street;
 	int maxParkingsCapicty;
 	int maxVehcelNumberIn1Parking;
@@ -22,5 +22,8 @@ class clsStation
 
 public:
 
-
+	int getid()
+	{
+		return station_id;
+	}
 };

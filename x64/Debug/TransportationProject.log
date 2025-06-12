@@ -1,18 +1,268 @@
 ﻿  TransportationProject.cpp
-D:\coding files\TransportationProject\TransportationProject\clsPassenger.h(9,1): error C2059: syntax error: 'using namespace'
+D:\coding files\TransportationProject\TransportationProject\clsTransportLine.h(14,46): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   (compiling source file 'TransportationProject.cpp')
   
-D:\coding files\TransportationProject\TransportationProject\clsPassenger.h(9,20): error C2238: unexpected token(s) preceding ';'
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24): error C2676: binary '==': 'Item' does not define this operator or a conversion to a type acceptable to the predefined operator
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24): error C2676:         with
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24): error C2676:         [
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24): error C2676:             Item=clsStation
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24): error C2676:         ]
   (compiling source file 'TransportationProject.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3682,17):
+      could be 'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Variable'
+          with
+          [
+              Variable=int
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3676,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3630,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1920,17):
+      or       'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Variable'
+          with
+          [
+              Variable=int
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1909,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1872,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3246,17):
+      or       'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const _Elem *const ' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3227,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3221,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xmemory(1046,30):
+      or       'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept': could not deduce template argument for 'const std::allocator<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\iterator(486,17):
+      or       'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)': could not deduce template argument for 'const std::istreambuf_iterator<_Elem,_Traits> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\iterator(304,17):
+      or       'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept': could not deduce template argument for 'const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(4474,30):
+      or       'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)': could not deduce template argument for 'const std::move_iterator<_Iter> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(1926,30):
+      or       'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)': could not deduce template argument for 'const std::reverse_iterator<_BidIt> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\utility(503,27):
+      or       'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,17):
+          'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)': could not deduce template argument for 'const std::pair<_Ty1,_Ty2> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      D:\coding files\TransportationProject\TransportationProject\DataStructures.h(258,24):
+      the template instantiation context (the oldest one first) is
+          D:\coding files\TransportationProject\TransportationProject\clsTransportLine.h(43,22):
+          see reference to function template instantiation 'bool DoubleLinkedList<clsStation>::remove<int>(Variable)' being compiled
+          with
+          [
+              Variable=int
+          ]
+              D:\coding files\TransportationProject\TransportationProject\clsTransportLine.h(43,9):
+              see the first reference to 'DoubleLinkedList<clsStation>::remove' in 'clsTransportLine::removeStation'
   
-D:\coding files\TransportationProject\TransportationProject\clsParking.h(17,83): error C2969: syntax error: ';': expected member function definition to end with '}'
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,28): error C2676: binary '==': 'Item' does not define this operator or a conversion to a type acceptable to the predefined operator
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,28): error C2676:         with
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,28): error C2676:         [
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,28): error C2676:             Item=clsStation
+D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,28): error C2676:         ]
   (compiling source file 'TransportationProject.cpp')
-  
-D:\coding files\TransportationProject\TransportationProject\clsParking.h(34,17): error C2838: 'numberOfAllParking': illegal qualified name in member declaration
-  (compiling source file 'TransportationProject.cpp')
-  
-D:\coding files\TransportationProject\TransportationProject\TransportationProject.cpp(5,1): error C2059: syntax error: 'using namespace'
-D:\coding files\TransportationProject\TransportationProject\TransportationProject.cpp(5,20): error C2238: unexpected token(s) preceding ';'
-D:\coding files\TransportationProject\TransportationProject\clsCard.h(6,15): error C1075: '{': no matching token found
-  (compiling source file 'TransportationProject.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3682,17):
+      could be 'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(std::nullptr_t,const std::unique_ptr<_Ty,_Dx> &) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Variable'
+          with
+          [
+              Variable=int
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3676,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(3630,30):
+      or       'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::unique_ptr<_Ty,_Dx> &,const std::unique_ptr<_Ty2,_Dx2> &)': could not deduce template argument for 'const std::unique_ptr<_Ty,_Dx> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1920,17):
+      or       'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(std::nullptr_t,const std::shared_ptr<_Ty> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Variable'
+          with
+          [
+              Variable=int
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1909,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,std::nullptr_t) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(1872,17):
+      or       'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::shared_ptr<_Ty> &,const std::shared_ptr<_Ty0> &) noexcept': could not deduce template argument for 'const std::shared_ptr<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3246,17):
+      or       'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const _Elem *const ,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const _Elem *const ' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3227,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const _Elem *const ) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xstring(3221,30):
+      or       'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::basic_string<_Elem,_Traits,_Alloc> &,const std::basic_string<_Elem,_Traits,_Alloc> &) noexcept': could not deduce template argument for 'const std::basic_string<_Elem,_Traits,_Alloc> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xmemory(1046,30):
+      or       'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::allocator<_Ty> &,const std::allocator<_Other> &) noexcept': could not deduce template argument for 'const std::allocator<_Ty> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\iterator(486,17):
+      or       'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::istreambuf_iterator<_Elem,_Traits> &,const std::istreambuf_iterator<_Elem,_Traits> &)': could not deduce template argument for 'const std::istreambuf_iterator<_Elem,_Traits> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\iterator(304,17):
+      or       'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &,const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &) noexcept': could not deduce template argument for 'const std::istream_iterator<_Ty,_Elem,_Traits,_Diff> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(4474,30):
+      or       'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::move_iterator<_Iter> &,const std::move_iterator<_Iter2> &) noexcept(<expr>)': could not deduce template argument for 'const std::move_iterator<_Iter> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(1926,30):
+      or       'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::reverse_iterator<_BidIt> &,const std::reverse_iterator<_BidIt2> &) noexcept(<expr>)': could not deduce template argument for 'const std::reverse_iterator<_BidIt> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\utility(503,27):
+      or       'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)'
+          D:\coding files\TransportationProject\TransportationProject\DataStructures.h(275,21):
+          'bool std::operator ==(const std::pair<_Ty1,_Ty2> &,const std::pair<_Uty1,_Uty2> &)': could not deduce template argument for 'const std::pair<_Ty1,_Ty2> &' from 'Item'
+          with
+          [
+              Item=clsStation
+          ]
   

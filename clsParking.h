@@ -11,13 +11,13 @@ Queue<clsPassenger> passengers; // الطابور المخصص بالركاب (�
 };
 
 class clsParking{
-
+     
     public:
     clsParking():id(0),distanceToNext(0.0) {}
-    clsParking(int id,double distanceToNext):id(id),distanceToNext(distanceToNext) {}
+    clsParking(int id, double distanceToNext) :id(id), distanceToNext(distanceToNext) {}
 
     double getDistanceToNext(){
-    return distanceToNext;
+        return distanceToNext;
     }
 
     bool operator==(int id){

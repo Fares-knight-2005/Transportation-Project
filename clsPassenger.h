@@ -7,6 +7,7 @@
 #include "clsCard.h"
 
 using namespace std;
+
 class clsPassenger : clsPerson {
 protected:
 

@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 enum enVehicleType {BUS=1, TRAM, FERRY, METRO};
 
 string getVehicleType(enVehicleType vehicleType) {

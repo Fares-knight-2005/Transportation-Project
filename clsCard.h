@@ -24,7 +24,7 @@ public:
 	}
 	void recharge(double amount) {
 		balance += amount;
-
+	}
 
 	double getBalance()  {
 		return balance;

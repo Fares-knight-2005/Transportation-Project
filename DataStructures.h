@@ -255,7 +255,7 @@ public:
             return false;
         }
 
-        if (head->item == variable) {
+        if (head->item == variable) { // Error Here binary '==': 'Item' does not define this operator or a conversion to a type acceptable to the predefined operator
             DoubleNode<Item>* temp = head;
             head = head->next;
 
@@ -272,7 +272,7 @@ public:
         DoubleNode<Item>* curr = head;
 
         while (curr != nullptr) {
-            if (curr->item == variable) {
+            if (curr->item == variable) { //Error Here binary '==': 'Item' does not define this operator or a conversion to a type acceptable to the predefined operator
                 curr->previous->next = curr->next;
 
                 if (curr->next != nullptr)
