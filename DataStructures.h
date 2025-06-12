@@ -235,6 +235,19 @@ public:
         length++;
     }
 
+    Item* operator[](int index) {
+    if (index < 0 || index >= length) {
+        throw out_of_range("Index out of bounds");
+    }
+
+    DoubleNode<Item>* curr = head;
+    for (int i = 0; i < index; i++) {
+        curr = curr->next;
+    }
+
+    return &curr->item;
+    }
+
     template<class Variable>
     bool remove(Variable variable) {
     if (isEmpty()) {
@@ -366,7 +379,7 @@ public:
     }
 
     int size(){
-    return length;     
+    return length;
     }
 
     bool isEmpty(){
@@ -376,152 +389,19 @@ public:
 };
 
 
-
-
-
-
-//Making Tree DataStructure 
-//
-//template <typename T> class TreeNode
-//{
-//public:
-//
-//    T* Data;
-//    TreeNode <T>* FChild;
-//    TreeNode <T>* Sibling;
-//
-//
-//    TreeNode(T Data, TreeNode <T>* FChild, TreeNode <T>* Sibling)
-//    {
-//        this->Data = Data;
-//        this->FChild = FChild;
-//        this->Sibling = Sibling;
-//    }
-//
-//    TreeNode()
-//    {
-//        this->Data = nullptr;
-//        this->FChild = nullptr;
-//        this->Sibling = nullptr;
-//
-//    }
-//
-//};
-//
-//template <typename T> class Tree
-//{
-//public:
-//
-//    TreeNode <T>* Root;
-//
-//
-//    Tree(TreeNode <T>* Root)
-//    {
-//        this->Root = Root;
-//    }
-//
-//    Tree()
-//    {
-//        this->Root = nullptr;
-//    }
-//
-//    void AddToParent(TreeNode <T>* Parent, T Value)
-//    {
-//        if (Parent == nullptr)
-//            return;
-//
-//        TreeNode <T>* NewNode = new TreeNode<T>();
-//
-//        if (Parent->FChild == nullptr)
-//        {
-//            Parent->FChild = NewNode;
-//            NewNode->Data = Value;
-//            return;
-//        }
-//
-//        TreeNode <T>* Temp = Parent.FChild;
-//
-//        while (Temp->Sibling != nullptr)
-//        {
-//            Temp = Temp->Sibling;
-//        }
-//
-//        Temp->Sibling = NewNode;
-//        NewNode->Data = Value;
-//
-//    }
-//
-//    TreeNode Search(TreeNode <T>* Parent, T Value)
-//    {
-//        if (Parent == nullptr)
-//            return nullptr;
-//
-//        if (Parent->Data == Value)
-//        {
-//            return Parent;
-//        }
-//
-//        TreeNode <T>* ChildResult = Search(Parent->FChild, Value);
-//
-//        if (ChildResult != nullptr)
-//            return ChildResult;
-//
-//        return Search(Parent->Sibling, Value);
-//
-//    }
-//
-//
-//    TreeNode Print(TreeNode <T>* Parent)
-//    {
-//        if (Parent == nullptr)
-//            return nullptr;
-//
-//        TreeNode <T>* ChildResult = Print(Parent->FChild, Value);
-//
-//        if (ChildResult != nullptr)
-//            return ChildResult;
-//
-//        return Search(Parent->Sibling, Value);
-//
-//    }
-//
-//
-//
-//
-//};
-
-
-
 //Making Closed Hashing DataStructure
 
 
 template <typename Key, typename Item>
-class KeyItemNode
+struct ClosedNode:public HashNode<Key,Item>
 {
-public:
 
-    Key* key;
-    Item* item;
+enum enNodeType {EMPTY=0,DELETED,FULL};
 
+    enNodeType nodeType;
 
-    KeyItemNode(Key k, Item i)
-    {
-        this->key = k;
-        this->item = i;
-    }
-
-
-    KeyItemNode()
-    {
-        this->key = nullptr;
-        this->item = nullptr;
-    }
-
-    bool isEmpty()
-    {
-        return this->item == nullptr;
-    }
-
+    ClosedNode(Key key,Item item): HashNode<Key, Item>(key,item),nodeType(FULL) {}
+    ClosedNode() : HashNode<Key,Item>(Key(), Item()), nodeType(EMPTY) {}
 };
 
 
@@ -529,123 +409,129 @@ public:
 template <typename Key, typename Item>
 class ClosedHash
 {
-    int Size;
-    KeyItemNode<Key, Item>* array;
+    int length,capacity;
+    ClosedNode<Key, Item>* array;
 
-    int Hash(Key key)
-    {
-        int Count = 0;
+    int hashCode(int key){
+       return key%capacity;
+    }
 
-        if (typeid(key) == typeid(string))
-        {
-            for (char c : key)
-                Count += (short)c;
+   int hashCode(string key){
+       int count=0;
+
+       for (char c : key)
+           count+=c;
+
+       return count%capacity;
+    }
+
+    void resize(int newCapacity) {
+        ClosedNode<Key, Item>* newArray = new ClosedNode<Key, Item>[newCapacity];
+
+        for (int i=0; i<capacity;i++) {
+            if (array[i].nodeType==ClosedNode<Key, Item>::FULL) {
+                int newIndex = hashCode(array[i].key);
+
+                while (newArray[newIndex].nodeType == ClosedNode<Key, Item>::FULL)
+                      newIndex = (newIndex + 1) % newCapacity;
+
+
+                newArray[newIndex] = array[i];
+            }
         }
 
-        else Count = key;
-
-        return Count % this->Size;
+        delete[] array;
+        array = newArray;
+        capacity = newCapacity;
     }
+
 
 public:
 
-    int Size()
+    int size()
     {
-        return this->Size;
+        return length;
     }
 
-    ClosedHash(int Size)
+    bool isFull(){
+    return (length/capacity)==1;
+    }
+
+    ClosedHash(int capacity=20):capacity(capacity)
     {
-        this->Size = Size;
-        Array = new KeyItemNode <Key, Item>[Size];
+        array=new ClosedNode<Key,Item>[capacity];
     }
 
     ~ClosedHash()
     {
-        delete[]array;
+        delete []array;
     }
 
-    void Add(Key key, Item item)
+    void insert(Key key, Item item)
     {
-        int Index = Hash(Key);
+        if(isFull())
+            resize(2*capacity);
 
+        int index = hashCode(key);
+        int originalIndex = index;
 
-        while (!array[Index].isEmpty())
-        {
-            if (Index == Size - 1)
-                Index = -1;
-            Index = Index + 1;
-        }
+        do{
+            if (array[index].nodeType != ClosedNode<Key, Item>::FULL) {
+                array[index]=ClosedNode<Key, Item>(key, item);
+                length++;
+                return;
+            }
 
-        array[Index] = new KeyItemNode <Key, Item>(key, item);
+        index = (index + 1) % capacity;
+        } while (index != originalIndex);
     }
 
 
-    Item* Find(Key key) {
-        int index = Hash(key);
+    Item* operator[](Key key) {
 
-        while (!(key == array[index].key))
-        {
+        int index = hashCode(key);
+        int originalIndex = index;
 
-            if (Index == Size - 1)
-                Index = -1;
+        do {
+            if (array[index].nodeType == ClosedNode<Key, Item>::EMPTY) {
+                return nullptr;
+            }
 
-            index++;
-        }
+            if (array[index].nodeType == ClosedNode<Key, Item>::FULL&&array[index].key == key) {
+                return &array[index].item;
+            }
 
-        return array[index].item;
-    }
+        index = (index + 1) % capacity;
+        } while (index != originalIndex);
 
-
-    KeyItemNode <Key, Item>* Find(Key key) {
-        int index = Hash(key);
-
-        while (!(key == array[index].key))
-        {
-
-            if (Index == Size - 1)
-                Index = -1;
-
-            index++;
-        }
-
-        return array[index];
+        return nullptr;
     }
 
 
     bool remove(Key key) {
-        int index = Hash(key);
 
-        KeyItemNode <Key, Item>* Itm = Find(key);
+        int index = hashCode(key);
+        int originalIndex = index;
 
-        if (Itm->isEmpty())
-        {
-            return false;
-        }
+        do {
+            if (array[index].nodeType == ClosedNode<Key, Item>::EMPTY) {
+                return false;
+            }
 
-        Itm->item = nullptr;
-        Itm->key = nullptr;
+            if (array[index].nodeType == ClosedNode<Key, Item>::FULL&&array[index].key == key) {
+                array[index].nodeType = ClosedNode<Key, Item>::DELETED;
+                length--;
+                return true;
+            }
 
-        return true;
+            index = (index + 1) % capacity;
+        } while (index != originalIndex);
+
+        return false;
     }
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif // DATASTRUCTURES_H
