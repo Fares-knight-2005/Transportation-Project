@@ -122,17 +122,41 @@ public:
         string input;
         while (true) {
             input = readString(message);
-            string inputLower=toLowerString(input);
-            string trueLower=toLowerString(trueInput);
-            string falseLower=toLowerString(falseInput);
-            if (inputLower==trueLower)
-               return true;
-            if (inputLower==falseLower)
-               return false;
-           system("color");
-           cout << "\033[1;31mInvalid input. Please enter either "<< trueInput << " or " << falseInput << "\033[0m\n";
+            string inputLower = toLowerString(input);
+            string trueLower = toLowerString(trueInput);
+            string falseLower = toLowerString(falseInput);
+            if (inputLower == trueLower)
+                return true;
+            if (inputLower == falseLower)
+                return false;
+            system("color");
+            cout << "\033[1;31mInvalid input. Please enter either " << trueInput << " or " << falseInput << "\033[0m\n";
         }
+    
     }
+
+
+
+    static void Clear()
+    {
+        system("cls");
+    }
+
+
+    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
+    {
+        int Number = readInt();
+
+        while (!(Number >= From && Number <= To))
+        {
+            cout << ErrorMessage;
+            Number = readInt();
+        }
+        return Number;
+    }
+
+};
+
 
 };
 

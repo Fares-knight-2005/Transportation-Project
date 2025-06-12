@@ -375,4 +375,277 @@ public:
 
 };
 
+
+
+
+
+
+//Making Tree DataStructure 
+//
+//template <typename T> class TreeNode
+//{
+//public:
+//
+//    T* Data;
+//    TreeNode <T>* FChild;
+//    TreeNode <T>* Sibling;
+//
+//
+//    TreeNode(T Data, TreeNode <T>* FChild, TreeNode <T>* Sibling)
+//    {
+//        this->Data = Data;
+//        this->FChild = FChild;
+//        this->Sibling = Sibling;
+//    }
+//
+//    TreeNode()
+//    {
+//        this->Data = nullptr;
+//        this->FChild = nullptr;
+//        this->Sibling = nullptr;
+//
+//    }
+//
+//};
+//
+//template <typename T> class Tree
+//{
+//public:
+//
+//    TreeNode <T>* Root;
+//
+//
+//    Tree(TreeNode <T>* Root)
+//    {
+//        this->Root = Root;
+//    }
+//
+//    Tree()
+//    {
+//        this->Root = nullptr;
+//    }
+//
+//    void AddToParent(TreeNode <T>* Parent, T Value)
+//    {
+//        if (Parent == nullptr)
+//            return;
+//
+//        TreeNode <T>* NewNode = new TreeNode<T>();
+//
+//        if (Parent->FChild == nullptr)
+//        {
+//            Parent->FChild = NewNode;
+//            NewNode->Data = Value;
+//            return;
+//        }
+//
+//        TreeNode <T>* Temp = Parent.FChild;
+//
+//        while (Temp->Sibling != nullptr)
+//        {
+//            Temp = Temp->Sibling;
+//        }
+//
+//        Temp->Sibling = NewNode;
+//        NewNode->Data = Value;
+//
+//    }
+//
+//    TreeNode Search(TreeNode <T>* Parent, T Value)
+//    {
+//        if (Parent == nullptr)
+//            return nullptr;
+//
+//        if (Parent->Data == Value)
+//        {
+//            return Parent;
+//        }
+//
+//        TreeNode <T>* ChildResult = Search(Parent->FChild, Value);
+//
+//        if (ChildResult != nullptr)
+//            return ChildResult;
+//
+//        return Search(Parent->Sibling, Value);
+//
+//    }
+//
+//
+//    TreeNode Print(TreeNode <T>* Parent)
+//    {
+//        if (Parent == nullptr)
+//            return nullptr;
+//
+//        TreeNode <T>* ChildResult = Print(Parent->FChild, Value);
+//
+//        if (ChildResult != nullptr)
+//            return ChildResult;
+//
+//        return Search(Parent->Sibling, Value);
+//
+//    }
+//
+//
+//
+//
+//};
+
+
+
+//Making Closed Hashing DataStructure
+
+
+template <typename Key, typename Item>
+class KeyItemNode
+{
+public:
+
+    Key* key;
+    Item* item;
+
+
+    KeyItemNode(Key k, Item i)
+    {
+        this->key = k;
+        this->item = i;
+    }
+
+
+    KeyItemNode()
+    {
+        this->key = nullptr;
+        this->item = nullptr;
+    }
+
+    bool isEmpty()
+    {
+        return this->item == nullptr;
+    }
+
+};
+
+
+
+template <typename Key, typename Item>
+class ClosedHash
+{
+    int Size;
+    KeyItemNode<Key, Item>* array;
+
+    int Hash(Key key)
+    {
+        int Count = 0;
+
+        if (typeid(key) == typeid(string))
+        {
+            for (char c : key)
+                Count += (short)c;
+        }
+
+        else Count = key;
+
+        return Count % this->Size;
+    }
+
+public:
+
+    int Size()
+    {
+        return this->Size;
+    }
+
+    ClosedHash(int Size)
+    {
+        this->Size = Size;
+        Array = new KeyItemNode <Key, Item>[Size];
+    }
+
+    ~ClosedHash()
+    {
+        delete[]array;
+    }
+
+    void Add(Key key, Item item)
+    {
+        int Index = Hash(Key);
+
+
+        while (!array[Index].isEmpty())
+        {
+            if (Index == Size - 1)
+                Index = -1;
+            Index = Index + 1;
+        }
+
+        array[Index] = new KeyItemNode <Key, Item>(key, item);
+    }
+
+
+    Item* Find(Key key) {
+        int index = Hash(key);
+
+        while (!(key == array[index].key))
+        {
+
+            if (Index == Size - 1)
+                Index = -1;
+
+            index++;
+        }
+
+        return array[index].item;
+    }
+
+
+    KeyItemNode <Key, Item>* Find(Key key) {
+        int index = Hash(key);
+
+        while (!(key == array[index].key))
+        {
+
+            if (Index == Size - 1)
+                Index = -1;
+
+            index++;
+        }
+
+        return array[index];
+    }
+
+
+    bool remove(Key key) {
+        int index = Hash(key);
+
+        KeyItemNode <Key, Item>* Itm = Find(key);
+
+        if (Itm->isEmpty())
+        {
+            return false;
+        }
+
+        Itm->item = nullptr;
+        Itm->key = nullptr;
+
+        return true;
+    }
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif // DATASTRUCTURES_H

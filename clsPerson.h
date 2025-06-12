@@ -12,7 +12,9 @@ private:
 
 protected:
 
-    short Age;
+
+	int Id;
+	short Age;
 	string FirstName;
 	string LastName;
 	string PhoneNumber;
@@ -20,7 +22,18 @@ protected:
 
 public:
 
-	clsPerson(short Age, string FirstName, string LastName, string PhoneNumber , string Eamil)
+	clsPerson(int ID, short Age, string FirstName, string LastName, string PhoneNumber, string Eamil)
+	{
+		this->Id = ID;
+		this->Age = Age;
+		this->FirstName = FirstName;
+		this->LastName = LastName;
+		this->PhoneNumber = PhoneNumber;
+		this->Email = Email;
+	}
+
+
+	clsPerson(short Age, string FirstName, string LastName, string PhoneNumber, string Eamil)
 	{
 		this->Age = Age;
 		this->FirstName = FirstName;
@@ -80,4 +93,3 @@ public:
 	}
 
 };
-
