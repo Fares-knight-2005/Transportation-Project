@@ -1,12 +1,12 @@
 
 #include <iostream>
-#include "clsPerson.h"
-#include "clsBusDriver.h"
+#include "clsParking.h"
+#include "clsTransportLine.h"
 using namespace std;
+
+
 
 int main()
 {
-    clsPerson Me = clsPerson(20 , "Fares" , "Oyion" , "0981883592");
-    
-    cout << Me.GetFirstName() + " " + Me.GetLastName();
+	clsTransportLine
 }

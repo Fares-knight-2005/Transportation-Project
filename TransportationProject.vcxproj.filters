@@ -20,7 +20,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clsMainMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="clsPerson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsClosedHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

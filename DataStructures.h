@@ -1,25 +1,26 @@
-
+#ifndef DATASTRUCTURES_H
+#define DATASTRUCTURES_H
 #include <iostream>
 
 using namespace std;
 
 template<class Item>
-struct Node{
-     Item item;
-     Node *next;
-     Node(Item item,Node *next):item(item),next(next){}
+struct Node {
+    Item item;
+    Node* next;
+    Node(Item item, Node* next) :item(item), next(next) {}
 };
 
 template<class Item>
-class SingleLinkedList{
+class SingleLinkedList {
 
-Node <Item> *head,*tail;
-int length;
+    Node<Item>* head, * tail;
+    int length;
 
 public:
-    SingleLinkedList():head(nullptr),tail(nullptr),length(0) {}
+    SingleLinkedList() :head(nullptr), tail(nullptr), length(0) {}
 
-    ~SingleLinkedList(){
+    ~SingleLinkedList() {
         Node<Item>* curr = head;
         while (curr != nullptr) {
             Node<Item>* next = curr->next;
@@ -28,125 +29,139 @@ public:
         }
     }
 
-    bool isEmpty(){
-    return head==nullptr;
+    bool isEmpty() {
+        return head == nullptr;
     }
 
-    void addLast(Item item){
-    if(isEmpty())
-        tail=head=new Node<Item>(item,nullptr);
-    else
-        tail=tail->next=new Node<Item>(item,nullptr);
+    void addLast(Item item) {
+        if (isEmpty())
+            tail = head = new Node<Item>(item, nullptr);
+        else
+            tail = tail->next = new Node<Item>(item, nullptr);
 
-    ++length;
+        ++length;
     }
 
-    bool removeFirst(){
+    void addFirst(Item item) {
+        if (isEmpty())
+            tail = head = new Node<Item>(item, nullptr);
+        else
+            head = new Node<Item>(item, head);
 
-    if(isEmpty())
-        return false;
-
-    Node<Item> *temp=head;
-    head=head->next;
-    delete temp;
-    --length;
-    return true;
+        ++length;
     }
 
-    void print(){
-    Node<Item> *curr=head;
+    bool removeFirst() {
 
-    while(curr!=nullptr)
-    {
-    cout<<curr->item<<endl;
-    cout<<"--------------------\n";
-    curr=curr->next;
+        if (isEmpty())
+            return false;
+
+        Node<Item>* temp = head;
+        head = head->next;
+        delete temp;
+        --length;
+        return true;
     }
 
-    }
+    void print() {
+        Node<Item>* curr = head;
 
-    template<class Value>
-    Item* find(Value value){
-    if(isEmpty())
-        return nullptr;
-    Node<Item> *curr=head;
-
-    while(curr!=nullptr)
-    {
-        if(curr->item==value)
-            return &curr->item;
-        curr=curr->next;
-    }
-    return nullptr;
-    }
-
-    template<class Value>
-    bool remove(Value value) {
-    if (isEmpty()) {
-        return false;
-    }
-
-    if (head->item==value)
-        return removeFirst();
-
-    Node<Item>* prev = head;
-    Node<Item>* curr = head->next;
-
-    while (curr != nullptr) {
-        if (curr->item==value){
-            prev->next=curr->next;
-
-            if (curr==tail)
-                tail=prev;
-            delete curr;
-            length--;
-            return true;
+        while (curr != nullptr)
+        {
+            cout << curr->item << endl;
+            cout << "--------------------\n";
+            curr = curr->next;
         }
 
-        prev = curr;
-        curr = curr->next;
     }
 
-    return false;
+    template<class Variable>
+    Item* find(Variable variable) {
+        if (isEmpty())
+            return nullptr;
+        Node<Item>* curr = head;
+
+        while (curr != nullptr)
+        {
+            if (curr->item == variable)
+                return &curr->item;
+            curr = curr->next;
+        }
+        return nullptr;
     }
 
-    int size(){
-    return length;
+    template<class Variable>
+    bool remove(Variable variable) {
+        if (isEmpty()) {
+            return false;
+        }
+
+        if (head->item == variable)
+            return removeFirst();
+
+        Node<Item>* prev = head;
+        Node<Item>* curr = head->next;
+
+        while (curr != nullptr) {
+            if (curr->item == variable) {
+                prev->next = curr->next;
+
+                if (curr == tail)
+                    tail = prev;
+                delete curr;
+                length--;
+                return true;
+            }
+
+            prev = curr;
+            curr = curr->next;
+        }
+
+        return false;
+    }
+
+    int size() {
+        return length;
     }
 };
 
 template<class Item>
-class Queue{
+class Queue {
 
-SingleLinkedList<Item> singleLinkedList;
+    SingleLinkedList<Item> singleLinkedList;
 
 public:
 
-    void enqueue(Item item){
-    singleLinkedList.addLast(item);
+    void enqueue(Item item) {
+        singleLinkedList.addLast(item);
     }
 
-    bool dequeue(){
-    return singleLinkedList.removeFirst();
+    bool dequeue() {
+        return singleLinkedList.removeFirst();
     }
 
-    bool isEmpty(){
-    return singleLinkedList.isEmpty();
+    void push(Item item) {
+        singleLinkedList.addFirst(item);
     }
 
-    int size(){
-    return singleLinkedList.size();
+    bool isEmpty() {
+        return singleLinkedList.isEmpty();
+    }
+
+    int size() {
+        return singleLinkedList.size();
     }
 };
 
 template<class Item>
-struct DoubleNode{
-        Item item;
-        DoubleNode* next;
-        DoubleNode* previous;
+struct DoubleNode {
+    Item item;
+    DoubleNode* next;
+    DoubleNode* previous;
 
-        DoubleNode(Item item, DoubleNode* next, DoubleNode* previous):
-            item(item), next(next), previous(previous) {}
+    DoubleNode(Item item, DoubleNode* next, DoubleNode* previous) :
+        item(item), next(next), previous(previous) {
+    }
 };
 
 template<class Item>
@@ -158,7 +173,7 @@ private:
     int length;
 
 public:
-    DoubleLinkedList(): head(nullptr), tail(nullptr), length(0) {}
+    DoubleLinkedList() : head(nullptr), tail(nullptr), length(0) {}
 
     ~DoubleLinkedList() {
         DoubleNode<Item>* curr = head;
@@ -169,19 +184,19 @@ public:
         }
     }
 
-    bool isEmpty(){
+    bool isEmpty() {
         return head == nullptr;
     }
 
-    int size(){
+    int size() {
         return length;
     }
 
     void addFirst(Item item) {
         if (isEmpty())
-            head=tail=new DoubleNode<Item>(item, nullptr, nullptr);
+            head = tail = new DoubleNode<Item>(item, nullptr, nullptr);
         else
-            head=head->previous=new DoubleNode<Item>(item, head, nullptr);
+            head = head->previous = new DoubleNode<Item>(item, head, nullptr);
 
         length++;
     }
@@ -190,7 +205,7 @@ public:
         if (isEmpty())
             head = tail = new DoubleNode<Item>(item, nullptr, nullptr);
         else
-            tail=tail->next = new DoubleNode<Item>(item, nullptr, tail);
+            tail = tail->next = new DoubleNode<Item>(item, nullptr, tail);
 
         length++;
     }
@@ -215,238 +230,309 @@ public:
             curr = curr->next;
         }
 
-        DoubleNode<Item>* newNode =new DoubleNode<Item>(item, curr->next, curr);
+        DoubleNode<Item>* newNode = new DoubleNode<Item>(item, curr->next, curr);
         curr->next->previous = newNode;
         curr->next = newNode;
         length++;
     }
 
-    template<class Value>
-    bool remove(Value value) {
-    if (isEmpty()) {
-        return false;
+    Item* operator[](int index) {
+        if (index < 0 || index >= length) {
+            throw out_of_range("Index out of bounds");
+        }
+
+        DoubleNode<Item>* curr = head;
+        for (int i = 0; i < index; i++) {
+            curr = curr->next;
+        }
+
+        return &curr->item;
     }
 
-    if (head->item==value) {
-        DoubleNode<Item>* temp=head;
-        head=head->next;
+    template<class Variable>
+    bool remove(Variable variable) {
+        if (isEmpty()) {
+            return false;
+        }
 
-        if (head!=nullptr)
-            head->previous=nullptr;
-        else
-            tail=nullptr;
+        if (head->item == variable) {
+            DoubleNode<Item>* temp = head;
+            head = head->next;
 
-        delete temp;
-        length--;
-        return true;
-    }
-
-    DoubleNode<Item>* curr=head;
-
-    while (curr!=nullptr) {
-        if (curr->item==value) {
-            curr->previous->next=curr->next;
-
-            if (curr->next!=nullptr)
-                curr->next->previous=curr->previous;
+            if (head != nullptr)
+                head->previous = nullptr;
             else
-                tail=curr->previous;
+                tail = nullptr;
 
-            delete curr;
+            delete temp;
             length--;
             return true;
         }
-        curr=curr->next;
-    }
 
-    return false;
-   }
-
-    void print(){
         DoubleNode<Item>* curr = head;
+
         while (curr != nullptr) {
-            cout <<curr->item<<'\n';
-            cout <<"---------------------\n";
+            if (curr->item == variable) {
+                curr->previous->next = curr->next;
+
+                if (curr->next != nullptr)
+                    curr->next->previous = curr->previous;
+                else
+                    tail = curr->previous;
+
+                delete curr;
+                length--;
+                return true;
+            }
             curr = curr->next;
         }
-        cout<<endl;
+
+        return false;
     }
 
-    template<class Value>
-    Item* find(Value value){
-    if(isEmpty())
+    void print() {
+        DoubleNode<Item>* curr = head;
+        while (curr != nullptr) {
+            cout << curr->item << '\n';
+            cout << "---------------------\n";
+            curr = curr->next;
+        }
+        cout << endl;
+    }
+
+    template<class Variable>
+    Item* find(Variable variable) {
+        if (isEmpty())
+            return nullptr;
+        DoubleNode<Item>* curr = head;
+        while (curr != nullptr)
+        {
+            if (curr->item == variable)
+                return &curr->item;
+            curr = curr->next;
+        }
         return nullptr;
-    DoubleNode<Item>* curr=head;
-    while(curr!=nullptr)
-        {
-        if(curr->item==value)
-            return &curr->item;
-        curr=curr->next;
-        }
-    return nullptr;
     }
 };
 
-template<class Key,class Item>
-class OpenHash{
+template<class Key, class Item>
+struct HashNode {
+    Key key;
+    Item item;
 
-int size;
-SingleLinkedList<Item> *array;
+    HashNode(Key key, Item item) :key(key), item(item) {}
 
-   int hashCode(int key){
-       return key%size;
-   }
+    bool operator==(Key key) {
+        return this->key == key;
+    }
 
-   int hashCode(string key){
-       int count=0;
+};
 
-       for (char c : key)
-           count+=c;
+template<class Key, class Item>
+class OpenHash {
 
-       return count%size;
+    int capacity, length;
+    SingleLinkedList<HashNode<Key, Item>>* array;
+
+    int hashCode(int key) {
+        return key % capacity;
+    }
+
+    int hashCode(string key) {
+        int count = 0;
+
+        for (char c : key)
+            count += c;
+
+        return count % capacity;
     }
 
 
 public:
-    OpenHash(int size=20):size(size) {array=new SingleLinkedList<Item>[size]; }
-     ~OpenHash()     {delete[] array;}
+    OpenHash(int capacity = 20) :capacity(capacity), length(0) { array = new SingleLinkedList<HashNode<Key, Item>>[capacity]; }
+    ~OpenHash() { delete[] array; }
 
-    void insert(Key key,Item item){
-       int index=hashCode(key);
-       array[index].addLast(item);
+    void insert(Key key, Item item) {
+        int index = hashCode(key);
+        array[index].addLast(HashNode<Key, Item>(key, item));
+        length++;
     }
 
-    void print(){
-    for(int i=0;i<size;i++)
-        if(!array[i].isEmpty())
-            array[i].print();
+    void print() {
+        for (int i = 0;i < size;i++)
+            if (!array[i].isEmpty())
+                array[i].print();
     }
 
-    
-    Item* find(Key key){
-    int index=hashCode(key);
-    return array[index].find(key);
+
+    Item* operator[](Key key) {
+        int index = hashCode(key);
+        return &array[index].find(key)->item;
     }
 
-    bool remove(Key key){
-    int index=hashCode(key);
-    bool result=array[index].remove(key);
-    if(result)
-        size--;
-    return result;
+
+    bool remove(Key key) {
+        int index = hashCode(key);
+        bool result = array[index].remove(key);
+        if (result)
+            length--;
+        return result;
+    }
+
+    int size() {
+        return length;
+    }
+
+    bool isEmpty() {
+        return length == 0;
     }
 
 };
 
 
+//Making Closed Hashing DataStructure
 
 
-
-
-//Making Tree DataStructure 
-
-template <typename T> class TreeNode
+template <typename Key, typename Item>
+struct ClosedNode :public HashNode<Key, Item>
 {
-public:
 
-    T* Data;
-    TreeNode <T>* FChild;
-    TreeNode <T>* Sibling;
+    enum enNodeType { EMPTY = 0, DELETED, FULL };
 
+    enNodeType nodeType;
 
-    TreeNode(T Data, TreeNode <T>* FChild, TreeNode <T>* Sibling)
-    {
-        this->Data = Data;
-        this->FChild = FChild;
-        this->Sibling = Sibling;
-    }
-
-    TreeNode()
-    {
-        this->Data = nullptr;
-        this->FChild = nullptr;
-        this->Sibling = nullptr;
-
-    }
-
+    ClosedNode(Key key, Item item) : HashNode<Key, Item>(key, item), nodeType(FULL) {}
+    ClosedNode() : HashNode<Key, Item>(Key(), Item()), nodeType(EMPTY) {}
 };
 
-template <typename T> class Tree
+
+
+template <typename Key, typename Item>
+class ClosedHash
 {
+    int length, capacity;
+    ClosedNode<Key, Item>* array;
+
+    int hashCode(int key) {
+        return key % capacity;
+    }
+
+    int hashCode(string key) {
+        int count = 0;
+
+        for (char c : key)
+            count += c;
+
+        return count % capacity;
+    }
+
+    void resize(int newCapacity) {
+        ClosedNode<Key, Item>* newArray = new ClosedNode<Key, Item>[newCapacity];
+
+        for (int i = 0; i < capacity;i++) {
+            if (array[i].nodeType == ClosedNode<Key, Item>::FULL) {
+                int newIndex = hashCode(array[i].key);
+
+                while (newArray[newIndex].nodeType == ClosedNode<Key, Item>::FULL)
+                    newIndex = (newIndex + 1) % newCapacity;
+
+
+                newArray[newIndex] = array[i];
+            }
+        }
+
+        delete[] array;
+        array = newArray;
+        capacity = newCapacity;
+    }
+
+
 public:
 
-    TreeNode <T>* Root;
-
-
-    Tree(TreeNode <T>* Root)
+    int size()
     {
-        this->Root = Root;
+        return length;
     }
 
-    Tree()
-    {
-        this->Root = nullptr;
+    bool isFull() {
+        return (length / capacity) == 1;
     }
 
-    void AddToParent(TreeNode <T>* Parent, T Value)
+    ClosedHash(int capacity = 20) :capacity(capacity)
     {
-        if (Parent == nullptr)
-            return;
-
-        TreeNode <T>* NewNode = new TreeNode<T>();
-
-        if (Parent->FChild == nullptr)
-        {
-            Parent->FChild = NewNode;
-            NewNode->Data = Value;
-            return;
-        }
-
-        TreeNode <T>* Temp = Parent.FChild;
-
-        while (Temp->Sibling != nullptr)
-        {
-            Temp = Temp->Sibling;
-        }
-
-        Temp->Sibling = NewNode;
-        NewNode->Data = Value;
-
+        array = new ClosedNode<Key, Item>[capacity];
     }
 
-    TreeNode Search(TreeNode <T>* Parent, T Value)
+    ~ClosedHash()
     {
-        if (Parent == nullptr)
-            return nullptr;
+        delete[]array;
+    }
 
-        if (Parent->Data == Value)
-        {
-            return Parent;
-        }
+    void insert(Key key, Item item)
+    {
+        if (isFull())
+            resize(2 * capacity);
 
-        TreeNode <T>* ChildResult = Search(Parent->FChild, Value);
+        int index = hashCode(key);
+        int originalIndex = index;
 
-        if (ChildResult != nullptr)
-            return ChildResult;
+        do {
+            if (array[index].nodeType != ClosedNode<Key, Item>::FULL) {
+                array[index] = ClosedNode<Key, Item>(key, item);
+                length++;
+                return;
+            }
 
-        return Search(Parent->Sibling, Value);
-
+            index = (index + 1) % capacity;
+        } while (index != originalIndex);
     }
 
 
-    TreeNode Print(TreeNode <T>* Parent)
-    {
-        if (Parent == nullptr)
-            return nullptr;
+    Item* operator[](Key key) {
 
-        TreeNode <T>* ChildResult = Print(Parent->FChild, Value);
+        int index = hashCode(key);
+        int originalIndex = index;
 
-        if (ChildResult != nullptr)
-            return ChildResult;
+        do {
+            if (array[index].nodeType == ClosedNode<Key, Item>::EMPTY) {
+                return nullptr;
+            }
 
-        return Search(Parent->Sibling, Value);
+            if (array[index].nodeType == ClosedNode<Key, Item>::FULL && array[index].key == key) {
+                return &array[index].item;
+            }
 
+            index = (index + 1) % capacity;
+        } while (index != originalIndex);
+
+        return nullptr;
     }
+
+
+    bool remove(Key key) {
+
+        int index = hashCode(key);
+        int originalIndex = index;
+
+        do {
+            if (array[index].nodeType == ClosedNode<Key, Item>::EMPTY) {
+                return false;
+            }
+
+            if (array[index].nodeType == ClosedNode<Key, Item>::FULL && array[index].key == key) {
+                array[index].nodeType = ClosedNode<Key, Item>::DELETED;
+                length--;
+                return true;
+            }
+
+            index = (index + 1) % capacity;
+        } while (index != originalIndex);
+
+        return false;
+    }
+
 
 };
- 
+
+
+#endif // DATASTRUCTURES_H

@@ -1,2 +1,18 @@
 ﻿  TransportationProject.cpp
-  TransportationProject.vcxproj -> D:\coding files\TransportationProject\x64\Debug\TransportationProject.exe
+D:\coding files\TransportationProject\TransportationProject\clsPassenger.h(9,1): error C2059: syntax error: 'using namespace'
+  (compiling source file 'TransportationProject.cpp')
+  
+D:\coding files\TransportationProject\TransportationProject\clsPassenger.h(9,20): error C2238: unexpected token(s) preceding ';'
+  (compiling source file 'TransportationProject.cpp')
+  
+D:\coding files\TransportationProject\TransportationProject\clsParking.h(17,83): error C2969: syntax error: ';': expected member function definition to end with '}'
+  (compiling source file 'TransportationProject.cpp')
+  
+D:\coding files\TransportationProject\TransportationProject\clsParking.h(34,17): error C2838: 'numberOfAllParking': illegal qualified name in member declaration
+  (compiling source file 'TransportationProject.cpp')
+  
+D:\coding files\TransportationProject\TransportationProject\TransportationProject.cpp(5,1): error C2059: syntax error: 'using namespace'
+D:\coding files\TransportationProject\TransportationProject\TransportationProject.cpp(5,20): error C2238: unexpected token(s) preceding ';'
+D:\coding files\TransportationProject\TransportationProject\clsCard.h(6,15): error C1075: '{': no matching token found
+  (compiling source file 'TransportationProject.cpp')
+  
