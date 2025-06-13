@@ -52,7 +52,7 @@ class Database
 			return Results.substr(Delim.length(), Results.length() - Delim.length());
 		}
 
-               void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
+               static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
                ofstream outFile(filename);
     
                for (int i = 0; i < transportLines.capacity; i++) {
@@ -66,7 +66,7 @@ class Database
                 outFile.close();
                 }
 
-                OpenHash<int, clsTransportLine> loadTransportLines(const string& filename) {
+                static OpenHash<int, clsTransportLine> loadTransportLines(const string& filename) {
     
                 OpenHash<int, clsTransportLine> transportLines;
 	        OpenHash<int,clsStation> stations;//يجب تحميله من تابع staions
@@ -90,8 +90,7 @@ class Database
                 }
               }
 
-            clsTransportLine tl(vehicles, price, type, s);
-            tl.setid(id);
+            clsTransportLine tl(id,vehicles, price, type, s);
             transportLines.insert(id, tl);
 	    if(clsParking::numberOfAllTransportLine<id)
 		    clsParking::numberOfAllTransportLine=id;
