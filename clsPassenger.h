@@ -12,11 +12,11 @@ class clsPassenger :public clsPerson {
 protected:
 
     clsCard Card;
-
+    static int numberOfAllPassenger;
 public:
     clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
                  int id, clsCard* card)
-        : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), id(id), Card(card) {}
+        : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), Card(card) {}
 
     string toString(){
         ostringstream oss;
@@ -26,3 +26,4 @@ public:
         return oss.str();
     }
 };
+static int clsPassenger::numberOfAllPassenger;
