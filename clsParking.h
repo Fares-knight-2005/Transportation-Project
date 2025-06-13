@@ -4,12 +4,6 @@
 #include "clsVehicle.h"
 #include "clsPassenger.h"
 
-struct strParkingQueue
-{
-Queue<clsVehicle> vehicle; // الطابور المخصص بالباصات (مصف)
-Queue<clsPassenger> passengers; // الطابور المخصص بالركاب (ترتيب اولوية الصعود)
-};
-
 class clsParking{
      
     public:
@@ -25,12 +19,12 @@ class clsParking{
     }
 
     private:
-        strParkingQueue  departure;// المصف المخصص للركاب وباصات المتجيهن الى نهاية الخط
-        strParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
-        int id;// معرف الموقف
-        double distanceToNext;//البعد عن الموقف التالي
+        Queue<clsVehicle> vehicl;
+        Queue<clsPassenger> passengers;
+        int id;
+        double distanceToNext;
         enVehicleType parkingType;
-        static int numberOfAllParking;//عدد الكلي للمواقف
+        static int numberOfAllParking;
 };
 int clsParking::numberOfAllParking=0;
 
