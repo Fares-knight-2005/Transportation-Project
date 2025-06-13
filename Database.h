@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "DataStructures.h"
+#include "clsVehicle"
+#include "clsParking.h"
+#include "clsTransportLine.h"
 
 class Database
 {
@@ -89,6 +92,8 @@ class Database
             clsTransportLine tl(vehicles, price, type, s);
             tl.setid(id);
             transportLines.insert(id, tl);
+	    if(clsParking::numberOfAllTransportLines<id)
+		    clsParking::numberOfAllTransportLines=id;
 
            } catch (...) {
               continue; 
@@ -130,9 +135,11 @@ OpenHash<int, clsParking> loadParkings(string filename) {
             double distance = stod(tokens[2]);
             enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
 
-            clsParking parking(id, distance);
+            clsParking parking(id, distance,stationId,type);
             
             parkings.insert(id, parking);
+	    if(clsParking::numberOfAllParking<id)
+		    clsParking::numberOfAllVehicle=id;
 
         } catch (...) {
             continue;
@@ -170,7 +177,7 @@ OpenHash<int, clsVehicle> loadVehicles(string filename) {
     while (getline(file, line)) {
         try {
             DoubleLinkedList<string> tokens = Split(line, ",,,");
-            if (tokens.size() < 6) continue;
+            if (tokens.size() < 7) continue;
 
             enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
             int lineId = stoi(tokens[1]);
@@ -178,15 +185,17 @@ OpenHash<int, clsVehicle> loadVehicles(string filename) {
             float spd = stof(tokens[3]);
             int disabilitySeats = stoi(tokens[4]);
             int pkgSize = stoi(tokens[5]);
-
-            clsVehicle vehicle(type, lineId, cap, spd, disabilitySeats, pkgSize);
+            int id= stoi(tokens[6]);
+            clsVehicle vehicle(id,type, lineId, cap, spd, disabilitySeats, pkgSize);
             
-            // تحميل رحلات المركبة إذا وجدت
-            for (int i = 6; i < tokens.size(); i++) {
+            for (int i = 7; i < tokens.size(); i++) {
                 vehicle.vehicleTripId.addLast(stoi(tokens[i]));
             }
             
-            vehicles.insert(lineId, vehicle);
+            vehicles.insert(id,vehicle);
+	    if(clsVehicle::numberOfAllVehicle<id)
+		    clsVehicle::numberOfAllVehicle=id;
+		
         } catch (...) {
             continue;
         }
