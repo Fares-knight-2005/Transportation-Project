@@ -176,11 +176,9 @@ public:
         return singleLinkedList.size();
     }
 
-    Queue toQueue(Stack stack){
-    Queue<Item> q;
-    while(!stack.isEmpty())
-        q.enqueue(q.pop());
-    return q;
+    void toQueue(Queue<Item> &q){
+    while(!isEmpty())
+        q.enqueue(pop());
     }
     
 };
