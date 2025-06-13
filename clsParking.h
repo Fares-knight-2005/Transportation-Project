@@ -9,8 +9,8 @@ class clsParking{
      
     public:
     clsParking():id(0),distanceToNext(0.0) {}
-    clsParking(int id, double distanceToNext) :id(id), distanceToNext(distanceToNext) {}
-
+    clsParking(int id, double distanceToNext,int stationId,enVehicleType parkingType) :id(id), distanceToNext(distanceToNext),stationId(stationId),parkingType(parkingType) {}
+ 
     double getDistanceToNext(){
         return distanceToNext;
     }
