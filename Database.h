@@ -177,43 +177,26 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
         outFile.close();
     }
 
-    static OpenHash<int, clsPassenger> loadPassengers(string filename) {
-        OpenHash<int, clsPassenger> passengers;
-        ifstream file(filename);
-        string line;
+static OpenHash<int, clsPassenger> loadPassengers(string filename) {
+    OpenHash<int, clsPassenger> passengers;
+    ifstream file(filename);
+    string line;
 
-        while (getline(file, line)) {
-            try {
-                DoubleLinkedList<string> tokens = Split(line, ",,,");
-                if (tokens.size() < 8) 
-			continue;
-
-                int id = stoi(tokens[0]);
-                short age = stoi(tokens[1]);
-                string firstName = tokens[2];
-                string lastName = tokens[3];
-                string phoneNumber = tokens[4];
-                string email = tokens[5];
-                
-                bool cardType = (tokens[6] == "Premium");
-                double cardBalance = stod(tokens[7]);
-                clsCard card(cardType, cardBalance);
-                
-                clsPassenger passenger(age, firstName, lastName, phoneNumber, email, id, card);
-                
-                passengers.insert(id, passenger);
-                
-                if(numberOfAllPassenger < id)
-                    numberOfAllPassenger = id;
-                
-            } catch (...) {
-                continue;
+    while (getline(file, line)) {
+        try {
+            clsPassenger passenger = parse(line);
+            passengers.insert(passenger.getId(), passenger);
+            
+            if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
+                clsPassenger::numberOfAllPassenger = passenger.getId();
             }
+        } catch (...) {
+            continue;
         }
-
-        file.close();
-        return passengers;
     }
+
+    return passengers;
+}
 
 static void saveVehicleTrips(const string& filename, OpenHash<int, clsVehicleTrip>& trips) {
     ofstream outFile(filename);
