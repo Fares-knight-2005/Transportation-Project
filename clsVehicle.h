@@ -3,6 +3,7 @@
 #include <iostream>
 #include "DataStructures.h"
 #include "clsPassengerTrip.h"
+#include <sstream>
 
 using namespace std;
 
@@ -157,6 +158,20 @@ public:
     bool canAccommodatePackage(int packageSizeToCheck) {
         return packageSizeToCheck <= packageSize;
     }
+
+    string toString() {
+    ostringstream oss;
+    oss << static_cast<int>(vehicleType) << ",,,"  << transportLineId << ",,," 
+        << capacity << ",,," << speed << ",,," << disabilitySeats << ",,," << packageSize;
+    
+    Node<int>* current = vehicleTripId.getHead();
+    while (current != nullptr) {
+        oss << ",,," << current->data;
+        current = current->next;
+    }
+    
+    return oss.str();
+  }
 
 private:
     int transportLineId;
