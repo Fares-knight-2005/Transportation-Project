@@ -24,6 +24,10 @@ class clsParking{
         return stationId;    
     }
 
+    int getId(){
+       return id;    
+    }
+
     string toString() {
     ostringstream oss;
     oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType);
