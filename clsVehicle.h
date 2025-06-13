@@ -3,6 +3,7 @@
 #include <iostream>
 #include "DataStructures.h"
 #include "clsPassengerTrip.h"
+#include "clsVechicleTrip.h"
 #include <sstream>
 
 using namespace std;
@@ -154,13 +155,36 @@ public:
     oss << static_cast<int>(vehicleType) << ",,,"  << transportLineId << ",,," 
         << capacity << ",,," << speed << ",,," << disabilitySeats << ",,," << packageSize<<",,,"<<id;
     
-    Node<int>* current = vehicleTripId.getHead();
+    Node<int>* current = vehicleTrip.getHead();
     while (current != nullptr) {
-        oss << ",,," << current->data;
+        oss << ",,," << current->data->getId();
         current = current->next;
     }
     
     return oss.str();
+  }
+
+  clsVehicle parse(string line,OpenHash<int,clsVechicleTrip> vechicleTrip) {
+    DoubleLinkedList<string> tokens = Split(line, ",,,");
+    if (tokens.size() < 7) {
+        throw invalid_argument("Not enough tokens in line");
+    }
+
+    enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
+    int lineId = stoi(tokens[1]);
+    int cap = stoi(tokens[2]);
+    float spd = stof(tokens[3]);
+    int disabilitySeats = stoi(tokens[4]);
+    int pkgSize = stoi(tokens[5]);
+    int id = stoi(tokens[6]);
+
+    clsVehicle vehicle(id, type, lineId, cap, spd, disabilitySeats, pkgSize);
+    
+    for (int i = 7; i < tokens.size(); i++) {
+        vehicle.vehicleTrip.addLast(vechicleTrip[stoi(tokens[i])]);
+    }
+    
+    return vehicle;
   }
 
 private:
@@ -170,7 +194,7 @@ private:
     int disabilitySeats,currDisabilitySeats;
     int packageSize,currPackageSize;
     bool destination;
-    SingleLinkedList<int> vehicleTripId;
+    SingleLinkedList<clsVechicleTrip> vehicleTrip;
     static int numberOfAllVehicle;
 };
 int clsVehicle::numberOfAllVehicle=0;
