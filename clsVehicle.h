@@ -129,6 +129,7 @@ public:
         packageSize = pkgSize;
     }
     clsVehicle(enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
+        id=++numberOfAllVehicle;
         vehicleType = type;
         transportLineId = lineId;
         capacity = cap;
