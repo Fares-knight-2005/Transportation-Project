@@ -2,7 +2,7 @@
 #define PARKING_H
 #include "DataStructures.h"
 #include "clsVehicle.h"
-#include "clsPassenger.h"
+#include "clsPassengerTrip.h"
 
 class clsParking{
      
@@ -24,7 +24,7 @@ class clsParking{
 
     private:
         Queue<clsVehicle> vehicl;
-        Queue<clsPassenger> passengers;
+        Queue<clsPassengerTrip> passengers;
         int id,stationId;
         double distanceToNext;
         enVehicleType parkingType;
