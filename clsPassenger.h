@@ -23,7 +23,9 @@ public:
     clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
                  clsCard card, string password = "")
         : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), 
-          id(++numberOfAllPassenger),Card(card), Password(password) {}
+          Card(card), Password(password) {
+            this->Id=++numberOfAllPassenger;
+          }
 
     string getPassword() {
         return Password;
