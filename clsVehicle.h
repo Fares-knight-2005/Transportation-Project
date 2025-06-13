@@ -60,7 +60,7 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
           
       while(hasCapacity()&&!(parking->passengers.isEmpty())){
       passengerTrip trip=parking->passengers.dequeue();
-      if(trip.getDestination()==destination){
+      if(trip.getDestination()==destination&&(!trip.disability||hasDisabilityAccess())){
       if(v[tripe.getIdEndStation()]==nullptr)
           v[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<passengerTrip>>();
           
