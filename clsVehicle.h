@@ -26,6 +26,31 @@ enVehicleType setVehicleType(int vehicleNumber){
     }
 }
 
+struct passengerMovements{
+int idStarStation,idEndStation,idPassenger;
+};
+
+class VehicleTrip{
+
+int idVehicle;
+ClosedHash<int,SingleLinkedList<passengerMovements>> p;
+
+};
+
+void starVehicleTrip(clsTransportLine t,VehicleTrip v){
+
+
+    DoubleNode<clsStation> *station=t.getFirstStation.getHead();
+
+    while(station!=nullptr){
+       station->item->
+
+
+    }
+
+
+}
+
 class clsVehicle {
 public:
     clsVehicle(enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
