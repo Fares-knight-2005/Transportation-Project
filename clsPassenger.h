@@ -23,13 +23,17 @@ public:
     clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
                  clsCard card, string password = "")
         : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), 
-          Card(card), Password(password) {}
+          id(++numberOfAllPassenger),Card(card), Password(password) {}
 
-    string getPassword() const {
+    string getPassword() {
         return Password;
     }
 
-    void setPassword(const string& newPassword) {
+    int getId(){
+       return id;
+    }
+
+    void setPassword(string& newPassword) {
         Password = newPassword;
     }
 
