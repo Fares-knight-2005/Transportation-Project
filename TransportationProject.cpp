@@ -1,12 +1,12 @@
 
 #include <iostream>
-#include "clsTransportLine.h"
+#include "clsScreen.h"
+
 using namespace std;
 
 
 
 int main()
 {
-	clsTransportLine s;
-	s.display();
+	clsScreen::NewMenu("Hello", 60);
 }

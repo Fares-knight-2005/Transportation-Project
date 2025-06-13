@@ -92,20 +92,9 @@ public:
 		this->Email = Email;
 	}
 
-        bool operator==(int Id){
-		return this->Id==Id;
-	}
-
 	string GetFullName()
 	{
 		return this->FirstName + " " + LastName;
 	}
-
-        string personToString(){
-        ostringstream oss;
-        oss << Id << ",,," << Age << ",,," << FirstName << ",,," 
-            << LastName << ",,," << PhoneNumber << ",,," << Email;
-        return oss.str();
-        }
 
 };

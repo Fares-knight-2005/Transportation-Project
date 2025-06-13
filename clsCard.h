@@ -6,30 +6,22 @@ using namespace std;
 class clsCard {
 
 protected:
-	bool type;
+	string type;
 	double balance;
 
 
 public:
-	clsCard(bool type = false, int balance = 0) {
+	clsCard(string type = "Reguler", int balance = 0) {
 		this->type = type;
 		this->balance = balance;
 	}
-
-        clsCard(string type = "Reguler", int balance = 0) {
-		if(type=="Reguler")
-			this.type=false;
-		else
-			this.type=true;
-		this->balance = balance;
-	}
-
-	void payment(double amount) {
+	virtual void payment(double amount) {
 		if (balance >= amount) {
 			balance -= amount;
 		}
+		else {
+		}
 	}
-
 	void recharge(double amount) {
 		balance += amount;
 	}
@@ -38,16 +30,13 @@ public:
 		return balance;
 	}
 
+	string getType()  {
+		return type;
+	}
 
-        string getType(){
-        return type ? "Premium" : "Regular";
-        }
 
-       string toString(){
-        ostringstream oss;
-        oss << (type ? "Premium" : "Regular") << ",,," << balance;
-        return oss.str();
-       }
+
+
 
 
 

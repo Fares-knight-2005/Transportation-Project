@@ -2,8 +2,6 @@
 #define CLSVEHICLE_H
 #include <iostream>
 #include "DataStructures.h"
-#include "clsPassengerTrip.h"
-#include <sstream>
 
 using namespace std;
 
@@ -30,17 +28,7 @@ enVehicleType setVehicleType(int vehicleNumber){
 
 class clsVehicle {
 public:
-    clsVehicle(int id,enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
-        this->id=id;
-        vehicleType = type;
-        transportLineId = lineId;
-        capacity = cap;
-        speed = spd;
-        seatsForPeopleWithDisabilities = disabilitySeats;
-        packageSize = pkgSize;
-    }
     clsVehicle(enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
-        id=++numberOfAllVehicle;
         vehicleType = type;
         transportLineId = lineId;
         capacity = cap;
@@ -48,7 +36,11 @@ public:
         seatsForPeopleWithDisabilities = disabilitySeats;
         packageSize = pkgSize;
     }
-  
+
+    int getId()
+    {
+        return id;
+    }
 
     enVehicleType getVehicleType() { return vehicleType; }
     int getTransportLineId() { return transportLineId; }
@@ -63,11 +55,9 @@ public:
     void setSpeed(float spd) { speed = spd; }
     void setDisabilitySeats(int seats) { seatsForPeopleWithDisabilities = seats; }
     void setPackageSize(int size) { packageSize = size; }
-    void setId(int id){this->id=id;}
 
     void displayVehicleInfo() {
         cout << "\nVehicle Information:";
-        cout<< "\nId: "<<id;
         cout << "\nType: " << ::getVehicleType(vehicleType);
         cout << "\nTransport Line ID: " << transportLineId;
         cout << "\nCapacity: " << capacity;
@@ -76,104 +66,23 @@ public:
         cout << "\nPackage Size: " << packageSize << endl;
     }
 
-   bool hasDisabilityAccess() {
-        return disabilitySeats>currDisabilitySeats;
+    bool hasDisabilityAccess() {
+        return seatsForPeopleWithDisabilities > 0;
     }
 
-    bool hasCapacity(){
-        return  capacity>currSeats;
+    bool canAccommodatePackage(int packageSizeToCheck) {
+        return packageSizeToCheck <= packageSize;
     }
-
-    bool hasPackageSize(){
-        return  packageSize>currPackageSize;
-    }
-
-    /*
-    void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
-
-
-    DoubleNode<clsStation> *station=t.getFirstStation.getHead();
-    destination=true;
-    
-    while(station!=nullptr||destination){
-      clsParking *parking=station->item->parkings[t.getId()];
-      parking->vehicle.enqueue(this);
-      Stack<clsPassengerTrip> s;
-        
-      if(parking->vehicle.size()==1){
-          
-      while(hasCapacity()&&!(parking->passengers.isEmpty())){
-      passengerTrip trip=parking->passengers.dequeue();
-      if(trip.getDestination()==destination&&(!trip.getDisability||hasDisabilityAccess())&&(!tripe.getThings()||hasPackageSize())){
-      if(v.m[tripe.getIdEndStation()]==nullptr)
-          v.m[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<VehicleMovements>>();
-          
-      v.m[tripe.getIdEndStation()].p.addFirst(trip);
-      currSeats++; 
-      if(trip.getDisability)
-      {
-      v.m[tripe.getIdEndStation()].currDisability++;
-      currDisabilitySeats++;
-      }
-      if(trip.getThings())
-      {
-      v.m[tripe.getIdEndStation()].currPackageSize++;
-      currPackageSize++;
-      }
-      }
-      else
-          s.push(trip);
-      }
-      if(!s.isEmpty())
-          s.toQueue(parking->passengers);
-      if(v.m[parking.getIdStation()]!=nullptr)
-      {
-      currSeats-=v.m[parking.getIdStation()].p.size();
-      currDisabilitySeats-=v.m[parking.getIdStation()].CurrDisability;
-      v.m[parking.getIdStation()].CurrDisability=0;
-      currPackageSize-=v.m[parking.getIdStation()].CurrPackageSize;
-      currPackageSize-=v.m[parking.getIdStation()].CurrPackageSize=0;
-      } 
-     if(station->next==nullptr)
-          destination=false;  
-      if(destination)
-          station=station->next;
-      else
-          station=station->previous;
-      parking->vehicle.dequeue();   
-      }   
-    }
-
-    vehicleTripId.addFirst(v.getId());
-    }
-*/
-
-
-    string toString() {
-    ostringstream oss;
-    oss << static_cast<int>(vehicleType) << ",,,"  << transportLineId << ",,," 
-        << capacity << ",,," << speed << ",,," << disabilitySeats << ",,," << packageSize<<",,,"<<id;
-    
-    Node<int>* current = vehicleTripId.getHead();
-    while (current != nullptr) {
-        oss << ",,," << current->data;
-        current = current->next;
-    }
-    
-    return oss.str();
-  }
 
 private:
-    int id,transportLineId;
-    int capacity,currSeats;
+    int id;
+    enVehicleType vehicleType;
+    int transportLineId;
+    int capacity;
     float speed;
-    int disabilitySeats,currDisabilitySeats;
-    int packageSize,currPackageSize;
-    bool destination;
-    SingleLinkedList<int> vehicleTripId;
-    static int numberOfAllVehicle;
+    int seatsForPeopleWithDisabilities;
+    int packageSize;
 };
-int clsVehicle::numberOfAllVehicle=0;
 
 #endif // CLSVEHICLE_H
       

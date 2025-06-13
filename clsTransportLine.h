@@ -15,13 +15,26 @@ public:
         numberOfVehicles(numberOfVehicles) {
     }
 
-    clsTransportLine(int id,int numberOfVehicles, double pricePerKilometer, enVehicleType vehiclesType, DoubleLinkedList<clsStation> stations) :
-         id(id),stations(stations), pricePerKilometer(pricePerKilometer), vehiclesType(vehiclesType),
-        numberOfVehicles(numberOfVehicles) {
-    }
-
     clsTransportLine() :id(0), numberOfVehicles(0), pricePerKilometer(0) {}
+    /*
+        double getDistance(int startId, int endId){
+        if(startId>=endId)
+            return 0;
+        double distance=0;
+        for(int i=startId;i>endId;i++)
+            //distance+=البعد عن الموقف التالي
 
+        return distance;
+        }
+
+        double calculateFare(int startId, int endId,bool cardType){
+            double distance= getDistance(startId,endId);
+            double price=distance*pricePerKilometer;
+            if(cardType)
+                 return price*0.8;
+            retrurn price;
+        }
+    */
     void addStation(clsStation station, int stationNumber) {
         stations.add(stationNumber - 1, station);
     }
@@ -31,10 +44,6 @@ public:
             cout << "The deletion process was completed successfully.\n";
         else
             cout << "The station ID number you entered is not available.\n";
-    }
-
-    DoubleNode<clsStation> *getFirstStation(){
-            return    station.getHead();
     }
 
     bool operator==(int id) {
