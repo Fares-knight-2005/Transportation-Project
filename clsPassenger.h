@@ -15,13 +15,17 @@ protected:
     static int numberOfAllPassenger;
 public:
     clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
-                 int id, clsCard* card)
+                 int id, clsCard card)
+        : clsPerson(id,Age, FirstName, LastName, PhoneNumber, Email), Card(card) {}
+
+    clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
+                 clsCard card)
         : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), Card(card) {}
 
     string toString(){
         ostringstream oss;
         
-        oss << id << ",,," << clsPerson::toString() << ",,,"<<card.toString();
+        oss << clsPerson::toString() << ",,,"<<card.toString();
         
         return oss.str();
     }
