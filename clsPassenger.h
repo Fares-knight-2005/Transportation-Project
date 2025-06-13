@@ -8,24 +8,26 @@
 
 using namespace std;
 
-class clsPassenger : clsPerson {
+class clsPassenger :public clsPerson {
 protected:
 
-    int id;
-    clsCard* Card;
-
+    clsCard Card;
+    static int numberOfAllPassenger;
 public:
-    clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email
-        , int id, clsCard* card)
-        : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), id(id), Card(card) {
-    }
+    clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
+                 int id, clsCard card)
+        : clsPerson(id,Age, FirstName, LastName, PhoneNumber, Email), Card(card) {}
 
-    bool operator==(int id) {
-        return this->id == id;
-    }
+    clsPassenger(short Age, string FirstName, string LastName, string PhoneNumber, string Email,
+                 clsCard card)
+        : clsPerson(Age, FirstName, LastName, PhoneNumber, Email), Card(card) {}
 
-
-    bool operator==(string fullName) {
-        return this->GetFullName() == fullName;
+    string toString(){
+        ostringstream oss;
+        
+        oss << personToString() << ",,,"<<card.toString();
+        
+        return oss.str();
     }
 };
+static int clsPassenger::numberOfAllPassenger=0;
