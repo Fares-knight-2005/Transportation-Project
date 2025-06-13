@@ -143,38 +143,23 @@ static void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehi
 
 static OpenHash<int, clsVehicle> loadVehicles(string filename) {
     OpenHash<int, clsVehicle> vehicles;
+    OpenHash<int, clsVehicleTrip> vehicleTrip=loadVehicleTrips();// اسم الملف
     ifstream file(filename);
     string line;
 
     while (getline(file, line)) {
         try {
-            DoubleLinkedList<string> tokens = Split(line, ",,,");
-            if (tokens.size() < 7)
-		    continue;
-
-            enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
-            int lineId = stoi(tokens[1]);
-            int cap = stoi(tokens[2]);
-            float spd = stof(tokens[3]);
-            int disabilitySeats = stoi(tokens[4]);
-            int pkgSize = stoi(tokens[5]);
-            int id= stoi(tokens[6]);
-            clsVehicle vehicle(id,type, lineId, cap, spd, disabilitySeats, pkgSize);
+            clsVehicle vehicle = parseVehicle(line,vehicleTrip);
+            vehicles.insert(vehicle.getId(), vehicle);
             
-            for (int i = 7; i < tokens.size(); i++) {
-                vehicle.vehicleTripId.addLast(stoi(tokens[i]));
+            if (clsVehicle::numberOfAllVehicle < vehicle.getId()) {
+                clsVehicle::numberOfAllVehicle = vehicle.getId();
             }
-            
-            vehicles.insert(id,vehicle);
-	    if(clsVehicle::numberOfAllVehicle<id)
-		    clsVehicle::numberOfAllVehicle=id;
-		
         } catch (...) {
             continue;
         }
     }
 
-    file.close();
     return vehicles;
 }
 
