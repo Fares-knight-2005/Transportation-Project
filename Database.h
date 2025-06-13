@@ -145,4 +145,55 @@ OpenHash<int, clsParking> loadParkings(string filename) {
 
 };
 
+
+
+
+void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
+    ofstream outFile(filename);
+    
+    for (int i = 0; i < vehicles.capacity; i++) {
+        auto current = vehicles.array[i].getHead();
+        while (current != nullptr) {
+            outFile << current->data.item.toString() << endl;
+            current = current->next;
+        }
+    }
+    
+    outFile.close();
+}
+
+OpenHash<int, clsVehicle> loadVehicles(string filename) {
+    OpenHash<int, clsVehicle> vehicles;
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        try {
+            DoubleLinkedList<string> tokens = Split(line, ",,,");
+            if (tokens.size() < 6) continue;
+
+            enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
+            int lineId = stoi(tokens[1]);
+            int cap = stoi(tokens[2]);
+            float spd = stof(tokens[3]);
+            int disabilitySeats = stoi(tokens[4]);
+            int pkgSize = stoi(tokens[5]);
+
+            clsVehicle vehicle(type, lineId, cap, spd, disabilitySeats, pkgSize);
+            
+            // تحميل رحلات المركبة إذا وجدت
+            for (int i = 6; i < tokens.size(); i++) {
+                vehicle.vehicleTripId.addLast(stoi(tokens[i]));
+            }
+            
+            vehicles.insert(lineId, vehicle);
+        } catch (...) {
+            continue;
+        }
+    }
+
+    file.close();
+    return vehicles;
+}
+
 #endif // DATABASE_H
