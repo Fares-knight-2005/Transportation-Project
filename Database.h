@@ -99,6 +99,50 @@ class Database
             return transportLines;
            }
 
+void saveParkings(const string& filename, OpenHash<int, clsParking>& parkings) {
+    ofstream outFile(filename);
+    
+    for (int i = 0; i < parkings.capacity; i++) {
+        DoubleLinkedList<clsParking> current = parkings.array[i].getHead();
+        while (current != nullptr) {
+            outFile << current->data.item.toString() << endl;
+            current = current->next;
+        }
+    }
+    
+    outFile.close();
+}
+
+
+OpenHash<int, clsParking> loadParkings(string filename) {
+    OpenHash<int, clsParking> parkings;
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        try {
+            DoubleLinkedList<string> tokens = Split(line, ",,,");
+            if (tokens.size() < 4) 
+		    continue;
+
+            int id = stoi(tokens[0]);
+            int stationId = stoi(tokens[1]);
+            double distance = stod(tokens[2]);
+            enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
+
+            clsParking parking(id, distance);
+            
+            parkings.insert(id, parking);
+
+        } catch (...) {
+            continue;
+        }
+    }
+
+    file.close();
+    return parkings;
+}
+
 };
 
 #endif // DATABASE_H
