@@ -154,6 +154,38 @@ public:
 };
 
 template<class Item>
+class Stack {
+
+    SingleLinkedList<Item> singleLinkedList;
+
+public:
+
+    void push(Item item) {
+        singleLinkedList.addFirst(item);
+    }
+
+    bool pop() {
+        return singleLinkedList.removeFirst();
+    }
+
+    bool isEmpty() {
+        return singleLinkedList.isEmpty();
+    }
+
+    int size() {
+        return singleLinkedList.size();
+    }
+
+    Queue toQueue(Stack stack){
+    Queue<Item> q;
+    while(!stack.isEmpty())
+        q.enqueue(q.pop());
+    return q;
+    }
+    
+};
+
+template<class Item>
 struct DoubleNode {
     Item item;
     DoubleNode* next;
