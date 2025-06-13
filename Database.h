@@ -92,8 +92,8 @@ class Database
             clsTransportLine tl(vehicles, price, type, s);
             tl.setid(id);
             transportLines.insert(id, tl);
-	    if(clsParking::numberOfAllTransportLines<id)
-		    clsParking::numberOfAllTransportLines=id;
+	    if(clsParking::numberOfAllTransportLine<id)
+		    clsParking::numberOfAllTransportLine=id;
 
            } catch (...) {
               continue; 
