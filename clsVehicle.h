@@ -29,29 +29,19 @@ enVehicleType setVehicleType(int vehicleNumber){
 
 class VehicleTrip{
 
-int id,idVehicle,currDisabilit,currPackageSize;
-ClosedHash<int,SingleLinkedList<passengerTrip>> p;
-public:
+struct VehicleMovements{
+int currDisabilit,currPackageSize;
+SingleLinkedList<passengerTrip>> p;
+};
 
- int getCurrDisability(){
-     return currDisability;
- }
+int id,idVehicle;
+ClosedHash<int,VehicleMovements> m;
+public:
 
 int getId(){
       return id;
 }
 
-void setCurrDisability(currDisability c){
-     currDisability=c;
- }
-
-void setCurrPackageSize(int currPackageSize){
-    this->currPackageSize=currPackageSize;
-}
-
-int getCurrPackageSize(){
-    return currPackageSize;
-}
 
 };
 
@@ -82,24 +72,35 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
           
       while(hasCapacity()&&!(parking->passengers.isEmpty())){
       passengerTrip trip=parking->passengers.dequeue();
-      if(trip.getDestination()==destination&&(!trip.disability||hasDisabilityAccess())){
-      if(v[tripe.getIdEndStation()]==nullptr)
-          v[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<passengerTrip>>();
+      if(trip.getDestination()==destination&&(!trip.getDisability||hasDisabilityAccess())&&(!tripe.getThings()||hasPackageSize())){
+      if(v.m[tripe.getIdEndStation()]==nullptr)
+          v.m[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<VehicleMovements>>();
           
-      v[tripe.getIdEndStation()].p.addFirst(trip);
+      v.m[tripe.getIdEndStation()].p.addFirst(trip);
       currSeats++; 
-      if(trip.disability)
-          currDisabilitySeats++;
+      if(trip.getDisability)
+      {
+      v.m[tripe.getIdEndStation()].currDisability++;
+      currDisabilitySeats++;
+      }
+      if(trip.getThings())
+      {
+      v.m[tripe.getIdEndStation()].currPackageSize++;
+      currPackageSize++;
+      }
       }
       else
           s.push(trip);
       }
       if(!s.isEmpty())
           s.toQueue(parking->passengers);
-      if(v[parking.getIdStation()]!=nullptr)
+      if(v.m[parking.getIdStation()]!=nullptr)
       {
-      currSeats-=v[parking.getIdStation()].p.size();
-      currDisabilitySeats-=v[parking.getIdStation()].getCurrDisability;
+      currSeats-=v.m[parking.getIdStation()].p.size();
+      currDisabilitySeats-=v.m[parking.getIdStation()].CurrDisability;
+      v.m[parking.getIdStation()].CurrDisability=0;
+      currPackageSize-=v.m[parking.getIdStation()].CurrPackageSize;
+      currPackageSize-=v.m[parking.getIdStation()].CurrPackageSize=0;
       } 
      if(station->next==nullptr)
           destination=false;  
