@@ -29,6 +29,10 @@ public:
         }
     }
 
+    Node<int>* getHead() {
+    return head;
+    }
+
     bool isEmpty() {
         return head == nullptr;
     }
