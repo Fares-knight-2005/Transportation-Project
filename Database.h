@@ -7,6 +7,8 @@
 #include "clsVehicle"
 #include "clsParking.h"
 #include "clsTransportLine.h"
+#include "clsVehicleTrip.h"
+#include "clsParking.h"
 
 class Database
 {
@@ -52,19 +54,18 @@ class Database
 			return Results.substr(Delim.length(), Results.length() - Delim.length());
 		}
 
-               static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
-               ofstream outFile(filename);
+static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
+    ofstream outFile(filename);
     
-               for (int i = 0; i < transportLines.capacity; i++) {
-                 HashNode<clsTransportLine> current = transportLines.array[i].getHead();
-                 while (current != nullptr) {
-                      outFile << current->data.item.toString() << endl;
-                      current = current->next;
-                }
-                }
-    
-                outFile.close();
-                }
+    for (int i = 0; i < transportLines.capacity; i++) {
+         HashNode<clsTransportLine> current = transportLines.array[i].getHead();
+         while (current != nullptr) {
+                outFile << current->data.item.toString() << endl;
+                current = current->next;
+          }
+          }
+        outFile.close();
+ }
 
 static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
     OpenHash<int, clsTransportLine> transportLines;
@@ -75,7 +76,7 @@ static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
 
     while (getline(file, line)) {
         try {
-            clsTransportLine tl =clsTransportLine.parse(line, stations);
+            clsTransportLine tl =clsTransportLine::parse(line, stations);
             transportLines.insert(tl.getid(), tl);
             
             if (clsParking::numberOfAllTransportLine < tl.getId()) {
@@ -111,7 +112,7 @@ static OpenHash<int, clsParking> loadParkings(string filename) {
 
     while (getline(file, line)) {
         try {
-            clsParking parking = parse(line);
+            clsParking parking =clsParking::parse(line);
             parkings.insert(parking.getId(), parking);
             
             if (clsParking::numberOfAllParking < parking.getId()) {
@@ -149,7 +150,7 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
 
     while (getline(file, line)) {
         try {
-            clsVehicle vehicle = parseVehicle(line,vehicleTrip);
+            clsVehicle vehicle =clsVehicle::parse(line,vehicleTrip);
             vehicles.insert(vehicle.getId(), vehicle);
             
             if (clsVehicle::numberOfAllVehicle < vehicle.getId()) {
@@ -184,7 +185,7 @@ static OpenHash<int, clsPassenger> loadPassengers(string filename) {
 
     while (getline(file, line)) {
         try {
-            clsPassenger passenger = parse(line);
+            clsPassenger passenger =clsPassenger::parse(line);
             passengers.insert(passenger.getId(), passenger);
             
             if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
@@ -212,59 +213,26 @@ static void saveVehicleTrips(const string& filename, OpenHash<int, clsVehicleTri
     outFile.close();
 }
 
-static OpenHash<int, clsVehicleTrip> loadVehicleTrips(string filename) {
+static OpenHash<int, clsVehicleTrip> loadVehicleTrips(const string& filename) {
     OpenHash<int, clsVehicleTrip> trips;
     ifstream file(filename);
     string line;
 
     while (getline(file, line)) {
         try {
-            DoubleLinkedList<string> tokens = Split(line, ",,,");
-            if (tokens.size() < 2) 
-                continue;
-
-            int id = stoi(tokens[0]);
-           
+            clsVehicleTrip trip =clsVehicleTrip::parse(line);
+            trips.insert(trip.getId(), trip);
             
-            clsVehicleTrip trip(id);
-            
-            int tokenIndex = 1;
-            while (tokenIndex < tokens.size()) {
-                int stationId = stoi(tokens[tokenIndex++]);
-                
-                strVehicleMovements movement(stationId);
-               
-                while (tokenIndex < tokens.size()) {
-                    try {
-                        int start = stoi(tokens[tokenIndex++]);
-                        int end = stoi(tokens[tokenIndex++]);
-                        int pid = stoi(tokens[tokenIndex++]);
-                        bool heading = tokens[tokenIndex++] == "1";
-                        bool disabled = tokens[tokenIndex++] == "1";
-                        bool items = tokens[tokenIndex++] == "1";
-                        
-                        clsPassengerTrip passenger(start, end, pid, heading, disabled, items);
-                        movement.passenger.addLast(passenger);
-                    } catch (...) {
-                        break;
-                    }
-                }
-                
-                trip.vehicleMovements.insert(stationId, movement);
+            if (clsVehicleTrip::numberOfAllVehicleTrip < trip.getId()) {
+                clsVehicleTrip::numberOfAllVehicleTrip = trip.getId();
             }
-            
-            trips.insert(id, trip);
-            
-            if(clsVehicleTrip::numberOfAllVehicleTrip < id)
-                clsVehicleTrip::numberOfAllVehicleTrip = id;
-                
         } catch (...) {
             continue;
         }
     }
 
-    file.close();
     return trips;
-   }
+    }
+
 };
 #endif // DATABASE_H
