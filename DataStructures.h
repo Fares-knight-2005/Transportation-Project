@@ -224,6 +224,10 @@ public:
         return length;
     }
 
+    DoubleNode<Item>* getHead(){
+          return head;   
+    }
+
     void addFirst(Item item) {
         if (isEmpty())
             head = tail = new DoubleNode<Item>(item, nullptr, nullptr);
