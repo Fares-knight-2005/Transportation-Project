@@ -31,6 +31,7 @@ enVehicleType setVehicleType(int vehicleNumber){
 class VehicleTrip{
 
 struct VehicleMovements{
+int idStation;
 int currDisabilit,currPackageSize;
 SingleLinkedList<passengerTrip>> p;
 };
