@@ -26,26 +26,60 @@ enVehicleType setVehicleType(int vehicleNumber){
     }
 }
 
-struct passengerMovements{
+class passengerTrip{
 int idStarStation,idEndStation,idPassenger;
+public:
+    int getIdEndStation(){
+        return idEndStation; 
+    }
 };
 
 class VehicleTrip{
 
 int idVehicle;
-ClosedHash<int,SingleLinkedList<passengerMovements>> p;
+ClosedHash<int,SingleLinkedList<passengerTrip>> p;
 
 };
 
-void starVehicleTrip(clsTransportLine t,VehicleTrip v){
+    bool hasDisabilityAccess() {
+        return disabilitySeats>currDisabilitySeats;
+    }
+
+    bool hasCapacity(){
+        return  capacity>currSeats;
+    }
+
+    bool hasPackageSize(){
+        return  packageSize>currPackageSize;
+    }
+
+void starVehicleTrip(clsTransportLine t,VehicleTrip &v){
 
 
     DoubleNode<clsStation> *station=t.getFirstStation.getHead();
 
-    while(station!=nullptr){
-       station->item->
-
-
+    while(station!=nullptr&&destination){
+      clsParking *parking=station->item->parkings[i.getId()];
+      parking->vehicle.enqueue(this);
+      if(parking->vehicle.size()==1){
+          
+      while(hasCapacity()&&!(parking->passengers.isEmpty())){
+      passengerTrip trip=parking->passengers.dequeue();
+      if(v[tripe.getIdEndStation()]==nullptr)
+          v[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<passengerTrip>>();
+          
+      v[tripe.getIdEndStation()].p.addFirst(trip);
+      currSeats++;    
+      }
+          
+      if(v[parking.getIdStation()]!=nullptr)
+            currSeats-=v[parking.getIdStation()].p.size();    
+      if(destination)
+          station=station->next;
+      else
+          station=station->previous;
+          
+      }   
     }
 
 
@@ -95,12 +129,13 @@ public:
     }
 
 private:
-    enVehicleType vehicleType;
     int transportLineId;
-    int capacity;
+    int capacity,currSeats;
     float speed;
-    int seatsForPeopleWithDisabilities;
-    int packageSize;
+    int disabilitySeats,currDisabilitySeats;
+    int packageSize,currPackageSize;
+    bool destination;
+    SingleLinkedList<int> vehicleTripId;
 };
 
 #endif // CLSVEHICLE_H
