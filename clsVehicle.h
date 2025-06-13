@@ -29,8 +29,29 @@ enVehicleType setVehicleType(int vehicleNumber){
 
 class VehicleTrip{
 
-int idVehicle;
+int id,idVehicle,currDisabilit,currPackageSize;
 ClosedHash<int,SingleLinkedList<passengerTrip>> p;
+public:
+
+ int getCurrDisability(){
+     return currDisability;
+ }
+
+int getId(){
+      return id;
+}
+
+void setCurrDisability(currDisability c){
+     currDisability=c;
+ }
+
+void setCurrPackageSize(int currPackageSize){
+    this->currPackageSize=currPackageSize;
+}
+
+int getCurrPackageSize(){
+    return currPackageSize;
+}
 
 };
 
@@ -50,9 +71,10 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
 
 
     DoubleNode<clsStation> *station=t.getFirstStation.getHead();
-
-    while(station!=nullptr&&destination){
-      clsParking *parking=station->item->parkings[i.getId()];
+    destination=true;
+    
+    while(station!=nullptr||destination){
+      clsParking *parking=station->item->parkings[t.getId()];
       parking->vehicle.enqueue(this);
       Stack<clsPassengerTrip> s;
         
@@ -66,7 +88,8 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
           
       v[tripe.getIdEndStation()].p.addFirst(trip);
       currSeats++; 
-          
+      if(trip.disability)
+          currDisabilitySeats++;
       }
       else
           s.push(trip);
@@ -74,18 +97,21 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
       if(!s.isEmpty())
           s.toQueue(parking->passengers);
       if(v[parking.getIdStation()]!=nullptr)
-            currSeats-=v[parking.getIdStation()].p.size();
-      if(station->next==nullptr)
+      {
+      currSeats-=v[parking.getIdStation()].p.size();
+      currDisabilitySeats-=v[parking.getIdStation()].getCurrDisability;
+      } 
+     if(station->next==nullptr)
           destination=false;  
       if(destination)
           station=station->next;
       else
           station=station->previous;
-          
+      parking->vehicle.dequeue();   
       }   
     }
 
-
+vehicleTripId.addFirst();
 }
 
 class clsVehicle {
