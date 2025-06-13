@@ -119,6 +119,15 @@ vehicleTripId.addFirst(v.getId());
 
 class clsVehicle {
 public:
+    clsVehicle(int id,enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
+        this->id=id;
+        vehicleType = type;
+        transportLineId = lineId;
+        capacity = cap;
+        speed = spd;
+        seatsForPeopleWithDisabilities = disabilitySeats;
+        packageSize = pkgSize;
+    }
     clsVehicle(enVehicleType type, int lineId, int cap, float spd, int disabilitySeats, int pkgSize) {
         vehicleType = type;
         transportLineId = lineId;
@@ -127,6 +136,7 @@ public:
         seatsForPeopleWithDisabilities = disabilitySeats;
         packageSize = pkgSize;
     }
+  
 
     enVehicleType getVehicleType() { return vehicleType; }
     int getTransportLineId() { return transportLineId; }
@@ -141,9 +151,11 @@ public:
     void setSpeed(float spd) { speed = spd; }
     void setDisabilitySeats(int seats) { seatsForPeopleWithDisabilities = seats; }
     void setPackageSize(int size) { packageSize = size; }
+    void setId(int id){this->id=id;}
 
     void displayVehicleInfo() {
         cout << "\nVehicle Information:";
+        cout<< "\nId: "<<id;
         cout << "\nType: " << ::getVehicleType(vehicleType);
         cout << "\nTransport Line ID: " << transportLineId;
         cout << "\nCapacity: " << capacity;
@@ -163,7 +175,7 @@ public:
     string toString() {
     ostringstream oss;
     oss << static_cast<int>(vehicleType) << ",,,"  << transportLineId << ",,," 
-        << capacity << ",,," << speed << ",,," << disabilitySeats << ",,," << packageSize;
+        << capacity << ",,," << speed << ",,," << disabilitySeats << ",,," << packageSize<<",,,"<<id;
     
     Node<int>* current = vehicleTripId.getHead();
     while (current != nullptr) {
@@ -175,14 +187,16 @@ public:
   }
 
 private:
-    int transportLineId;
+    int id,transportLineId;
     int capacity,currSeats;
     float speed;
     int disabilitySeats,currDisabilitySeats;
     int packageSize,currPackageSize;
     bool destination;
     SingleLinkedList<int> vehicleTripId;
+    static int numberOfAllVehicle;
 };
+int clsVehicle::numberOfAllVehicle=0;
 
 #endif // CLSVEHICLE_H
       
