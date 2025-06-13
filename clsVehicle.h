@@ -54,17 +54,25 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
     while(station!=nullptr&&destination){
       clsParking *parking=station->item->parkings[i.getId()];
       parking->vehicle.enqueue(this);
+      Stack<clsPassengerTrip> s;
+        
       if(parking->vehicle.size()==1){
           
       while(hasCapacity()&&!(parking->passengers.isEmpty())){
       passengerTrip trip=parking->passengers.dequeue();
+      if(trip.getDestination()==destination){
       if(v[tripe.getIdEndStation()]==nullptr)
           v[tripe.getIdEndStation()]=ClosedHash<int,SingleLinkedList<passengerTrip>>();
           
       v[tripe.getIdEndStation()].p.addFirst(trip);
-      currSeats++;    
-      }
+      currSeats++; 
           
+      }
+      else
+          s.push(trip);
+      }
+      if(!s.isEmpty())
+          s.toQueue(parking->passengers);
       if(v[parking.getIdStation()]!=nullptr)
             currSeats-=v[parking.getIdStation()].p.size();
       if(station->next==nullptr)
