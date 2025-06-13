@@ -25,9 +25,9 @@ public:
     string toString(){
         ostringstream oss;
         
-        oss << clsPerson::toString() << ",,,"<<card.toString();
+        oss << personToString() << ",,,"<<card.toString();
         
         return oss.str();
     }
 };
-static int clsPassenger::numberOfAllPassenger;
+static int clsPassenger::numberOfAllPassenger=0;
