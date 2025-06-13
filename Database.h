@@ -1,8 +1,12 @@
-﻿#ifndef DATABASE_H
+#ifndef DATABASE_H
 #define DATABASE_H
 
 #include <iostream>
+#include <fstream>
 #include "DataStructures.h"
+#include "clsVehicle"
+#include "clsParking.h"
+#include "clsTransportLine.h"
 
 class Database
 {
@@ -48,7 +52,7 @@ class Database
 			return Results.substr(Delim.length(), Results.length() - Delim.length());
 		}
 
-               static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
+               void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
                ofstream outFile(filename);
     
                for (int i = 0; i < transportLines.capacity; i++) {
@@ -62,7 +66,7 @@ class Database
                 outFile.close();
                 }
 
-                static OpenHash<int, clsTransportLine> loadTransportLines(const string& filename) {
+                OpenHash<int, clsTransportLine> loadTransportLines(const string& filename) {
     
                 OpenHash<int, clsTransportLine> transportLines;
 	        OpenHash<int,clsStation> stations;//يجب تحميله من تابع staions
@@ -86,7 +90,8 @@ class Database
                 }
               }
 
-            clsTransportLine tl(id,vehicles, price, type, s);
+            clsTransportLine tl(vehicles, price, type, s);
+            tl.setid(id);
             transportLines.insert(id, tl);
 	    if(clsParking::numberOfAllTransportLine<id)
 		    clsParking::numberOfAllTransportLine=id;
@@ -147,5 +152,111 @@ static OpenHash<int, clsParking> loadParkings(string filename) {
 }
 
 };
+
+
+
+
+static void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
+    ofstream outFile(filename);
+    
+    for (int i = 0; i < vehicles.capacity; i++) {
+        auto current = vehicles.array[i].getHead();
+        while (current != nullptr) {
+            outFile << current->data.item.toString() << endl;
+            current = current->next;
+        }
+    }
+    
+    outFile.close();
+}
+
+static OpenHash<int, clsVehicle> loadVehicles(string filename) {
+    OpenHash<int, clsVehicle> vehicles;
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        try {
+            DoubleLinkedList<string> tokens = Split(line, ",,,");
+            if (tokens.size() < 7)
+		    continue;
+
+            enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
+            int lineId = stoi(tokens[1]);
+            int cap = stoi(tokens[2]);
+            float spd = stof(tokens[3]);
+            int disabilitySeats = stoi(tokens[4]);
+            int pkgSize = stoi(tokens[5]);
+            int id= stoi(tokens[6]);
+            clsVehicle vehicle(id,type, lineId, cap, spd, disabilitySeats, pkgSize);
+            
+            for (int i = 7; i < tokens.size(); i++) {
+                vehicle.vehicleTripId.addLast(stoi(tokens[i]));
+            }
+            
+            vehicles.insert(id,vehicle);
+	    if(clsVehicle::numberOfAllVehicle<id)
+		    clsVehicle::numberOfAllVehicle=id;
+		
+        } catch (...) {
+            continue;
+        }
+    }
+
+    file.close();
+    return vehicles;
+}
+
+    static void savePassengers(const string& filename, OpenHash<int, clsPassenger>& passengers) {
+        ofstream outFile(filename);
+        
+        for (int i = 0; i < passengers.capacity; i++) {
+            auto current = passengers.array[i].getHead();
+            while (current != nullptr) {
+                outFile << current->data.item.toString() << endl;
+                current = current->next;
+            }
+        }
+        
+        outFile.close();
+    }
+
+    static OpenHash<int, clsPassenger> loadPassengers(string filename) {
+        OpenHash<int, clsPassenger> passengers;
+        ifstream file(filename);
+        string line;
+
+        while (getline(file, line)) {
+            try {
+                DoubleLinkedList<string> tokens = Split(line, ",,,");
+                if (tokens.size() < 8) 
+			continue;
+
+                int id = stoi(tokens[0]);
+                short age = stoi(tokens[1]);
+                string firstName = tokens[2];
+                string lastName = tokens[3];
+                string phoneNumber = tokens[4];
+                string email = tokens[5];
+                
+                bool cardType = (tokens[6] == "Premium");
+                double cardBalance = stod(tokens[7]);
+                clsCard card(cardType, cardBalance);
+                
+                clsPassenger passenger(age, firstName, lastName, phoneNumber, email, id, card);
+                
+                passengers.insert(id, passenger);
+                
+                if(numberOfAllPassenger < id)
+                    numberOfAllPassenger = id;
+                
+            } catch (...) {
+                continue;
+            }
+        }
+
+        file.close();
+        return passengers;
+    }
 
 #endif // DATABASE_H
