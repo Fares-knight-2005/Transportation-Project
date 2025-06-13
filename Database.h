@@ -2,6 +2,7 @@
 #define DATABASE_H
 
 #include <iostream>
+#include <fstream>
 #include "DataStructures.h"
 #include "clsVehicle"
 #include "clsParking.h"
@@ -104,7 +105,7 @@ class Database
             return transportLines;
            }
 
-void saveParkings(const string& filename, OpenHash<int, clsParking>& parkings) {
+static void saveParkings(const string& filename, OpenHash<int, clsParking>& parkings) {
     ofstream outFile(filename);
     
     for (int i = 0; i < parkings.capacity; i++) {
@@ -119,7 +120,7 @@ void saveParkings(const string& filename, OpenHash<int, clsParking>& parkings) {
 }
 
 
-OpenHash<int, clsParking> loadParkings(string filename) {
+static OpenHash<int, clsParking> loadParkings(string filename) {
     OpenHash<int, clsParking> parkings;
     ifstream file(filename);
     string line;
@@ -155,7 +156,7 @@ OpenHash<int, clsParking> loadParkings(string filename) {
 
 
 
-void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
+static void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
     ofstream outFile(filename);
     
     for (int i = 0; i < vehicles.capacity; i++) {
@@ -169,7 +170,7 @@ void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
     outFile.close();
 }
 
-OpenHash<int, clsVehicle> loadVehicles(string filename) {
+static OpenHash<int, clsVehicle> loadVehicles(string filename) {
     OpenHash<int, clsVehicle> vehicles;
     ifstream file(filename);
     string line;
@@ -177,7 +178,8 @@ OpenHash<int, clsVehicle> loadVehicles(string filename) {
     while (getline(file, line)) {
         try {
             DoubleLinkedList<string> tokens = Split(line, ",,,");
-            if (tokens.size() < 7) continue;
+            if (tokens.size() < 7)
+		    continue;
 
             enVehicleType type = static_cast<enVehicleType>(stoi(tokens[0]));
             int lineId = stoi(tokens[1]);
@@ -204,5 +206,57 @@ OpenHash<int, clsVehicle> loadVehicles(string filename) {
     file.close();
     return vehicles;
 }
+
+    static void savePassengers(const string& filename, OpenHash<int, clsPassenger>& passengers) {
+        ofstream outFile(filename);
+        
+        for (int i = 0; i < passengers.capacity; i++) {
+            auto current = passengers.array[i].getHead();
+            while (current != nullptr) {
+                outFile << current->data.item.toString() << endl;
+                current = current->next;
+            }
+        }
+        
+        outFile.close();
+    }
+
+    static OpenHash<int, clsPassenger> loadPassengers(string filename) {
+        OpenHash<int, clsPassenger> passengers;
+        ifstream file(filename);
+        string line;
+
+        while (getline(file, line)) {
+            try {
+                DoubleLinkedList<string> tokens = Split(line, ",,,");
+                if (tokens.size() < 8) 
+			continue;
+
+                int id = stoi(tokens[0]);
+                short age = stoi(tokens[1]);
+                string firstName = tokens[2];
+                string lastName = tokens[3];
+                string phoneNumber = tokens[4];
+                string email = tokens[5];
+                
+                bool cardType = (tokens[6] == "Premium");
+                double cardBalance = stod(tokens[7]);
+                clsCard card(cardType, cardBalance);
+                
+                clsPassenger passenger(age, firstName, lastName, phoneNumber, email, id, card);
+                
+                passengers.insert(id, passenger);
+                
+                if(numberOfAllPassenger < id)
+                    numberOfAllPassenger = id;
+                
+            } catch (...) {
+                continue;
+            }
+        }
+
+        file.close();
+        return passengers;
+    }
 
 #endif // DATABASE_H
