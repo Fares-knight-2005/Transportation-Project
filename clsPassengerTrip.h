@@ -1,19 +1,17 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
-class Passenger {
+class clsPassengerTrip {
 private:
-    int idStarStation;
-    int idEndStation;
-    int idPassenger;
-    bool isHeadingToEnd;
-    bool isDisabled;
-    bool hasItems;
+    
+    int idStarStation,idEndStation,idPassenger;
+    bool isHeadingToEnd,isDisabled,hasItems;
 
 public:
-    Passenger(int start, int end, int id, bool heading, bool disabled, bool items) {
+    clsPassengerTrip(int start, int end, int id, bool heading, bool disabled, bool items) {
         idStarStation = start;
         idEndStation = end;
         idPassenger = id;
@@ -43,6 +41,15 @@ public:
         cout << "Heading to end: " << (isHeadingToEnd ? "Yes" : "No") << endl;
         cout << "Disabled: " << (isDisabled ? "Yes" : "No") << endl;
         cout << "Has items: " << (hasItems ? "Yes" : "No") << endl;
+    }
+
+    string toString() {
+        ostringstream oss;
+        oss << idStarStation << ",,," << idEndStation << ",,," 
+            << idPassenger << ",,," << (isHeadingToEnd ? "1" : "0") << ",,," 
+            << (isDisabled ? "1" : "0") << ",,," << (hasItems ? "1" : "0");
+        
+        return oss.str();
     }
 
     
