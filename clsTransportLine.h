@@ -41,6 +41,9 @@ public:
         return this->id == id;
     }
 
+    int getId(){
+        return id;
+    }
 
     void display() {
 
