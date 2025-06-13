@@ -57,6 +57,7 @@ public:
     float getSpeed() { return speed; }
     int getDisabilitySeats() { return seatsForPeopleWithDisabilities; }
     int getPackageSize() { return packageSize; }
+    int getId(){return id;}
 
     void setVehicleType(enVehicleType type) { vehicleType = type; }
     void setTransportLineId(int lineId) { transportLineId = lineId; }
