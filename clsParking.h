@@ -18,10 +18,14 @@ class clsParking{
         return this->id==id;
     }
 
+    int getStationId(){
+        return stationId;    
+    }
+
     private:
         Queue<clsVehicle> vehicl;
         Queue<clsPassenger> passengers;
-        int id;
+        int id,stationId;
         double distanceToNext;
         enVehicleType parkingType;
         static int numberOfAllParking;
