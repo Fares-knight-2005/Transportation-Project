@@ -112,7 +112,7 @@ void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
       }   
     }
 
-vehicleTripId.addFirst();
+vehicleTripId.addFirst(v.getId());
 }
 
 class clsVehicle {
