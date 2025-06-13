@@ -417,7 +417,7 @@ public:
         return result;
     }
 
-    HashNode<Key,Item>* getHead(int index){
+    HashNode<Key,Item>* getNode(int index){
          return array[index].getHead();
     }
 
@@ -550,6 +550,11 @@ public:
         return nullptr;
     }
 
+    
+
+    HashNode<Key,Item> getNode(int index){
+         return array[index];
+    }
 
     bool remove(Key key) {
 
