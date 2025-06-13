@@ -3,6 +3,7 @@
 #include "DataStructures.h"
 #include "clsVehicle.h"
 #include "clsPassengerTrip.h"
+#include <sstream>
 
 class clsParking{
      
@@ -22,6 +23,11 @@ class clsParking{
         return stationId;    
     }
 
+    string toString() {
+    ostringstream oss;
+    oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType);
+    return oos;
+    }
     private:
         Queue<clsVehicle> vehicl;
         Queue<clsPassengerTrip> passengers;
