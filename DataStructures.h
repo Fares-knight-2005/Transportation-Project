@@ -417,6 +417,10 @@ public:
         return result;
     }
 
+    HashNode<Key,Item>* getHead(int index){
+         return array[index].getHead();
+    }
+
     int size() {
         return length;
     }
