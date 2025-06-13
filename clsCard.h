@@ -1,6 +1,7 @@
 #include <iostream>
 #include "clsPerson.h"
 #include "DataStructures.h"
+#include <sstream>
 
 using namespace std;
 class clsCard {
