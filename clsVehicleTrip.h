@@ -34,13 +34,15 @@ ClosedHash<int,strVehicleMovements> vehicleMovements;
 static int numberOfAllVehicleTrip;
 
 public:
-clsVehicleTrip():id(++numberOfAllVehicleTrip) {}
 
-clsVehicleTrip(int id):id(id) {}
+   clsVehicleTrip():id(++numberOfAllVehicleTrip) {}
 
-int getId(){
-      return id;
-}
+   clsVehicleTrip(int id):id(id) {}
+
+    int getId(){
+          return id;
+    }
+ 
     string toString() {
         ostringstream oss;
         oss << id;
@@ -81,6 +83,42 @@ int getId(){
         }
     }
     }
+
+    clsVehicleTrip parse(string line) {
+    DoubleLinkedList<string> tokens = Split(line, ",,,");
+    if (tokens.size() < 2) {
+        throw invalid_argument("Not enough tokens in line");
+    }
+
+    int id = stoi(tokens[0]);
+    clsVehicleTrip trip(id);
+    
+    int tokenIndex = 1;
+    while (tokenIndex < tokens.size()) {
+        int stationId = stoi(tokens[tokenIndex++]);
+        strVehicleMovements movement(stationId);
+       
+        while (tokenIndex < tokens.size()) {
+            try {
+                int start = stoi(tokens[tokenIndex++]);
+                int end = stoi(tokens[tokenIndex++]);
+                int pid = stoi(tokens[tokenIndex++]);
+                bool heading = tokens[tokenIndex++] == "1";
+                bool disabled = tokens[tokenIndex++] == "1";
+                bool items = tokens[tokenIndex++] == "1";
+                
+                clsPassengerTrip passenger(start, end, pid, heading, disabled, items);
+                movement.passenger.addLast(passenger);
+            } catch (...) {
+                break;
+            }
+        }
+        
+        trip.vehicleMovements.insert(stationId, movement);
+    }
+    
+    return trip;
+}
 
 
 
