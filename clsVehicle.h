@@ -2,6 +2,7 @@
 #define CLSVEHICLE_H
 #include <iostream>
 #include "DataStructures.h"
+#include "clsPassengerTrip.h"
 
 using namespace std;
 
@@ -26,14 +27,6 @@ enVehicleType setVehicleType(int vehicleNumber){
     }
 }
 
-class passengerTrip{
-int idStarStation,idEndStation,idPassenger;
-public:
-    int getIdEndStation(){
-        return idEndStation; 
-    }
-};
-
 class VehicleTrip{
 
 int idVehicle;
@@ -53,7 +46,7 @@ ClosedHash<int,SingleLinkedList<passengerTrip>> p;
         return  packageSize>currPackageSize;
     }
 
-void starVehicleTrip(clsTransportLine t,VehicleTrip &v){
+void starVehicleTrip(clsTransportLine t,clsPassengerTrip &v){
 
 
     DoubleNode<clsStation> *station=t.getFirstStation.getHead();
@@ -73,7 +66,9 @@ void starVehicleTrip(clsTransportLine t,VehicleTrip &v){
       }
           
       if(v[parking.getIdStation()]!=nullptr)
-            currSeats-=v[parking.getIdStation()].p.size();    
+            currSeats-=v[parking.getIdStation()].p.size();
+      if(station->next==nullptr)
+          destination=false;  
       if(destination)
           station=station->next;
       else
