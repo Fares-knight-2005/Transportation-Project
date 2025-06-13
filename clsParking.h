@@ -29,6 +29,7 @@ class clsParking{
         strParkingQueue  coming;//المصف المخصص للركاب وباصات المتجهين الى بداية الخط
         int id;// معرف الموقف
         double distanceToNext;//البعد عن الموقف التالي
+        enVehicleType parkingType;
         static int numberOfAllParking;//عدد الكلي للمواقف
 };
 int clsParking::numberOfAllParking=0;
