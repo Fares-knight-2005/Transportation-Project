@@ -3,7 +3,7 @@ using namespace std;
 
 class clsPassengerTrip{
 int idStarStation,idEndStation,idPassenger;
-bool destination;
+bool destination,disability;
 
 public:
     clsPassengerTrip(int idStarStation,int idEndStation,int idPassenger):idPassenger(idPassenger),idEndStation(idEndStation),idPassenger(idPassenger) {}
