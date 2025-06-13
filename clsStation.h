@@ -17,10 +17,14 @@ class clsStation
 	string street;
 	int maxParkingsCapicty;
 	int maxVehcelNumberIn1Parking;
-	enVehicleType stationType;
+	
 
 
 public:
+
+        bool operator==(){
+	       return this->id==id;
+	}
 
 	int getid()
 	{
