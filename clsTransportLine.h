@@ -15,6 +15,11 @@ public:
         numberOfVehicles(numberOfVehicles) {
     }
 
+    clsTransportLine(int id,int numberOfVehicles, double pricePerKilometer, enVehicleType vehiclesType, DoubleLinkedList<clsStation> stations) :
+         id(id),stations(stations), pricePerKilometer(pricePerKilometer), vehiclesType(vehiclesType),
+        numberOfVehicles(numberOfVehicles) {
+    }
+
     clsTransportLine() :id(0), numberOfVehicles(0), pricePerKilometer(0) {}
 
     void addStation(clsStation station, int stationNumber) {
