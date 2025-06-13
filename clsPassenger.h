@@ -5,6 +5,7 @@
 #include "clsPerson.h"
 #include "DataStructures.h"
 #include "clsCard.h"
+#include <sstream>
 
 using namespace std;
 
