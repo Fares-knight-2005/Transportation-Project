@@ -72,6 +72,28 @@ public:
         return oss.str();
     }
 
+    clsTransportLine parse(string line,OpenHash<int, clsStation>& stations) {
+    DoubleLinkedList<string> tokens = Split(line,",,,");
+    if (tokens.size() < 4) {
+        throw invalid_argument("Not enough tokens in line");
+    }
+
+    int id = stoi(tokens[0]);
+    int vehicles = stoi(tokens[1]);
+    double price = stod(tokens[2]);
+    enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
+    
+    DoubleLinkedList<clsStation> stationList;
+    for (int i = 4; i < tokens.size(); i++) {
+        int stationId = stoi(tokens[i]);
+        stationList.addFirst(stations[stationId]);
+    }
+
+    clsTransportLine tl(vehicles, price, type, stationList);
+    tl.setid(id);
+    return tl;
+}
+
 
 private:
     DoubleLinkedList<clsStation> stations;
