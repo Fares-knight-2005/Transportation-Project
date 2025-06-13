@@ -16,25 +16,7 @@ public:
     }
 
     clsTransportLine() :id(0), numberOfVehicles(0), pricePerKilometer(0) {}
-    /*
-        double getDistance(int startId, int endId){
-        if(startId>=endId)
-            return 0;
-        double distance=0;
-        for(int i=startId;i>endId;i++)
-            //distance+=البعد عن الموقف التالي
 
-        return distance;
-        }
-
-        double calculateFare(int startId, int endId,bool cardType){
-            double distance= getDistance(startId,endId);
-            double price=distance*pricePerKilometer;
-            if(cardType)
-                 return price*0.8;
-            retrurn price;
-        }
-    */
     void addStation(clsStation station, int stationNumber) {
         stations.add(stationNumber - 1, station);
     }
