@@ -54,6 +54,34 @@ int getId(){
         return oss.str();
     }
 
+    void displayInfo() {
+    cout << "**************************************\n";
+    cout << "       Vehicle Trip Information      \n";
+    cout << "**************************************\n";
+    cout << "Trip ID: " << id << "\n";
+    cout << "Total Vehicle Trips: " << numberOfAllVehicleTrip << "\n\n";
+
+    for (int i = 0; i < vehicleMovements.size(); i++) {
+        auto node = vehicleMovements.getNode(i);
+        if (node.nodeType == ClosedNode<int, strVehicleMovements>::FULL) {
+            cout << "Current Station: " << node.item.idStation << "\n";
+            cout << "Passengers List:\n";
+            cout << "----------------\n";
+
+            auto current = node.item.passenger.getHead();
+            int passengerCount = 1;
+            
+            while (current != nullptr) {
+                cout << passengerCount++ << ". ";
+                current->data.displayInfo();
+                cout << "----------------\n";
+                current = current->next;
+            }
+            cout << "**************************************\n";
+        }
+    }
+    }
+
 
 
 };
