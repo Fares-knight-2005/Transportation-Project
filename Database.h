@@ -66,7 +66,7 @@ class Database
                 outFile.close();
                 }
 
-OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
+static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
     OpenHash<int, clsTransportLine> transportLines;
     OpenHash<int, clsStation> stations;//هون في تابع
     
@@ -111,32 +111,19 @@ static OpenHash<int, clsParking> loadParkings(string filename) {
 
     while (getline(file, line)) {
         try {
-            DoubleLinkedList<string> tokens = Split(line, ",,,");
-            if (tokens.size() < 4) 
-		    continue;
-
-            int id = stoi(tokens[0]);
-            int stationId = stoi(tokens[1]);
-            double distance = stod(tokens[2]);
-            enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
-
-            clsParking parking(id, distance,stationId,type);
+            clsParking parking = parse(line);
+            parkings.insert(parking.getId(), parking);
             
-            parkings.insert(id, parking);
-	    if(clsParking::numberOfAllParking<id)
-		    clsParking::numberOfAllVehicle=id;
-
+            if (clsParking::numberOfAllParking < parking.getId()) {
+                clsParking::numberOfAllParking = parking.getId();
+            }
         } catch (...) {
             continue;
         }
     }
 
-    file.close();
     return parkings;
 }
-
-};
-
 
 
 
@@ -311,5 +298,5 @@ static OpenHash<int, clsVehicleTrip> loadVehicleTrips(string filename) {
     file.close();
     return trips;
    }
-
+};
 #endif // DATABASE_H
