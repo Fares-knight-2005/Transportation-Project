@@ -29,6 +29,10 @@ public:
         }
     }
 
+    Node<int>* getHead() {
+    return head;
+    }
+
     bool isEmpty() {
         return head == nullptr;
     }
@@ -154,6 +158,36 @@ public:
 };
 
 template<class Item>
+class Stack {
+
+    SingleLinkedList<Item> singleLinkedList;
+
+public:
+
+    void push(Item item) {
+        singleLinkedList.addFirst(item);
+    }
+
+    bool pop() {
+        return singleLinkedList.removeFirst();
+    }
+
+    bool isEmpty() {
+        return singleLinkedList.isEmpty();
+    }
+
+    int size() {
+        return singleLinkedList.size();
+    }
+
+    void toQueue(Queue<Item> &q){
+    while(!isEmpty())
+        q.enqueue(pop());
+    }
+    
+};
+
+template<class Item>
 struct DoubleNode {
     Item item;
     DoubleNode* next;
@@ -190,6 +224,10 @@ public:
 
     int size() {
         return length;
+    }
+
+    DoubleNode<Item>* getHead(){
+          return head;   
     }
 
     void addFirst(Item item) {
@@ -379,6 +417,10 @@ public:
         return result;
     }
 
+    HashNode<Key,Item>* getHead(int index){
+         return array[index].getHead();
+    }
+
     int size() {
         return length;
     }
@@ -533,6 +575,5 @@ public:
 
 
 };
-
 
 #endif // DATASTRUCTURES_H
