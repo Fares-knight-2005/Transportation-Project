@@ -167,11 +167,12 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
     return vehicles;
 }
 
-static void savePassengers(const string& filename, OpenHash<int, clsPassenger>& passengers) {
+template<class Item>
+static void savePassengers(string& filename, OpenHash<Item, clsPassenger>& passengers) {
      ofstream outFile(filename);
         
      for (int i = 0; i < passengers.capacity; i++) {
-            HashNode<<int, clsPassenger> *current = passengers.array[i].getHead();
+            HashNode<<Item, clsPassenger> *current = passengers.array[i].getHead();
             while (current != nullptr) {
                 outFile << current->data.item.toString() << endl;
                 current = current->next;
@@ -190,6 +191,28 @@ static OpenHash<int, clsPassenger> loadPassengers(string filename) {
         try {
             clsPassenger passenger =clsPassenger::parse(line);
             passengers.insert(passenger.getId(), passenger);
+            
+            if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
+                clsPassenger::numberOfAllPassenger = passenger.getId();
+            }
+        } catch (...) {
+            continue;
+        }
+    }
+
+    return passengers;
+}
+
+static OpenHash<string, clsPassenger> loadPassengersByName(string filename) {
+    OpenHash<string, clsPassenger> passengers;
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        try {
+            clsPassenger passenger = clsPassenger::parse(line);
+            string fullNameKey = passenger.GetFullName();
+            passengers.insert(fullNameKey, passenger);
             
             if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
                 clsPassenger::numberOfAllPassenger = passenger.getId();
