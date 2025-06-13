@@ -4,61 +4,64 @@
 #include <iostream>
 #include <fstream>
 #include "DataStructures.h"
-#include "clsVehicle"
+#include "clsVehicle.h"
 #include "clsParking.h"
 #include "clsTransportLine.h"
 #include "clsVehicleTrip.h"
-#include "clsParking.h"
+#include "clsPassenger.h"
 
 class Database
 {
-    public:
+public:
+
+static string clsVehicleFileName,clsParkingFileName;
+static string clsTransportLineFileName,clsVehicleTripFileName;
+static string clsPassengerFileName;
 
 
-		static DoubleLinkedList <string> Split(string s, string delim)
-		{
-			string Word = "";
+static DoubleLinkedList <string> Split(string s, string delim)
+{
+string Word = "";
 
-			DoubleLinkedList <string> Words;
+DoubleLinkedList <string> Words;
 
-			short pos = s.find(delim);
+short pos = s.find(delim);
 
-			while (pos != string::npos)
-			{
-				Word = s.substr(0, pos);
-				s.erase(0, pos + delim.length());
+while (pos != string::npos)
+{
+Word = s.substr(0, pos);
+s.erase(0, pos + delim.length());
 
-				if (Word != "")
-					Words.addLast(Word);
+if (Word != "")
+    Words.addLast(Word);
+    pos = s.find(delim);
+}
 
-				pos = s.find(delim);
-			}
+if (s != "")
+   Words.addLast(s);
 
-			if (s != "")
-				Words.addLast(s);
-
-			return Words;
-		}
-
+  return Words;
+}
 
 
-		static string JoinString(string* ArrString, string Delim)
-		{
-			string Results = "";
 
-			for (int i = 0; i < ArrString->length; i++)
-			{
-				Results += Delim + ArrString[i];
-			}
+static string JoinString(string* ArrString, string Delim)
+{
+string Results = "";
 
-			return Results.substr(Delim.length(), Results.length() - Delim.length());
-		}
+for (int i = 0; i < ArrString->length; i++)
+{
+Results += Delim + ArrString[i];
+}
+
+return Results.substr(Delim.length(), Results.length() - Delim.length());
+}
 
 static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
     ofstream outFile(filename);
     
     for (int i = 0; i < transportLines.capacity; i++) {
-         HashNode<clsTransportLine> current = transportLines.array[i].getHead();
+         HashNode<clsTransportLine>* current = transportLines.array[i].getHead();
          while (current != nullptr) {
                 outFile << current->data.item.toString() << endl;
                 current = current->next;
@@ -90,11 +93,11 @@ static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
     return transportLines;
 }
 
-static void saveParkings(const string& filename, OpenHash<int, clsParking>& parkings) {
+static void saveParkings(string& filename, OpenHash<int, clsParking>& parkings) {
     ofstream outFile(filename);
     
     for (int i = 0; i < parkings.capacity; i++) {
-        DoubleLinkedList<clsParking> current = parkings.array[i].getHead();
+        DoubleLinkedList<clsParking> *current = parkings.array[i].getHead();
         while (current != nullptr) {
             outFile << current->data.item.toString() << endl;
             current = current->next;
@@ -128,11 +131,11 @@ static OpenHash<int, clsParking> loadParkings(string filename) {
 
 
 
-static void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehicles) {
+static void saveVehicles(string& filename, OpenHash<int, clsVehicle>& vehicles) {
     ofstream outFile(filename);
     
     for (int i = 0; i < vehicles.capacity; i++) {
-        auto current = vehicles.array[i].getHead();
+        HashNode<int, clsVehicle> *current = vehicles.array[i].getHead();
         while (current != nullptr) {
             outFile << current->data.item.toString() << endl;
             current = current->next;
@@ -144,7 +147,7 @@ static void saveVehicles(const string& filename, OpenHash<int, clsVehicle>& vehi
 
 static OpenHash<int, clsVehicle> loadVehicles(string filename) {
     OpenHash<int, clsVehicle> vehicles;
-    OpenHash<int, clsVehicleTrip> vehicleTrip=loadVehicleTrips();// اسم الملف
+    OpenHash<int, clsVehicleTrip> vehicleTrip=loadVehicleTrips(Database::clsVehicleTripFileName);
     ifstream file(filename);
     string line;
 
@@ -164,11 +167,11 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
     return vehicles;
 }
 
-    static void savePassengers(const string& filename, OpenHash<int, clsPassenger>& passengers) {
-        ofstream outFile(filename);
+static void savePassengers(const string& filename, OpenHash<int, clsPassenger>& passengers) {
+     ofstream outFile(filename);
         
-        for (int i = 0; i < passengers.capacity; i++) {
-            auto current = passengers.array[i].getHead();
+     for (int i = 0; i < passengers.capacity; i++) {
+            HashNode<<int, clsPassenger> *current = passengers.array[i].getHead();
             while (current != nullptr) {
                 outFile << current->data.item.toString() << endl;
                 current = current->next;
@@ -176,7 +179,7 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
         }
         
         outFile.close();
-    }
+}
 
 static OpenHash<int, clsPassenger> loadPassengers(string filename) {
     OpenHash<int, clsPassenger> passengers;
@@ -203,7 +206,7 @@ static void saveVehicleTrips(const string& filename, OpenHash<int, clsVehicleTri
     ofstream outFile(filename);
     
     for (int i = 0; i < trips.capacity; i++) {
-        HashNode<int, clsVehicleTrip> current = trips.getHead(i);
+        HashNode<int, clsVehicleTrip> *current = trips.getHead(i);
         while (current != nullptr) {
             outFile << current->data.item.toString() << endl;
             current = current->next;
@@ -235,4 +238,10 @@ static OpenHash<int, clsVehicleTrip> loadVehicleTrips(const string& filename) {
     }
 
 };
+static string Database::clsVehicleFileName="vehicle";
+static string Database::clsParkingFileName="parking";
+static string Database::clsTransportLineFileName="transportLine";
+static string Database::clsVehicleTripFileName="vehicleTrip";
+static string Database::clsPassengerFileName="passenger";
+
 #endif // DATABASE_H
