@@ -97,4 +97,11 @@ public:
 		return this->FirstName + " " + LastName;
 	}
 
+        string toString(){
+        ostringstream oss;
+        oss << Id << ",,," << Age << ",,," << FirstName << ",,," 
+            << LastName << ",,," << PhoneNumber << ",,," << Email;
+        return oss.str();
+        }
+
 };
