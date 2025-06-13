@@ -10,31 +10,18 @@ class clsTransportLine
 
 
 public:
-    clsTransportLine(int numberOfVehicles, double pricePerKilometer, enVehicleType vehiclesType, DoubleLinkedList<clsStation> stations) :
-        stations(stations), pricePerKilometer(pricePerKilometer), id(++numberOfAllTransportLine), vehiclesType(vehiclesType),
+    clsTransportLine(int numberOfVehicles, double price, enVehicleType vehiclesType, DoubleLinkedList<clsStation> stations) :
+        stations(stations), pricePerKilometer(price), id(++numberOfAllTransportLine), vehiclesType(vehiclesType),
         numberOfVehicles(numberOfVehicles) {
     }
 
-    clsTransportLine() :id(0), numberOfVehicles(0), pricePerKilometer(0) {}
-    /*
-        double getDistance(int startId, int endId){
-        if(startId>=endId)
-            return 0;
-        double distance=0;
-        for(int i=startId;i>endId;i++)
-            //distance+=البعد عن الموقف التالي
+    clsTransportLine(int id,int numberOfVehicles, double price, enVehicleType vehiclesType, DoubleLinkedList<clsStation> stations) :
+         id(id),stations(stations), pricePerKilometer(price), vehiclesType(vehiclesType),
+         numberOfVehicles(numberOfVehicles) {
+    }
 
-        return distance;
-        }
+    clsTransportLine() :id(0), numberOfVehicles(0), price(0) {}
 
-        double calculateFare(int startId, int endId,bool cardType){
-            double distance= getDistance(startId,endId);
-            double price=distance*pricePerKilometer;
-            if(cardType)
-                 return price*0.8;
-            retrurn price;
-        }
-    */
     void addStation(clsStation station, int stationNumber) {
         stations.add(stationNumber - 1, station);
     }
@@ -44,6 +31,10 @@ public:
             cout << "The deletion process was completed successfully.\n";
         else
             cout << "The station ID number you entered is not available.\n";
+    }
+
+    DoubleNode<clsStation> *getFirstStation(){
+            return  station.getHead();
     }
 
     bool operator==(int id) {
@@ -57,7 +48,7 @@ public:
         cout << "--------------------------\n";
         cout << "Line ID: " << id << "\n";
         cout << "Number of Vehicles: " << numberOfVehicles << "\n";
-        cout << "Price per Kilometer: " << pricePerKilometer << " $\n";
+        cout << "Price : " << price << " $\n";
         cout << getVehicleType(vehiclesType) << "\n";
         if (stations.size() > 0) {
             cout << "Stations IDs: ";
@@ -75,7 +66,7 @@ public:
 
     string toString() {
         ostringstream oss;
-        oss << id << ",,," << numberOfVehicles << ",,," << pricePerKilometer << ",,," << static_cast<int>(vehiclesType) << ",,,";
+        oss << id << ",,," << numberOfVehicles << ",,," << price << ",,," << static_cast<int>(vehiclesType) << ",,,";
         for (int i = 0; i < stations.size(); i++)
             oss << ",,," << stations[i];
         return oss.str();
@@ -84,7 +75,7 @@ public:
 
 private:
     DoubleLinkedList<clsStation> stations;
-    int id, numberOfVehicles, pricePerKilometer;
+    int id,numberOfVehicles,price;
     enVehicleType vehiclesType;
     static int numberOfAllTransportLine;
 
