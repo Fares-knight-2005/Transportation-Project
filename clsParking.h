@@ -29,6 +29,22 @@ class clsParking{
     oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType);
     return oos;
     }
+
+    clsParking parse(string& line) {
+    DoubleLinkedList<string> tokens = Split(line,",,,");
+         
+    if (tokens.size() < 4) {
+        throw invalid_argument("Not enough tokens in line");
+    }
+
+    int id = stoi(tokens[0]);
+    int stationId = stoi(tokens[1]);
+    double distance = stod(tokens[2]);
+    enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
+
+    return clsParking(id, distance, stationId, type);
+    }
+
     private:
         Queue<clsVehicle> vehicl;
         Queue<clsPassengerTrip> passengers;
