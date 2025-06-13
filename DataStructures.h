@@ -417,7 +417,7 @@ public:
         return result;
     }
 
-    HashNode<Key,Item>* getNode(int index){
+    HashNode<Key,Item>* getHead(int index){
          return array[index].getHead();
     }
 
