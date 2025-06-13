@@ -28,6 +28,10 @@ public:
             cout << "The station ID number you entered is not available.\n";
     }
 
+    DoubleNode<clsStation> *getFirstStation(){
+            return    station.getHead();
+    }
+
     bool operator==(int id) {
         return this->id == id;
     }
