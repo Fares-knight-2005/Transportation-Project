@@ -25,22 +25,21 @@ class Input {
 public:
 
     static void pressAnyKeyToContinue() {
-        cout <<"\nPress anything to continue...";
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        system("pause");
         system("cls");
     }
 
-    static int readInt(string message="Please enter a number: ") {
-        int input;
-        cout << message;
-        while (!(cin>>input)) {
-            system("color");
-            cout<<"\033[1;31mInvalid input. Please enter a number: \033[0m";
-            clearInput();
-        }
+   static int readInt(string ErrorMessage = "Invalid input. Please enter a number : " ,string message="Please enter a number : ") {
+      int input;
+      cout << message;
+      while (!(cin>>input)) {
+          system("color");
+          cout<<"\033[1;31m" + ErrorMessage +" \033[0m";
+          clearInput();
+      }
 
-        return input;
-    }
+      return input;
+  }
 
     static float readFloat(string message="Please enter a number: ") {
         float input;
@@ -142,22 +141,19 @@ public:
         system("cls");
     }
 
-
-    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
+    static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n" , string ErrorMessageLetters)
     {
-        int Number = readInt();
+        int Number = readInt(ErrorMessageLetters);
 
         while (!(Number >= From && Number <= To))
         {
             cout << ErrorMessage;
-            Number = readInt();
+            Number = readInt(ErrorMessageLetters);
         }
         return Number;
     }
 
 };
 
-
-};
 
 #endif // INPUT_H
