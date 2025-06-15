@@ -47,11 +47,15 @@ public:
         return this->id == id;
     }
 
+    bool operator==(string name){
+       return this->name=name;      
+    }
+
     int getId(){
         return id;
     }
 
-    void setid(int id) {
+    void setId(int id) {
         this->id = id;
     }
 
