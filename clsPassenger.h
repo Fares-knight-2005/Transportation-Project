@@ -36,6 +36,14 @@ public:
         Password = newPassword;
     }
 
+    static int getNumberOfAllPassenger(){
+          return numberOfAllPassenger;     
+    }
+
+    static void setNumberOfAllPassenger(int n){
+          numberOfAllPassenger=n;
+    }
+
     string toString() {
         ostringstream oss;
         oss << personToString() << ",,," << Card.toString() << ",,," << Password<< ",,," <<isDisabled;
