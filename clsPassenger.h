@@ -57,10 +57,11 @@ public:
         
         bool cardType = (tokens[6] == "Premium");
         double cardBalance = stod(tokens[7]);
-        string password = tokens[8];
-        bool isDisabled= (stoi(tokens[9])==1);
+        int freeTrips= stod(tokens[8]);
+        string password = tokens[9];
+        bool isDisabled= (stoi(tokens[10])==1);
         
-        clsCard card(cardType, cardBalance);
+        clsCard card(cardType, cardBalance,freeTrips);
         
         return clsPassenger(age, firstName, lastName, phoneNumber, email, id, card, password, isDisabled);
     }
