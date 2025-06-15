@@ -46,7 +46,7 @@ public:
         cout << "Has items: " << (hasItems ? "Yes" : "No") << endl;
     }
 
-    void setPrice(int amount,clsCard card,bool transportingItems){
+    bool setPrice(int amount,clsCard card,bool transportingItems){
         
     if(hasItems)
         price+=20;
@@ -66,8 +66,10 @@ public:
     price+=amount;
         
     if(card.isPremium())
-        amount*=0.7;// خصم
-    
+        price*=0.7;// خصم
+
+    return card.payment(price);
+
     }
 
     string toString() {
