@@ -67,6 +67,16 @@ public:
         return true;
     }
 
+   Item removeFirstWithReturnItem() {
+
+        if (isEmpty())
+            return nullptr;
+        Item *item=head->item;
+        head = head->next;
+        --length;
+        return item;
+    }
+
     void print() {
         Node<Item>* curr = head;
 
@@ -140,8 +150,8 @@ public:
         singleLinkedList.addLast(item);
     }
 
-    bool dequeue() {
-        return singleLinkedList.removeFirst();
+    Item* dequeue() {
+        return singleLinkedList.removeFirstWithReturnItem();
     }
 
     void push(Item item) {
@@ -168,8 +178,8 @@ public:
         singleLinkedList.addFirst(item);
     }
 
-    bool pop() {
-        return singleLinkedList.removeFirst();
+    Item* pop() {
+        return singleLinkedList.removeFirstWithReturnItem();
     }
 
     bool isEmpty() {
