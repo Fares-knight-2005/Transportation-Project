@@ -51,7 +51,9 @@ public:
         clsTransportLine  line=*transportLines[lineId];
         if(line==nullptr)
             cout<< "There is no line with this ID. \n";
-        else
+        else if(vehicleType!=line.getVehicleType())
+            cout<< "The Transport line type does not match the added vehicle. \n";
+        else 
         {
             line.setNumberOfVehicles(getNumberOfVehicles()++);
             break;
@@ -134,14 +136,15 @@ public:
             case 1: {
            OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
            while(true){
-              int lineId = Input::readInt("Enter Transport Line ID: ");
-              clsTransportLine  line=*transportLines[lineId];
-                  if(line==nullptr)
-                       cout<< "There is no line with this ID. \n";
-                 else{
-                       line.setNumberOfVehicles(getNumberOfVehicles()++);
-                       Database::saveTransportLines(Database::clsTransportLineFileName,transportLines);
-                       break;} }
+             int lineId = Input::readInt("Enter Transport Line ID: ");
+             clsTransportLine  line=*transportLines[lineId];
+             if(line==nullptr)
+                 cout<< "There is no line with this ID. \n";
+            else if(vehicle.getVehicleType()!=line.getVehicleType())
+                  cout<< "The Transport line type does not match the added vehicle. \n";
+            else {
+            line.setNumberOfVehicles(getNumberOfVehicles()++);
+            break; }}
             }
             case 2: {
                 int newCapacity = Input::readInt("Enter new Capacity: ");
