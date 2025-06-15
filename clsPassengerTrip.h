@@ -8,16 +8,18 @@ class clsPassengerTrip {
 private:
     
     int idStarStation,idEndStation,idPassenger;
+    float price;
     bool isHeadingToEnd,isDisabled,hasItems;
 
 public:
-    clsPassengerTrip(int start, int end, int id, bool heading, bool disabled, bool items) {
+    clsPassengerTrip(int start, int end, int id, bool heading, bool disabled, bool items,float price) {
         idStarStation = start;
         idEndStation = end;
         idPassenger = id;
         isHeadingToEnd = heading;
         isDisabled = disabled;
         hasItems = items;
+        this->price=price;
     }
 
     int getStartStation() { return idStarStation; }
@@ -38,6 +40,7 @@ public:
         cout << "Passenger ID: " << idPassenger << endl;
         cout << "Start Station: " << idStarStation << endl;
         cout << "End Station: " << idEndStation << endl;
+        cout << "Price: "<< price << endl;
         cout << "Heading to end: " << (isHeadingToEnd ? "Yes" : "No") << endl;
         cout << "Disabled: " << (isDisabled ? "Yes" : "No") << endl;
         cout << "Has items: " << (hasItems ? "Yes" : "No") << endl;
@@ -47,7 +50,7 @@ public:
         ostringstream oss;
         oss << idStarStation << ",,," << idEndStation << ",,," 
             << idPassenger << ",,," << (isHeadingToEnd ? "1" : "0") << ",,," 
-            << (isDisabled ? "1" : "0") << ",,," << (hasItems ? "1" : "0");
+            << (isDisabled ? "1" : "0") << ",,," << (hasItems ? "1" : "0")<< ",,," <<price;
         
         return oss.str();
     }
