@@ -59,6 +59,14 @@ public:
         this->id = id;
     }
 
+    void setNumberOfVehicles(int n){
+         numberOfVehicles=n;     
+    }
+
+    int getNumberOfVehicles(){
+        return numberOfVehicles;      
+    }
+
     void display() {
         cout << "\nTransport Line Information\n";
         cout << "--------------------------\n";
