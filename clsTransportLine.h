@@ -75,6 +75,14 @@ public:
         cout << "--------------------------\n";
     }
 
+    static int getNumberOfAllTransportLine(){
+          return numberOfAllTransportLine;     
+    }
+
+    static void setNumberOfAllTransportLine(int n){
+          numberOfAllTransportLine=n;
+    }
+
     string toString() {
         ostringstream oss;
         oss << id << ",,," << numberOfVehicles << ",,," << price << ",,," << static_cast<int>(vehicleType) << ",,," << name;
