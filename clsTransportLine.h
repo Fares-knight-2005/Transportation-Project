@@ -51,6 +51,10 @@ public:
        return this->name=name;      
     }
 
+    enVehicleType getVehicleType() {
+        return vehicleType;
+    }
+
     int getId(){
         return id;
     }
