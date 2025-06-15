@@ -60,7 +60,7 @@ public:
 
         clsCard card(isPremium, balance );
         clsPassenger newPassenger(age, firstName, lastName, phone, email, card, password, isDisabled);
-        passengers.insert(newPassenger.getFullName(), newPassenger);
+        passengers.insert(newPassenger.GetFullName(), newPassenger);
 
         cout << "\nPassenger added successfully with ID: " << newPassenger.getId() << "\n";
         Database::savePassengers(Database::clsPassengerFileName, passengers);
@@ -187,7 +187,7 @@ public:
             }
             case 8: {
                 bool isDisabled = Input::readBool("Is Disabled? (yes/no): ");
-                passengerToUpdate->isDisabled = isDisabled;
+                passengerToUpdate->setDisabled(isDisabled);
                 break;
             }
         }
@@ -214,7 +214,7 @@ private:
 
         cout << "\n\nWhat would you like to update?\n";
         cout << "1. Card Type\n";
-        cout << "2. Balance\n";
+        cout << "2. Recharge\n";
         cout << "0. Cancel\n";
 
         int choice = Input::ReadIntNumberBetween(0, 2, "Invalid choice. Enter 0-" + to_string(maxChoice) + ": ");
@@ -226,14 +226,16 @@ private:
                 cout << "\nCard Types:\n";
                 cout << "1. Regular\n";
                 cout << "2. Premium\n";
-                cout << "3. Converting the card to Premium requires $200.\n";
+                cout << "Converting the card to Premium requires $500.\n";
                 int cardChoice = Input::ReadIntNumberBetween(1, 2, "Invalid choice. Enter 1-2: ");
-                card.convertToPremium(cardChoice == 2);
+                card.setType(cardChoice == 2);
                 break;
             }
             case 2: {
-                double amount = Input::readDouble("Enter new Balance: ");
-                card.setBalance(amount);
+                if(card.isPremium())
+                    cout << "You can get a free trips if you add an amount $"+clsCard::getAmountForFreeTrip();
+                double amount = Input::readDouble("Enter amount: ");
+                card.Recharge(amount);
                 break;
             }
         }
