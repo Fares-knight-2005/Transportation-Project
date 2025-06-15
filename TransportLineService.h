@@ -48,6 +48,7 @@ public:
         cout << "1. Bus\n";
         cout << "2. Train\n";
         cout << "3. Metro\n";
+        
         int typeChoice = Input::ReadIntNumberBetween(1, 4, "Invalid choice. Enter 1-4: ");
         enVehicleType vehicleType = static_cast<enVehicleType>(typeChoice - 1);
 
@@ -77,7 +78,7 @@ public:
             }
         }
 
-        clsTransportLine newLine(vehicles, price, vehicleType, name, lineStations);
+        clsTransportLine newLine(price, vehicleType, name, lineStations);
         transportLines.insert(newLine.getId(), newLine);
 
         cout << "\nTransport Line added successfully with ID: " << newLine.getId() << "\n";
