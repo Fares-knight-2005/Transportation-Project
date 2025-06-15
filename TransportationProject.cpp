@@ -1,12 +1,11 @@
 
 #include <iostream>
-#include "clsScreen.h"
+#include "clsLogin.h"
 
 using namespace std;
 
 
-
 int main()
 {
-	clsScreen::NewMenu("Hello", 60);
+    clsLogin::Login();
 }
