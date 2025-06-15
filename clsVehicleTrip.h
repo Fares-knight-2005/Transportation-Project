@@ -121,8 +121,9 @@ public:
                     bool heading = tokens[tokenIndex++] == "1";
                     bool disabled = tokens[tokenIndex++] == "1";
                     bool items = tokens[tokenIndex++] == "1";
+                    float price = stoi(tokens[tokenIndex++]);
                     
-                    clsPassengerTrip passenger(start, end, pid, heading, disabled, items);
+                    clsPassengerTrip passenger(start, end, pid, heading, disabled, items ,price);
                     movement.passengers.addLast(passenger);
                 } catch (...) {
                     break;
