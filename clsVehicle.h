@@ -160,6 +160,15 @@ public:
     }
     */
 
+
+   static int getNumberOfAllVehicle(){
+          return numberOfAllVehicle;     
+    }
+
+    static void setNumberOfAllVehicle(int n){
+          numberOfAllVehicle=n;
+    }
+
     void displayVehicleInfo() {
         cout << "\nVehicle Information:";
         cout << "\nId: " << id;
