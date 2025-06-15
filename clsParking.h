@@ -34,6 +34,14 @@ class clsParking{
         passengers.enqueue(trip);
     }
 
+   static int getNumberOfAllParking(){
+          return numberOfAllParking;     
+    }
+
+    static void setNumberOfAllParking(int n){
+          numberOfAllParking=n;
+    }
+         
     string toString() {
     ostringstream oss;
     oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType)<< ",,," << idTransportLine;
