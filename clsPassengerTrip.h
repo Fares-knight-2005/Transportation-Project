@@ -46,6 +46,23 @@ public:
         cout << "Has items: " << (hasItems ? "Yes" : "No") << endl;
     }
 
+    void setPrice(int amount,clsCard card,bool transportingItems){
+        
+    if(hasItems)
+        price+=20;
+    if(transportingItems)
+        price+=5;
+        
+    if(card.getFreeTrips()>0){
+    bool r=Input::readBool("You have free trips. Do you want to use them?");
+    break;
+    }
+        
+    if(card.isPremur())
+        amount*=0.7;// خصم
+    
+    }
+
     string toString() {
         ostringstream oss;
         oss << idStarStation << ",,," << idEndStation << ",,," 
