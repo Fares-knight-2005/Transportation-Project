@@ -47,6 +47,14 @@ public:
 	return balance;
 	}
 
+        int getFreeTrips(){
+	return freeTrips;
+	}
+
+        void setFreeTrips(int freeTrips){
+	this->freeTrips=freeTrips;
+	}
+
         bool isPremium(){
 	return type;
 	}
