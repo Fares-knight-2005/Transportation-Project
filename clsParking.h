@@ -8,9 +8,11 @@
 class clsParking{
      
     public:
-    clsParking():id(0),distanceToNext(0.0) {}
-    clsParking(int id, double distanceToNext,int stationId,enVehicleType parkingType) :id(id), distanceToNext(distanceToNext),stationId(stationId),parkingType(parkingType) {}
-     clsParking(double distanceToNext,int stationId,enVehicleType parkingType) :id(++numberOfAllParking), distanceToNext(distanceToNext),stationId(stationId),parkingType(parkingType) {
+   
+    clsParking(int id, double distanceToNext,int stationId,enVehicleType parkingType,int idTransportLine) :id(id), distanceToNext(distanceToNext),stationId(stationId),
+    parkingType(parkingType),idTransportLine(idTransportLine) {}
+    clsParking(double distanceToNext,int stationId,enVehicleType parkingType,int idTransportLine) :id(++numberOfAllParking), distanceToNext(distanceToNext),stationId(stationId),
+    parkingType(parkingType),idTransportLine(idTransportLine) {
           
     double getDistanceToNext(){
         return distanceToNext;
@@ -30,29 +32,30 @@ class clsParking{
 
     string toString() {
     ostringstream oss;
-    oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType);
-    return oos;
+    oss<< id<< ",,,"<< stationId<< ",,," << distanceToNext << ",,,"  << static_cast<int>(parkingType)<< ",,," << idTransportLine;
+    return oss;
     }
 
-    clsParking parse(string& line) {
+    static clsParking parse(string& line) {
     DoubleLinkedList<string> tokens = Split(line,",,,");
          
-    if (tokens.size() < 4) {
+    if (tokens.size() < 5) {
         throw invalid_argument("Not enough tokens in line");
     }
 
     int id = stoi(tokens[0]);
     int stationId = stoi(tokens[1]);
-    double distance = stod(tokens[2]);
+    double distance = stoi(tokens[2]);
     enVehicleType type = static_cast<enVehicleType>(stoi(tokens[3]));
+    int idTransportLine= stoi(tokens[4]);
 
-    return clsParking(id, distance, stationId, type);
+    return clsParking(id, distance, stationId, type, idTransportLine);
     }
 
     private:
-        Queue<clsVehicle> vehicl;
+        Queue<clsVehicle> Vehicle;
         Queue<clsPassengerTrip> passengers;
-        int id,stationId;
+        int id,stationId,idTransportLine;
         double distanceToNext;
         enVehicleType parkingType;
         static int numberOfAllParking;
