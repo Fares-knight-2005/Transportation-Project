@@ -11,7 +11,7 @@ class TransportLineService {
 
 
 public:
-    void printAllTransportLines() {
+    static void printAllTransportLines() {
         OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
 
         if (transportLines.isEmpty()) {
@@ -32,7 +32,7 @@ public:
         }
     }
 
-    void addNewTransportLine() {
+    static void addNewTransportLine() {
         OpenHash<string, clsTransportLine> transportLines=Database::loadTransportLinesByName(Database::clsTransportLineFileName);
         OpenHash<int, clsStation> stations = Database::loadStations(Database::clsStationFileName);
       
@@ -91,7 +91,7 @@ public:
         Database::saveTransportLines(Database::clsTransportLineFileName, transportLines);
     }
 
-    void deleteTransportLine() {
+    static void deleteTransportLine() {
        
         cout << "\n===========================================\n";
         cout << "        Delete Transport Line";
@@ -141,7 +141,7 @@ public:
       }
     }
 
-    void updateTransportLine() {
+    static void updateTransportLine() {
         cout << "\n===========================================\n";
         cout << "        Update Transport Line";
         cout << "\n===========================================\n";
@@ -198,7 +198,7 @@ public:
                 break;
             }
             case 3: {
-                updateStations(*lineToUpdate);
+                TransportLineService::updateStations(*lineToUpdate);
                 break;
             }
         }
@@ -215,7 +215,7 @@ public:
     }
 
 private:
-    void updateStations(clsTransportLine& line) {
+    static void updateStations(clsTransportLine& line) {
         OpenHash<int, clsStation> stations = Database::loadStations(Database::clsStationFileName);
         
         while (true) {
