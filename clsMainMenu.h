@@ -58,19 +58,19 @@ class clsMainMenu
 			switch (WhatToDo)
 			{
 			case enWhatToDo::enShowLines:
-				system("cls");
+				Input::Clear();
 				ShowLines();
 				MainMenu();
 				break;
 
 			case enWhatToDo::enBookPlace:
-				system("cls");
+				Input::Clear();
 				BookPlace();
 				MainMenu();
 				break;
 
 			case enWhatToDo::enFindShorterPath:
-				system("cls");
+				Input::Clear();
 				FindShorterPath();
 				MainMenu();
 				break;
@@ -81,7 +81,7 @@ class clsMainMenu
 			//	break;
 
 			case enWhatToDo::Exit:
-				system("cls");
+				Input::Clear();
 				//MainMenu();
 				break;
 			}
@@ -99,7 +99,7 @@ public:
 
 
 
-		clsScreen::NewMenu("The Main Menu ", 43);
+		clsScreen::NewMenu("             The Main Menu ", 43);
 
 		cout << setw(37) << left << "" << "=======================================================" << endl;
 		cout << setw(37) << left << "" << "                      Main Menu\n";
@@ -112,7 +112,7 @@ public:
 
 		int WhatChoos;
 		cout << setw(37) << "" << "Enter What to do [1 -> 4] : ";
-		WhatChoos = Input::ReadIntNumberBetween(1, 4, "                                     Number is Not With Range Enter [1 -> 10] : ");
+		WhatChoos = Input::ReadIntNumberBetween(1, 4, "                                     Number is Not With Range Enter [1 -> 4] : ");
 
 		$p((enWhatToDo)WhatChoos);
 		return;
