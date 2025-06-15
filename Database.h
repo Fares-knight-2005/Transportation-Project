@@ -57,7 +57,8 @@ Results += Delim + ArrString[i];
 return Results.substr(Delim.length(), Results.length() - Delim.length());
 }
 
-static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>& transportLines) {
+template<class Item>
+static void saveTransportLines(string filename, OpenHash<Item, clsTransportLine>& transportLines) {
     ofstream outFile(filename);
     
     for (int i = 0; i < transportLines.capacity; i++) {
@@ -81,6 +82,30 @@ static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
         try {
             clsTransportLine tl =clsTransportLine::parse(line, stations);
             transportLines.insert(tl.getid(), tl);
+            
+            if (clsParking::getNumberOfAllTransportLine() < tl.getId()) {
+                clsParking::setNumberOfAllTransportLine(tl.getId());
+            }
+        } catch (...) {
+            continue;
+        }
+    }
+    
+    return transportLines;
+}
+
+static OpenHash<string, clsTransportLine> loadTransportLinesByName(string filename) {
+    OpenHash<string, clsTransportLine> transportLines;
+    OpenHash<int, clsStation> stations = loadTransportLines("station");
+    
+    ifstream file(filename);
+    string line;
+
+    while (getline(file, line)) {
+        try {
+            clsTransportLine tl = clsTransportLine::parse(line, stations);
+            string nameKey = tl.getName(); 
+            transportLines.insert(nameKey, tl);
             
             if (clsParking::getNumberOfAllTransportLine() < tl.getId()) {
                 clsParking::setNumberOfAllTransportLine(tl.getId());
