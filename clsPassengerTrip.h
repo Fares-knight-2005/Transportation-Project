@@ -50,15 +50,22 @@ public:
         
     if(hasItems)
         price+=20;
+        
     if(transportingItems)
         price+=5;
         
     if(card.getFreeTrips()>0){
     bool r=Input::readBool("You have free trips. Do you want to use them?");
+    if(r)
+    {
+    card.setFreeTrips(card.getFreeTrips()--);
     break;
     }
+    }
+
+    price+=amount;
         
-    if(card.isPremur())
+    if(card.isPremium())
         amount*=0.7;// خصم
     
     }
