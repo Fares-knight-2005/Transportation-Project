@@ -54,7 +54,7 @@ public:
 
        string toString(){
         ostringstream oss;
-        oss << (type ? "Premium" : "Regular") << ",,," << balance;
+        oss << (type ? "Premium" : "Regular") << ",,," << balance<< ",,," <<freeTrips;
         return oss.str();
        }
 
