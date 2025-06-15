@@ -16,7 +16,7 @@ private:
     static int numberOfAllTransportLines;
 
 public:
-    clsTransportLine(int numberOfVehicles, double price, enVehicleType vehicleType, string name, DoubleLinkedList<clsStation> stations) :
+    clsTransportLine(double price, enVehicleType vehicleType, string name, DoubleLinkedList<clsStation> stations) :
         stations(stations), price(price), id(++numberOfAllTransportLines), vehicleType(vehicleType),
         numberOfVehicles(numberOfVehicles), name(name) {
     }
