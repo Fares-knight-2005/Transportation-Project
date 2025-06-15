@@ -48,6 +48,14 @@ public:
         vehicleMovements = ClosedHash<int, strVehicleMovements>(numberOfStations);          
     }
 
+   static int getNumberOfAllVehicleTrip(){
+          return numberOfAllVehicle;     
+    }
+
+    static void setNumberOfAllVehicleTrip(int n){
+          numberOfAllVehicle=n;
+    }
+
     int getId() { return id; }
  
     string toString() {
