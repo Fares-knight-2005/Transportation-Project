@@ -63,6 +63,10 @@ public:
         this->id = id;
     }
 
+    DoubleNode<clsStation> *getStations(){
+         return stations;
+    }
+
     void setNumberOfVehicles(int n){
          numberOfVehicles=n;     
     }
