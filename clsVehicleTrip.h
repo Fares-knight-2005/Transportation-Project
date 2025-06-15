@@ -1,5 +1,5 @@
 #include<iostream>
-#include "passengerTrip.h"
+#include "clsPassengerTrip.h"
 #include <sstream>
 
 using namespace std;
@@ -8,7 +8,7 @@ class clsVehicleTrip {
     struct strVehicleMovements {
         int idStation;
         int currDisabilitSeat, currPackageSize;
-        SingleLinkedList<passengerTrip> passengers;
+        SingleLinkedList<clsPassengerTrip> passengers;
 
         strVehicleMovements(int idStation) : idStation(idStation), currPackageSize(0), currDisabilitSeat(0) {}
         strVehicleMovements() : idStation(0), currPackageSize(0), currDisabilitSeat(0) {}
@@ -17,7 +17,7 @@ class clsVehicleTrip {
             ostringstream oss;
             oss << idStation;
             
-            auto current = passengers.getHead();
+            Node<clsPassengerTrip>* current = passengers.getHead();
             while (current != nullptr) {
                 oss << ",,," << current->data.toString();
                 current = current->next;
@@ -55,8 +55,8 @@ public:
         oss << id << ",,," << numberOfStations << ",,," << idVehicle << ",,," << idTransportLine;
             
         for(int i = 0; i < vehicleMovements.size(); i++) {
-            auto node = vehicleMovements.getNode(i);
-            if (node.nodeType == ClosedNode<int, strVehicleMovements>::FULL) {
+            HashNode<strVehicleMovements> curr = vehicleMovements.getNode(i);
+            if (curr.nodeType == ClosedNode<int, strVehicleMovements>::FULL) {
                 oss << ",,," << node.item.toString();
             }
         }
@@ -73,13 +73,13 @@ public:
         cout << "number of stations: " << numberOfStations << "\n\n";
 
         for (int i = 0; i < vehicleMovements.size(); i++) {
-            auto node = vehicleMovements.getNode(i);
+            HashNode<strVehicleMovements> node = vehicleMovements.getNode(i);
             if (node.nodeType == ClosedNode<int, strVehicleMovements>::FULL) {
                 cout << "Current Station: " << node.item.idStation << "\n";
                 cout << "Passengers List:\n";
                 cout << "----------------\n";
 
-                auto current = node.item.passengers.getHead();
+                Node<clsPassengerTrip> current = node.item.passengers.getHead();
                 int passengerCount = 1;
                 
                 while (current != nullptr) {
@@ -122,7 +122,7 @@ public:
                     bool disabled = tokens[tokenIndex++] == "1";
                     bool items = tokens[tokenIndex++] == "1";
                     
-                    passengerTrip passenger(start, end, pid, heading, disabled, items);
+                    clsPassengerTrip passenger(start, end, pid, heading, disabled, items);
                     movement.passengers.addLast(passenger);
                 } catch (...) {
                     break;
