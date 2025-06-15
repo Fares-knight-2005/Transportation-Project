@@ -72,7 +72,7 @@ static void saveTransportLines(string filename, OpenHash<int, clsTransportLine>&
 
 static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
     OpenHash<int, clsTransportLine> transportLines;
-    OpenHash<int, clsStation> stations;//هون في تابع
+    OpenHash<int, clsStation> stations=loadTransportLines("station");
     
     ifstream file(filename);
     string line;
@@ -82,8 +82,8 @@ static OpenHash<int, clsTransportLine> loadTransportLines(string filename) {
             clsTransportLine tl =clsTransportLine::parse(line, stations);
             transportLines.insert(tl.getid(), tl);
             
-            if (clsParking::numberOfAllTransportLine < tl.getId()) {
-                clsParking::numberOfAllTransportLine = tl.getId();
+            if (clsParking::getNumberOfAllTransportLine() < tl.getId()) {
+                clsParking::setNumberOfAllTransportLine(tl.getId());
             }
         } catch (...) {
             continue;
@@ -118,8 +118,8 @@ static OpenHash<int, clsParking> loadParkings(string filename) {
             clsParking parking =clsParking::parse(line);
             parkings.insert(parking.getId(), parking);
             
-            if (clsParking::numberOfAllParking < parking.getId()) {
-                clsParking::numberOfAllParking = parking.getId();
+            if (clsParking::getNumberOfAllParking() < parking.getId()) {
+                clsParking::setNumberOfAllParking(parking.getId());
             }
         } catch (...) {
             continue;
@@ -156,8 +156,8 @@ static OpenHash<int, clsVehicle> loadVehicles(string filename) {
             clsVehicle vehicle =clsVehicle::parse(line,vehicleTrip);
             vehicles.insert(vehicle.getId(), vehicle);
             
-            if (clsVehicle::numberOfAllVehicle < vehicle.getId()) {
-                clsVehicle::numberOfAllVehicle = vehicle.getId();
+            if (clsVehicle::getNumberOfAllVehicle() < vehicle.getId()) {
+                clsVehicle::setNumberOfAllVehicle(vehicle.getId());
             }
         } catch (...) {
             continue;
@@ -192,8 +192,8 @@ static OpenHash<int, clsPassenger> loadPassengers(string filename) {
             clsPassenger passenger =clsPassenger::parse(line);
             passengers.insert(passenger.getId(), passenger);
             
-            if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
-                clsPassenger::numberOfAllPassenger = passenger.getId();
+            if (clsPassenger::getNumberOfAllPassenger() < passenger.getId()) {
+                clsPassenger::setNumberOfAllPassenger(passenger.getId());
             }
         } catch (...) {
             continue;
@@ -214,8 +214,8 @@ static OpenHash<string, clsPassenger> loadPassengersByName(string filename) {
             string fullNameKey = passenger.GetFullName();
             passengers.insert(fullNameKey, passenger);
             
-            if (clsPassenger::numberOfAllPassenger < passenger.getId()) {
-                clsPassenger::numberOfAllPassenger = passenger.getId();
+            if (clsPassenger::getNumberOfAllPassenger() < passenger.getId()) {
+                clsPassenger::setNumberOfAllPassenger(passenger.getId());
             }
         } catch (...) {
             continue;
@@ -249,8 +249,8 @@ static OpenHash<int, clsVehicleTrip> loadVehicleTrips(const string& filename) {
             clsVehicleTrip trip =clsVehicleTrip::parse(line);
             trips.insert(trip.getId(), trip);
             
-            if (clsVehicleTrip::numberOfAllVehicleTrip < trip.getId()) {
-                clsVehicleTrip::numberOfAllVehicleTrip = trip.getId();
+            if (clsVehicleTrip::getNumberOfAllVehicleTrip() < trip.getId()) {
+                clsVehicleTrip::setNumberOfAllVehicleTrip(trip.getId());
             }
         } catch (...) {
             continue;
