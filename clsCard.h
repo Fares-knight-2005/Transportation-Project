@@ -9,12 +9,15 @@ class clsCard {
 protected:
 	bool type;
 	double balance;
+        int freeTrips;
+        static double amountForFreeTrip;
 
 
 public:
-	clsCard(bool type = false, int balance = 0) {
+	clsCard(bool type = false, int balance = 0,int freeTrips=0) {
 		this->type = type;
 		this->balance = balance;
+		this->freeTrips = freeTrips;
 	}
 
         clsCard(string type = "Reguler", int balance = 0) {
@@ -25,18 +28,23 @@ public:
 		this->balance = balance;
 	}
 
-	void payment(double amount) {
+	bool payment(double amount) {
 		if (balance >= amount) {
 			balance -= amount;
+			return true;
 		}
+		else
+			return false;
 	}
 
 	void recharge(double amount) {
 		balance += amount;
+		if(amount==amountForFreeTrip)
+			freeTrips++;
 	}
 
 	double getBalance()  {
-		return balance;
+	return balance;
 	}
 
 
@@ -51,6 +59,14 @@ public:
        }
 
 
+       static void setAmountForFreeTrip(int amount){
+        amountForFreeTrip = amount; 
+       }
+
+       double getAmountForFreeTrip(){
+        return amountForFreeTrip;
+       }
+
 
 };
-
+double clsCard::amountForFreeTrip=2000;
