@@ -11,19 +11,6 @@ class TransportLineService {
 private:
     enum SearchBy { BY_ID, BY_NAME };
 
-    clsTransportLine* findTransportLine(OpenHash<int, clsTransportLine>& hash, int id) {
-        return hash.find(id);
-    }
-
-    clsTransportLine* findTransportLine(OpenHash<string, clsTransportLine>& hash, string name) {
-        return hash.find(name);
-    }
-
-    template<class Key>
-    bool removeTransportLine(OpenHash<Key, clsTransportLine>& hash, Key key) {
-        return hash.remove(key);
-    }
-
 public:
     void printAllTransportLines() {
         OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
@@ -38,7 +25,7 @@ public:
         cout << "\n===========================================\n"; 
 
         for (int i = 0; i < transportLines.capacity; i++) {
-            auto current = transportLines.getHead(i);
+            HashNode<clsTransportLine> *current = transportLines.getHead(i);
             while (current != nullptr) {
                 current->data.item.display();
                 current = current->next;
@@ -70,7 +57,7 @@ public:
         if (!stations.isEmpty()) {
             cout << "\nAvailable Stations:\n";
             for (int i = 0; i < stations.capacity; i++) {
-                DoubleNode<clsStation> current = stations.getHead(i);
+                DoubleNode<clsStation> *current = stations.getHead(i);
                 while (current != nullptr) {
                     cout << current->data.item.getId() << " - " << current->data.item.getName() << endl;
                     current = current->next;
@@ -170,12 +157,12 @@ public:
         if (choice == 1) {
             transportLinesById = Database::loadTransportLines(Database::clsTransportLineFileName);
             int id = Input::readInt("Enter Transport Line ID to update: ");
-            lineToUpdate = findTransportLine(transportLinesById, id);
+            lineToUpdate = transportLinesById[id];
         }
         else {
             transportLinesByName = Database::loadTransportLinesByName(Database::clsTransportLineFileName);
             string name = Input::readString("Enter Transport Line Name to update: ");
-            lineToUpdate = findTransportLine(transportLinesByName, name);
+            lineToUpdate = transportLinesByName[name];
         }
 
         if (lineToUpdate == nullptr) {
@@ -257,7 +244,7 @@ private:
             if (choice == 1) {
                 cout << "\nAvailable Stations:\n";
                 for (int i = 0; i < stations.capacity; i++) {
-                    auto current = stations.getHead(i);
+                    HashNode<clsStation> *current = stations.getHead(i);
                     while (current != nullptr) {
                         cout << current->data.item.getId() << " - " << current->data.item.getName() << endl;
                         current = current->next;
