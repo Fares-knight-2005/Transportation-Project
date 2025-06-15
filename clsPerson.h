@@ -48,6 +48,11 @@ public:
 		return FirstName;
 	}
 
+        int getId(){
+	   return Id;
+	}
+
+
 	void SetFirstName(string FirstName)
 	{
 		this->FirstName = FirstName;
