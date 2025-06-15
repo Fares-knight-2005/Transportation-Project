@@ -53,7 +53,7 @@ public:
             cout<< "There is no line with this ID. \n";
         else
         {
-            line.setNumberOfVehicle(getNumberOfVehicle()++);
+            line.setNumberOfVehicles(getNumberOfVehicles()++);
             break;
         }    
         }
@@ -91,7 +91,7 @@ public:
 
         if (success) {
             int lineId=vehicles[id]->getIdTransportLine();
-            transportLines[lineId]->setNumberOfVehicle(getNumberOfVehicle()--);
+            transportLines[lineId]->setNumberOfVehicles(getNumberOfVehicles()++);
             Database::saveVehicles(Database::clsVehicleFileName, vehicles);
             Database::saveTransportLines(Database::clsTransportLineFileName,transportLines);
             cout << "\nVehicle deleted successfully.\n";
@@ -139,7 +139,7 @@ public:
                   if(line==nullptr)
                        cout<< "There is no line with this ID. \n";
                  else{
-                       line.setNumberOfVehicle(getNumberOfVehicle()++);
+                       line.setNumberOfVehicles(getNumberOfVehicles()++);
                        Database::saveTransportLines(Database::clsTransportLineFileName,transportLines);
                        break;} }
             }
