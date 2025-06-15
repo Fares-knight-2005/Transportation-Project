@@ -93,13 +93,17 @@ public:
 		this->Email = Email;
 	}
 
+	string GetFullName()
+	{
+		return this->FirstName + " " + LastName;
+	}
+
         bool operator==(int Id){
 		return this->Id==Id;
 	}
 
-	string GetFullName()
-	{
-		return this->FirstName + " " + LastName;
+        bool operator==(string name){
+               return GetFullName()==name;	
 	}
 
         string personToString(){
