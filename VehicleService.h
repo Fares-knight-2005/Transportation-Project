@@ -32,7 +32,8 @@ public:
 
     void addNewVehicle() {
         OpenHash<int, clsVehicle> vehicles = Database::loadVehicles(Database::clsVehicleFileName);
-      
+        OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
+        
         cout << "\n===========================================\n";
         cout << "        Add New Vehicle";
         cout << "\n===========================================\n";
@@ -45,8 +46,19 @@ public:
                 
         int typeChoice = Input::ReadIntNumberBetween(1, 4, "Invalid choice. Enter 1-4: ");
         enVehicleType vehicleType = static_cast<enVehicleType>(typeChoice - 1);
-
+        while(true){
         int lineId = Input::readInt("Enter Transport Line ID: ");
+        clsTransportLine  line=*transportLines[lineId];
+        if(line==nullptr)
+            cout<< "There is no line with this ID. \n";
+        else if(vehicleType!=line.getVehicleType())
+            cout<< "The Transport line type does not match the added vehicle. \n";
+        else 
+        {
+            line.setNumberOfVehicles(getNumberOfVehicles()++);
+            break;
+        }    
+        }
         int capacity = Input::readInt("Enter Vehicle Capacity: ");
         float speed = Input::readFloat("Enter Vehicle Speed (km/h): ");
         int disabilitySeats = Input::readInt("Enter Disability Seats Count: ");
@@ -62,6 +74,7 @@ public:
 
         cout << "\nVehicle added successfully with ID: " << newVehicle.getId() << "\n";
         Database::saveVehicles(Database::clsVehicleFileName, vehicles);
+        Database::saveTransportLines(Database::clsTransportLineFileName,transportLines);
     }
 
     void deleteVehicle() {
@@ -70,13 +83,19 @@ public:
         cout << "\n===========================================\n";
 
         int id = Input::readInt("Enter Vehicle ID to delete (0 to cancel): ");
-        if (id == 0) return;
+        if (id == 0) 
+            return;
 
         OpenHash<int, clsVehicle> vehicles = Database::loadVehicles(Database::clsVehicleFileName);
+        OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
+        
         bool success = vehicles.remove(id);
 
         if (success) {
+            int lineId=vehicles[id]->getIdTransportLine();
+            transportLines[lineId]->setNumberOfVehicles(getNumberOfVehicles()++);
             Database::saveVehicles(Database::clsVehicleFileName, vehicles);
+            Database::saveTransportLines(Database::clsTransportLineFileName,transportLines);
             cout << "\nVehicle deleted successfully.\n";
         } else {
             cout << "\nVehicle not found!\n";
@@ -89,10 +108,11 @@ public:
         cout << "\n===========================================\n";
 
         int id = Input::readInt("Enter Vehicle ID to update (0 to cancel): ");
-        if (id == 0) return;
+        if (id == 0) 
+            return;
 
         OpenHash<int, clsVehicle> vehicles = Database::loadVehicles(Database::clsVehicleFileName);
-        clsVehicle* vehicle = vehicles.find(id);
+        clsVehicle* vehicle = vehicles[id];
 
         if (vehicle == nullptr) {
             cout << "\nVehicle not found!\n";
@@ -114,9 +134,17 @@ public:
 
         switch (choice) {
             case 1: {
-                int newLineId = Input::readInt("Enter new Transport Line ID: ");
-                vehicle->setTransportLineId(newLineId);
-                break;
+           OpenHash<int, clsTransportLine> transportLines = Database::loadTransportLines(Database::clsTransportLineFileName);
+           while(true){
+             int lineId = Input::readInt("Enter Transport Line ID: ");
+             clsTransportLine  line=*transportLines[lineId];
+             if(line==nullptr)
+                 cout<< "There is no line with this ID. \n";
+            else if(vehicle.getVehicleType()!=line.getVehicleType())
+                  cout<< "The Transport line type does not match the added vehicle. \n";
+            else {
+            line.setNumberOfVehicles(getNumberOfVehicles()++);
+            break; }}
             }
             case 2: {
                 int newCapacity = Input::readInt("Enter new Capacity: ");

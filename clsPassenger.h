@@ -36,12 +36,31 @@ public:
         Password = newPassword;
     }
 
+    bool getDisabled(){
+        retrun isDisabled;
+    }
+
     static int getNumberOfAllPassenger(){
           return numberOfAllPassenger;     
     }
 
     static void setNumberOfAllPassenger(int n){
           numberOfAllPassenger=n;
+    }
+
+    void printPassengerInfo() {
+        cout << "\nID: " << getId();
+        cout << "\nName: " << GetFullName();
+        cout << "\nAge: " << GetAge();
+        cout << "\nPhone: " << GetPhoneNumber();
+        cout << "\nEmail: " << GetEmail();
+        cout << "\nCard Type: " << (Card.isPremium() ? "Premium" : "Regular");
+        cout << "\nCard Balance: " << Card.getBalance();
+        if (passenger.Card.isPremium()) {
+            cout << "\nFree Trips: " << Card.getFreeTrips();
+        }
+        cout << "\nDisabled: " << (isDisabled() ? "Yes" : "No");
+        cout << "\n-------------------------------------------\n";
     }
 
     string toString() {

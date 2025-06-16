@@ -47,6 +47,36 @@ public:
 	return balance;
 	}
 
+        int getFreeTrips(){
+	return freeTrips;
+	}
+
+        void setFreeTrips(int freeTrips){
+	this->freeTrips=freeTrips;
+	}
+
+        bool isPremium(){
+	return type;
+	}
+
+        void setType(bool newType){
+		
+        if(newType){
+	   if(payment(500)){
+	      cout<<"Your type has been successfully modified and you have received three free trips.\n";
+	      freeTrips+=3;
+	      type=newType;
+	   }
+	   else
+	       cout<< "The transfer was not completed because you do not have enough money. \n";	
+	}
+	else{
+	      cout<<"Your type has been successfully modified.\n";
+	      type=newType;	
+	}
+		
+	}
+
 
         string getType(){
         return type ? "Premium" : "Regular";
@@ -63,10 +93,10 @@ public:
         amountForFreeTrip = amount; 
        }
 
-       double getAmountForFreeTrip(){
+       static double getAmountForFreeTrip(){
         return amountForFreeTrip;
        }
 
 
 };
-double clsCard::amountForFreeTrip=2000;
+double clsCard::amountForFreeTrip=500;

@@ -46,6 +46,32 @@ public:
         cout << "Has items: " << (hasItems ? "Yes" : "No") << endl;
     }
 
+    bool setPrice(int amount,clsCard *card,bool transportingItems){
+        
+    if(hasItems)
+        price+=20;
+        
+    if(transportingItems)
+        price+=5;
+        
+    if(card->getFreeTrips()>0){
+    bool r=Input::readBool("You have free trips. Do you want to use them? ");
+    if(r)
+    {
+    card->setFreeTrips(card->getFreeTrips()--);
+    break;
+    }
+    }
+
+    price+=amount;
+        
+    if(card->isPremium())
+        price*=0.7;// خصم
+
+    return card->payment(price);
+
+    }
+
     string toString() {
         ostringstream oss;
         oss << idStarStation << ",,," << idEndStation << ",,," 

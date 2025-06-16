@@ -51,12 +51,28 @@ public:
        return this->name=name;      
     }
 
+    enVehicleType getVehicleType() {
+        return vehicleType;
+    }
+
     int getId(){
         return id;
     }
 
     void setId(int id) {
         this->id = id;
+    }
+
+    DoubleNode<clsStation> *getStations(){
+         return stations;
+    }
+
+    void setNumberOfVehicles(int n){
+         numberOfVehicles=n;     
+    }
+
+    int getNumberOfVehicles(){
+        return numberOfVehicles;      
     }
 
     void display() {
